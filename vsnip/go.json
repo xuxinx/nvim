@@ -1,0 +1,70 @@
+{
+    "package assert": {
+        "prefix": ["pkassert"],
+        "body": ["import \"github.com/stretchr/testify/assert\""]
+    },
+    "package psql driver": {
+        "prefix": "pkpqd",
+        "body": [
+            "import _ \"github.com/lib/pq\""
+        ]
+    },
+    "package theplant kitlog": {
+        "prefix": "pktplog",
+        "body": [
+            "import kitlog \"github.com/theplant/appkit/log\""
+        ]
+    },
+    "package htmlgo": {
+        "prefix": "pkhtmlgo",
+        "body": [
+            "import . \"github.com/theplant/htmlgo\""
+        ]
+    },
+    "package goplaid vuetify": {
+        "prefix": "pkvuetify",
+        "body": [
+            "import v \"github.com/goplaid/x/vuetify\""
+        ]
+    },
+    "test cases": {
+        "prefix": "tc",
+        "body": [
+            "func Test${1:name}(t *testing.T) {",
+            "\tfor _, c := range []struct {",
+            "\t\tname string",
+            "\t\t${2:expect} ${3:expect_type}",
+            "\t}{",
+            "\t\t{},",
+            "\t}{",
+            "\t\tif diff := cmp.Diff(c.${2}, ${1}()); diff != \"\" {",
+            "\t\t\tt.Fatalf(\"%s: %s\\n\", c.name, diff)",
+            "\t\t}",
+            "\t}",
+            "}"
+        ]
+    },
+    "debug print": {
+        "prefix": "dp",
+        "body": [
+            "fmt.Println(\"#########################################start\")",
+            "testingutils.PrintlnJson($1)",
+            "fmt.Println(\"#########################################end\")"
+        ]
+    },
+    "http handler": {
+        "prefix": "hh",
+        "body": [
+            "func(w http.ResponseWriter, r *http.Request) {",
+            "\t$1",
+            "}"
+        ]
+    },
+    "set debug env": {
+        "prefix": "gde",
+        "body": [
+            "// TODO: remove debug Setenv",
+            "gde.Setenv(\"./dev_env\")"
+        ]
+    }
+}

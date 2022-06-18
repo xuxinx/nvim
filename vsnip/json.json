@@ -1,0 +1,13 @@
+{
+    "vscode snip": {
+        "prefix": "vsnip",
+        "body": [
+            "\"${1:desc}\": {",
+            "    \"prefix\": \"${2:prefix}\",",
+            "    \"body\": [",
+            "        \"${3:body}\"",
+            "    ]",
+            "}"
+        ]
+    }
+}
