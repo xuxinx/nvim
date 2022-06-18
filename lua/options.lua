@@ -24,7 +24,7 @@ vim.o.foldmethod = 'indent'
 vim.o.foldlevelstart = 99
 vim.o.updatetime = 200
 vim.o.scrolloff = 3
-vim.o.grepprg = "ag --vimgrep --hidden --ignore={.git,.vscode,.idea,.local-history,node_modules,vendor,'*.swp'} $*"
+vim.o.grepprg = "ag --vimgrep --hidden --ignore={.git,.vscode,.idea,.local-history,node_modules,vendor,testdata/fuzz,'*.swp'} $*"
 vim.o.grepformat = '%f:%l:%c:%m'
 vim.o.splitright = true
 vim.o.statusline = '%!v:lua.require\'x.statusline\'.statusline()'

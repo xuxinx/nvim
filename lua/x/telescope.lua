@@ -16,6 +16,7 @@ require('telescope').setup{
             '.idea/',
             '.local%-history/',
             'node_modules/',
+            'testdata/fuzz/',
             'vendor/',
             '*.swp',
         },
