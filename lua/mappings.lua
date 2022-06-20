@@ -45,7 +45,7 @@ vim.api.nvim_set_keymap('n', '<F7>', '<cmd>lua require"dap".step_into()<CR>', { 
 vim.api.nvim_set_keymap('n', '<F8>', '<cmd>lua require"dap".step_over()<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader><F8>', '<cmd>lua require"dap".step_out()<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>K', '<cmd>lua require"dapui".eval()<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>dt', '<cmd>lua require("dap-go").debug_test()<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>dt', '<cmd>lua require("x.dap_go").debug_test()<CR>', { noremap = true })
 
 vim.cmd [[
 augroup ftMapping

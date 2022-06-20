@@ -99,14 +99,12 @@ require'packer'.startup(function(use)
         'mfussenegger/nvim-dap',
         after = {
             'nvim-dap-ui',
-            'nvim-dap-go',
         },
         config = function ()
             require'x.dap'
         end
     }
     use 'rcarriga/nvim-dap-ui'
-    use 'leoluz/nvim-dap-go'
     use {
         'github/copilot.vim',
         opt = true,

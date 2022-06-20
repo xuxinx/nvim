@@ -12,4 +12,5 @@ dap.listeners.before.event_exited["dapui_config"] = function()
     dapui.close()
 end
 
-require'dap-go'.setup()
+require'x.dap_go'.setup()
+
