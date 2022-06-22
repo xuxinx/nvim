@@ -238,8 +238,8 @@ local theme = lush(function()
         TSVariableBuiltin { fg = syntax.variable }, -- Variable names defined by the language: `this` or `self` in Javascript.
 
         -- GitSigns
-        GitSignsAdd    { fg = green.darken(40) },
-        GitSignsChange { fg = blue },
+        GitSignsAdd    { fg = green.lighten(40) },
+        GitSignsChange { fg = blue.lighten(20) },
         GitSignsDelete { fg = orange },
 
         -- Hop
