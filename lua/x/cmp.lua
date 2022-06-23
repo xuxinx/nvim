@@ -1,6 +1,8 @@
+local cmp = require'cmp'
+
 vim.g.vsnip_snippet_dir = vim.fn.stdpath('config')..'/vsnip'
 
-require'cmp'.setup({
+cmp.setup({
     snippet = {
         expand = function(args)
             vim.fn["vsnip#anonymous"](args.body)
@@ -12,4 +14,5 @@ require'cmp'.setup({
         { name = 'path' },
         { name = 'vsnip' },
     },
+    mapping = require'cmp.config.mapping'.preset.insert()
 })

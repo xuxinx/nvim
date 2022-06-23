@@ -1,15 +1,15 @@
-local lsp_installer = require("nvim-lsp-installer")
-
-local on_attach = function(_, bufnr)
-    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-end
+local lspconfig = require'lspconfig'
+local lspinstaller = require'nvim-lsp-installer'
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
-lsp_installer.on_server_ready(function(server)
+lspinstaller.setup{
+    ensure_installed = {"sumneko_lua", "gopls", "tsserver", "jdtls"}
+}
+
+for _, server in ipairs(lspinstaller.get_installed_servers()) do
     local opts = {
-        on_attach = on_attach,
         capabilities = capabilities,
     }
 
@@ -42,5 +42,5 @@ lsp_installer.on_server_ready(function(server)
         }
     end
 
-    server:setup(opts)
-end)
+    lspconfig[server.name].setup(opts)
+end
