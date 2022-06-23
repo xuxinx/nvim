@@ -22,7 +22,7 @@ vim.api.nvim_set_keymap('n', '<leader>tb', '<cmd>TagbarToggle<CR>', { noremap = 
 -- # lsp
 -- vim.api.nvim_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', { noremap = true })
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
-vim.api.nvim_set_keymap('n', '<leader>ca', [[<cmd>lua require'telescope.builtin'.lsp_code_actions()<CR>]], { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>ca', [[<cmd>lua vim.lsp.buf.code_action()<CR>]], { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>D', [[<cmd>lua vim.lsp.buf.hover()<CR>]], { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>fr', [[<cmd>lua require'telescope.builtin'.lsp_references()<CR>]], { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>fi', [[<cmd>lua require'telescope.builtin'.lsp_implementations()<CR>]], { noremap = true })
