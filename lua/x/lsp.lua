@@ -1,4 +1,5 @@
 local lspconfig = require'lspconfig'
+local lsputil = require'lspconfig.util'
 local lspinstaller = require'nvim-lsp-installer'
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -40,6 +41,10 @@ for _, server in ipairs(lspinstaller.get_installed_servers()) do
                 usePlaceholders = true,
             },
         }
+    elseif server.name == 'jdtls' then
+        opts.root_dir = function ()
+            return lsputil.root_pattern(".git")() or vim.fn.getcwd()
+        end
     end
 
     lspconfig[server.name].setup(opts)
