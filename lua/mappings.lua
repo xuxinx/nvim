@@ -48,7 +48,7 @@ vim.api.nvim_set_keymap('n', '<leader>K', '<cmd>lua require"dapui".eval()<CR>', 
 vim.api.nvim_set_keymap('n', '<leader>dt', '<cmd>lua require("x.dap_go").debug_test()<CR>', { noremap = true })
 
 vim.cmd [[
-augroup ftMapping
+augroup xFiletypeMapping
     autocmd!
     " mark todo as done and add datetime
     autocmd FileType markdown nnoremap <buffer> <leader>tdd ^2f<Space>rx

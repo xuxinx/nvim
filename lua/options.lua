@@ -41,7 +41,7 @@ vim.g.netrw_bufsettings = 'nomodifiable nomodified number relativenumber nobufli
 
 -- # filetype
 vim.cmd [[
-augroup customFiletypes
+augroup xFiletypes
     autocmd!
     autocmd BufNewFile,BufRead *.gohtml setlocal filetype=html
     autocmd BufNewFile,BufRead *.vue setlocal filetype=html
@@ -50,7 +50,7 @@ augroup end
 
 -- # indentations
 vim.cmd [[
-augroup customIndentations
+augroup xIndentations
     autocmd!
     autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
     autocmd FileType proto setlocal ts=2 sts=2 sw=2 expandtab
@@ -59,7 +59,7 @@ augroup end
 
 -- # off syntax
 vim.cmd [[
-augroup customOffSyntax
+augroup xOffSyntax
     autocmd!
     autocmd BufNewFile,BufRead go.sum syntax off
 augroup end
@@ -67,7 +67,7 @@ augroup end
 
 -- # restore cursor
 vim.cmd [[
-augroup restorecursor
+augroup xRestoreCursor
     autocmd!
     autocmd BufReadPost * lua require'x.restore_cursor'.restoreCursor()
 augroup end
@@ -75,7 +75,7 @@ augroup end
 
 -- # cursorline
 vim.cmd [[
-augroup cursorline
+augroup xCursorline
     autocmd!
     " TODO: is there a better way to check if win if Telescope popup
     autocmd VimEnter,WinEnter,BufWinEnter * if nvim_win_get_config(0).relative != 'editor' | setlocal cursorline | endif
@@ -85,7 +85,7 @@ augroup end
 
 -- # statusline
 vim.cmd [[
-augroup statusline
+augroup xStatusline
     autocmd!
     autocmd FileType dapui_watches,dapui_stacks,dapui_breakpoints,dapui_scopes setlocal statusline=%f
     autocmd FileType dap-repl setlocal statusline=DAP\ REPL
@@ -96,17 +96,25 @@ augroup end
 
 -- # commentary
 vim.cmd [[
-augroup customCommentary
+augroup xCommentary
     autocmd!
     autocmd BufNewFile,BufRead *.mod,*.work setlocal commentstring=//\ %s
 augroup end
 ]]
 
+-- # auto format
+vim.cmd [[
+augroup xAutoFormat
+    autocmd!
+    autocmd BufWritePre *.go lua require'x.go'.goimports(1000)
+    autocmd BufWritePre *.java lua vim.lsp.buf.formatting()
+augroup end
+]]
+
 -- # go
 vim.cmd [[
-augroup customGoExec
+augroup xGo
     autocmd!
     autocmd BufNewFile *.go lua require'x.go'.newFileTpl()
-    autocmd BufWritePre *.go lua require'x.go'.goimports(1000)
 augroup end
 ]]
