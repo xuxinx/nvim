@@ -22,14 +22,18 @@ require'packer'.startup(function(use)
     use {
         'neovim/nvim-lspconfig',
         after = {
-            'nvim-lsp-installer',
             'nvim-cmp',
         },
         config = function ()
             require'x.lsp'
         end
     }
-    use 'williamboman/nvim-lsp-installer'
+    use {
+        'williamboman/mason.nvim',
+        config = function ()
+            require'mason'.setup()
+        end
+    }
     use {
         'hrsh7th/nvim-cmp',
         requires = {

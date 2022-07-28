@@ -1,22 +1,18 @@
 local lspconfig = require'lspconfig'
 local lsputil = require'lspconfig.util'
-local lspinstaller = require'nvim-lsp-installer'
+local cmplsp = require'cmp_nvim_lsp'
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+capabilities = cmplsp.update_capabilities(capabilities)
 
-lspinstaller.setup{
-    ensure_installed = {"sumneko_lua", "gopls", "tsserver", "jdtls"}
-}
-
-for _, server in ipairs(lspinstaller.get_installed_servers()) do
-    local opts = {
-        capabilities = capabilities,
-    }
-
-    if server.name == 'sumneko_lua' then
+local serverOptions = {
+    ['sumneko_lua'] = function (opts)
         opts.settings = {
             Lua = {
+                runtime = {
+                    -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                    version = 'LuaJIT',
+                },
                 diagnostics = {
                     -- Get the language server to recognize the `vim` global
                     globals = {'vim'},
@@ -31,7 +27,9 @@ for _, server in ipairs(lspinstaller.get_installed_servers()) do
                 },
             },
         }
-    elseif server.name == 'gopls' then
+    end,
+
+    ['gopls'] = function (opts)
         opts.settings = {
             gopls = {
                 analyses = {
@@ -41,11 +39,23 @@ for _, server in ipairs(lspinstaller.get_installed_servers()) do
                 usePlaceholders = true,
             },
         }
-    elseif server.name == 'jdtls' then
+    end,
+
+    ['jdtls'] = function (opts)
         opts.root_dir = function ()
             return lsputil.root_pattern(".git")() or vim.fn.getcwd()
         end
-    end
+    end,
 
-    lspconfig[server.name].setup(opts)
+    ['tsserver'] = function (opts) end,
+}
+
+for server, optf in pairs(serverOptions) do
+    local opts = {
+        capabilities = capabilities,
+    }
+
+    optf(opts)
+
+    lspconfig[server].setup(opts)
 end
