@@ -77,7 +77,7 @@ local theme = lush(function()
         -- SpellLocal   { }, -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
         -- SpellRare    { }, -- Word that is recognized by the spellchecker as one that is hardly ever used.  |spell| Combined with the highlighting used otherwise.
         StatusLine   { bg = ash, fg = grey }, -- status line of current window
-        StatusLineNC { bg = StatusLine.bg, fg = StatusLine.fg }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
+        StatusLineNC { bg = StatusLine.bg.lighten(30), fg = StatusLine.fg.lighten(30) }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
         TabLine      { StatusLine }, -- tab pages line, not active tab page label
         TabLineFill  { bg = Normal.bg }, -- tab pages line, where there are no labels
         TabLineSel   { bg = grey, fg = ash }, -- tab pages line, active tab page label
