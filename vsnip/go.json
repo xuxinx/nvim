@@ -66,5 +66,12 @@
             "// TODO: remove debug Setenv",
             "gde.Setenv(\"./dev_env\")"
         ]
+    },
+    "add play tailwind": {
+        "prefix": "ptw",
+        "body": [
+            "// TODO: remove play tailwind",
+            "ctx.Injector.HeadHTML(`<script src=\"https://cdn.tailwindcss.com\"></script>`)"
+        ]
     }
 }
