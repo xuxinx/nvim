@@ -48,6 +48,7 @@ local serverOptions = {
     end,
 
     ['tsserver'] = function (opts) end,
+    ['vuels'] = function (opts) end,
 }
 
 for server, optf in pairs(serverOptions) do

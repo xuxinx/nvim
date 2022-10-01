@@ -44,7 +44,6 @@ vim.cmd [[
 augroup xFiletypes
     autocmd!
     autocmd BufNewFile,BufRead *.gohtml setlocal filetype=html
-    autocmd BufNewFile,BufRead *.vue setlocal filetype=html
 augroup end
 ]]
 
