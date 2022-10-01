@@ -1,0 +1,13 @@
+{
+    "memo record": {
+        "prefix": "memo",
+        "body": [
+            "    - tags:",
+            "        - $1",
+            "      question: $2",
+            "      desc: $3",
+            "      answer: |-"
+        ]
+    }
+}
+
