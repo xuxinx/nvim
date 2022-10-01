@@ -48,13 +48,7 @@ local serverOptions = {
     end,
 
     ['tsserver'] = function (opts) end,
-    ['volar'] = function (opts)
-        opts.init_options = {
-            documentFeatures = {
-                documentFormatting = false
-            }
-        }
-    end,
+    ['vuels'] = function (opts) end,
 }
 
 for server, optf in pairs(serverOptions) do
