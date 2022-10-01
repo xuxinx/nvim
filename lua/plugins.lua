@@ -113,7 +113,6 @@ require'packer'.startup(function(use)
         'github/copilot.vim',
         opt = true,
     }
-    use 'othree/html5.vim'
     use {
         'dinhhuy258/vim-local-history',
         run = ':UpdateRemotePlugins',
