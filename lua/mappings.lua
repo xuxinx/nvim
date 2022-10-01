@@ -26,7 +26,7 @@ vim.api.nvim_set_keymap('n', '<leader>ca', [[<cmd>lua vim.lsp.buf.code_action()<
 vim.api.nvim_set_keymap('n', '<leader>D', [[<cmd>lua vim.lsp.buf.hover()<CR>]], { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>fr', [[<cmd>lua require'telescope.builtin'.lsp_references()<CR>]], { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>fi', [[<cmd>lua require'telescope.builtin'.lsp_implementations()<CR>]], { noremap = true })
-vim.keymap.set('n', '<leader>==', function() vim.lsp.buf.formatting_sync(nil, 1000) end)
+vim.keymap.set('n', '<leader>F', vim.lsp.buf.formatting)
 vim.api.nvim_set_keymap('n', '<leader>lr', '<cmd>LspRestart<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>ls', '<cmd>LspStart<CR>', { noremap = true })
 -- # diagnostic
@@ -54,6 +54,7 @@ augroup xFiletypeMapping
     " mark todo as done and add datetime
     autocmd FileType markdown nnoremap <buffer> <leader>tdd ^2f<Space>rx
     autocmd FileType markdown nnoremap <buffer> <leader>tdu ^fxr<Space>
+    autocmd FileType javascript,javascriptreact,typescript,typescriptreact,vue,css,less,scss,html,json,graphql,markdown,yaml nnoremap <buffer> <leader>F <Plug>(Prettier)
 augroup end
 ]]
 
