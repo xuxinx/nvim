@@ -119,6 +119,7 @@ require'packer'.startup(function(use)
         run = function() vim.fn["mkdp#util#install"]() end,
     }
     use 'prettier/vim-prettier'
+    use 'editorconfig/editorconfig-vim'
 
     if packer_bootstrap then
         print('packer bootstrap')
