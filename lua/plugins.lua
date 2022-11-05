@@ -65,12 +65,6 @@ require'packer'.startup(function(use)
         end
     }
     use {
-        'rktjmp/lush.nvim',
-        config = function ()
-            require'x.lush'
-        end
-    }
-    use {
         'phaazon/hop.nvim',
         config = function ()
             require'hop'.setup()
