@@ -1,0 +1,56 @@
+snippet pkassert "package assert" b
+import "github.com/stretchr/testify/assert"
+endsnippet
+
+snippet pkpqd "package psql driver" b
+import _ "github.com/lib/pq"
+endsnippet
+
+snippet pktplog "package theplant kitlog" b
+import kitlog "github.com/theplant/appkit/log"
+endsnippet
+
+snippet pkhtmlgo "package htmlgo" b
+import h "github.com/theplant/htmlgo"
+endsnippet
+
+snippet pkvuetify "package vuetify" b
+import . "github.com/qor5/ui/vuetify"
+endsnippet
+
+snippet pkvuetifyx "package vuetifyx" b
+import vx "github.com/qor5/ui/vuetifyx"
+endsnippet
+
+snippet tc "test cases" b
+func Test$1(t *testing.T) {
+	for _, c := range []struct {
+		name string
+		${2:expect}
+	}{
+		{},
+	}{
+		assert.Equal(t, c.$2, $1(), c.name)
+		if diff := cmp.Diff(c.$2, $1()); diff != "" {
+			t.Fatalf("%s: %s\n", c.name, diff)
+		}
+	}
+}
+endsnippet
+
+snippet dp "debug print" b
+fmt.Println("#########################################start")
+testingutils.PrintlnJson($1)
+fmt.Println("#########################################end")
+endsnippet
+
+snippet hh "http handler" w
+func(w http.ResponseWriter, r *http.Request) {
+	$1
+}
+endsnippet
+
+snippet gde "set debug env" b
+// TODO: remove debug Setenv
+gde.Setenv("./dev_env")
+endsnippet
