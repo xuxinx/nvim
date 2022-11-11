@@ -1,9 +1,7 @@
 local lspconfig = require'lspconfig'
-local lsputil = require'lspconfig.util'
 local cmplsp = require'cmp_nvim_lsp'
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = cmplsp.update_capabilities(capabilities)
+local capabilities = cmplsp.default_capabilities()
 
 local serverOptions = {
     ['sumneko_lua'] = function (opts)
