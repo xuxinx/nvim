@@ -106,7 +106,6 @@ vim.cmd [[
 augroup xAutoFormat
     autocmd!
     autocmd BufWritePre *.go lua require'x.go'.goimports(1000)
-    autocmd BufWritePre *.java lua vim.lsp.buf.formatting_sync(nil, 1000)
 augroup end
 ]]
 

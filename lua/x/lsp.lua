@@ -41,12 +41,6 @@ local serverOptions = {
         }
     end,
 
-    ['jdtls'] = function (opts)
-        opts.root_dir = function ()
-            return lsputil.root_pattern(".git")() or vim.fn.getcwd()
-        end
-    end,
-
     ['tsserver'] = function (opts) end,
     ['vuels'] = function (opts) end,
 }
