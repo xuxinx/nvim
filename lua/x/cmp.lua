@@ -1,7 +1,5 @@
 local cmp = require'cmp'
 
-vim.g.vsnip_snippet_dir = vim.fn.stdpath('config')..'/vsnip'
-
 cmp.setup({
     snippet = {
         expand = function(args)

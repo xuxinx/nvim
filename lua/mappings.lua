@@ -32,11 +32,6 @@ vim.api.nvim_set_keymap('n', '<leader>ls', '<cmd>LspStart<CR>', { noremap = true
 -- # diagnostic
 vim.api.nvim_set_keymap('n', ']e', '<cmd>lua vim.diagnostic.goto_next()<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '[e', '<cmd>lua vim.diagnostic.goto_prev()<CR>', { noremap = true })
--- # snip
-vim.api.nvim_set_keymap('i', '<C-j>', '<Plug>(vsnip-jump-next)', {})
-vim.api.nvim_set_keymap('i', '<C-k>', '<Plug>(vsnip-jump-prev)', {})
-vim.api.nvim_set_keymap('s', '<C-j>', '<Plug>(vsnip-jump-next)', {})
-vim.api.nvim_set_keymap('s', '<C-k>', '<Plug>(vsnip-jump-prev)', {})
 -- # dap
 vim.api.nvim_set_keymap('n', '<leader>db', '<cmd>lua require"dap".toggle_breakpoint()<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<F4>', '<cmd>lua require"dap".terminate()<CR>', { noremap = true })
