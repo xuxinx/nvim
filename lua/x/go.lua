@@ -15,7 +15,10 @@ function M.goimports(wait_ms)
         end
     end
 
-    vim.lsp.buf.formatting_sync(nil, wait_ms)
+    vim.lsp.buf.format({
+        timeout_ms = wait_ms,
+        async = false,
+    })
 end
 
 function M.newFileTpl()

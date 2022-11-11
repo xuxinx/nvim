@@ -26,7 +26,7 @@ vim.api.nvim_set_keymap('n', '<leader>ca', [[<cmd>lua vim.lsp.buf.code_action()<
 vim.api.nvim_set_keymap('n', '<leader>D', [[<cmd>lua vim.lsp.buf.hover()<CR>]], { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>fr', [[<cmd>lua require'telescope.builtin'.lsp_references()<CR>]], { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>fi', [[<cmd>lua require'telescope.builtin'.lsp_implementations()<CR>]], { noremap = true })
-vim.keymap.set('n', '<leader>F', vim.lsp.buf.formatting)
+vim.keymap.set('n', '<leader>F', vim.lsp.buf.format)
 vim.api.nvim_set_keymap('n', '<leader>lr', '<cmd>LspRestart<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>ls', '<cmd>LspStart<CR>', { noremap = true })
 -- # diagnostic
