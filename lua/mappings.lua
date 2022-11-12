@@ -54,7 +54,8 @@ sm('n', '<leader>K', function () require'dapui'.eval() end)
 sm('n', '<leader>dt', function() require'x.dap_go'.debug_test() end)
 -- # markdown
 cac('FileType', { pattern = 'markdown' , callback = function ()
-    -- TODO: add datetime
-    sm('n', '<leader>tdd', '^2f<Space>rx')
-    sm('n', '<leader>tdu', '^fxr<Space>')
+    sm('n', '<leader>tdd', function ()
+         return '^2f<Space>rx<C-[>A (' .. os.date("%Y-%m-%d %H:%M %a") .. ')<C-[>'
+    end, { expr = true })
+    sm('n', '<leader>tdu', '^fxr<Space>$da(x')
 end})
