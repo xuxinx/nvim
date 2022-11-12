@@ -21,8 +21,8 @@ function M.goimports(wait_ms)
     })
 end
 
-function M.newFileTpl()
-    vim.fn.append(0, 'package ' .. require'x.utils'.currDir())
+function M.new_file_tpl()
+    vim.fn.append(0, 'package ' .. require'x.utils'.curr_dir())
     vim.fn.append(1, '')
 end
 

@@ -1,66 +1,60 @@
+local sm = vim.keymap.set
+local cac = vim.api.nvim_create_autocmd
+
 vim.g.mapleader = ' '
-vim.api.nvim_set_keymap('n', '<leader>co', '<cmd>copen<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>cc', '<cmd>cclose<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>ff', '<cmd>Telescope find_files hidden=true no_ignore=true<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>fb', '<cmd>Telescope buffers<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>fs', '<cmd>Telescope live_grep<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>fc', 'v:lua.require\'x.search_copied\'.searchCopied()', { noremap = true, expr = true })
+
+-- # quickfix list
+sm('n', '<leader>co', function () vim.cmd('copen') end)
+sm('n', '<leader>cc', function () vim.cmd('cclose') end)
+-- # search file/string
+sm('n', '<leader>ff', function () require'telescope.builtin'.find_files({hidden = true, no_ignore = true}) end)
+sm('n', '<leader>fb', function () require'telescope.builtin'.buffers() end)
+sm('n', '<leader>fs', function () require'telescope.builtin'.live_grep() end)
+sm('n', '<leader>fc', function () return require'x.search_copied'.search_copied() end, { expr = true })
 -- # tab
-vim.api.nvim_set_keymap('n', '<leader>tt', '<cmd>$tabe<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>to', '<cmd>$tab<Space>split<CR>', { noremap = true })
+sm('n', '<leader>tt', function () vim.cmd("$tabe") end)
+sm('n', '<leader>to', function () vim.cmd('$tab split') end)
 -- # git
-vim.api.nvim_set_keymap('n', ']c', '<cmd>Gitsigns next_hunk<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '[c', '<cmd>Gitsigns prev_hunk<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>gb', '<cmd>lua require"gitsigns".blame_line{full=true}<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>hp', '<cmd>lua require"gitsigns".preview_hunk()<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>hr', '<cmd>Gitsigns reset_hunk<CR>', { noremap = true })
+sm('n', ']c', function () require'gitsigns'.next_hunk() end)
+sm('n', '[c', function () require'gitsigns'.prev_hunk() end)
+sm('n', '<leader>gb', function() require'gitsigns'.blame_line{full=true} end)
+sm('n', '<leader>hp', function() require'gitsigns'.preview_hunk() end)
+sm('n', '<leader>hr', function() require'gitsigns'.reset_hunk() end)
 -- # jump
-vim.api.nvim_set_keymap('n', '<leader>j', '<cmd>HopChar1<CR>', { noremap = true })
-vim.api.nvim_set_keymap('v', '<leader>j', '<cmd>HopChar1<CR>', { noremap = true })
+sm({'n', 'v'}, '<leader>j', function () require'hop'.hint_char1() end)
 -- # tag
-vim.api.nvim_set_keymap('n', '<leader>tb', '<cmd>TagbarToggle<CR>', { noremap = true })
+sm('n', '<leader>tb', function () vim.cmd('TagbarToggle') end)
 -- # lsp
--- vim.api.nvim_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', { noremap = true })
-vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
-vim.api.nvim_set_keymap('n', '<leader>ca', [[<cmd>lua vim.lsp.buf.code_action()<CR>]], { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>D', [[<cmd>lua vim.lsp.buf.hover()<CR>]], { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>fr', [[<cmd>lua require'telescope.builtin'.lsp_references()<CR>]], { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>fi', [[<cmd>lua require'telescope.builtin'.lsp_implementations()<CR>]], { noremap = true })
-vim.keymap.set('n', '<leader>F', vim.lsp.buf.format)
-vim.api.nvim_set_keymap('n', '<leader>lr', '<cmd>LspRestart<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>ls', '<cmd>LspStart<CR>', { noremap = true })
+sm('n', 'gd', function () vim.lsp.buf.definition() end)
+sm('n', '<leader>ca', function () vim.lsp.buf.code_action() end)
+sm('n', '<leader>D', function () vim.lsp.buf.hover() end)
+sm('n', '<leader>fr', function () require'telescope.builtin'.lsp_references() end)
+sm('n', '<leader>fi', function () require'telescope.builtin'.lsp_implementations() end)
+local prettier_files = require'x.utils'.set({'javascript','javascriptreact','typescript','typescriptreact',
+'vue','css','less','scss','html','json','graphql','markdown','yaml'})
+sm('n', '<leader>F', function ()
+    if prettier_files[vim.bo.filetype] then
+        vim.cmd('Prettier')
+    else
+        vim.lsp.buf.format()
+    end
+end)
 -- # diagnostic
-vim.api.nvim_set_keymap('n', ']e', '<cmd>lua vim.diagnostic.goto_next()<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '[e', '<cmd>lua vim.diagnostic.goto_prev()<CR>', { noremap = true })
+sm('n', ']e', function () vim.diagnostic.goto_next() end)
+sm('n', '[e', function () vim.diagnostic.goto_prev() end)
 -- # dap
-vim.api.nvim_set_keymap('n', '<leader>db', '<cmd>lua require"dap".toggle_breakpoint()<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<F4>', '<cmd>lua require"dap".terminate()<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<F5>', '<cmd>lua require"dap".continue()<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader><F5>', '<cmd>lua require"dap".run_to_cursor()<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<F7>', '<cmd>lua require"dap".step_into()<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<F8>', '<cmd>lua require"dap".step_over()<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader><F8>', '<cmd>lua require"dap".step_out()<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>K', '<cmd>lua require"dapui".eval()<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>dt', '<cmd>lua require("x.dap_go").debug_test()<CR>', { noremap = true })
-
-vim.cmd [[
-augroup xFiletypeMapping
-    autocmd!
-    " mark todo as done and add datetime
-    autocmd FileType markdown nnoremap <buffer> <leader>tdd ^2f<Space>rx
-    autocmd FileType markdown nnoremap <buffer> <leader>tdu ^fxr<Space>
-    autocmd FileType javascript,javascriptreact,typescript,typescriptreact,vue,css,less,scss,html,json,graphql,markdown,yaml nnoremap <buffer> <leader>F <Plug>(Prettier)
-augroup end
-]]
-
--- # commands
-vim.cmd [[
-command! -nargs=0 Note :$tabe $HOME/xhome/notes/notes.md
-command! -nargs=0 XNote :$tabe $HOME/xhome/notes/xnotes.md
-command! -nargs=0 Tmp :$tabe $HOME/xhome/notes/tmp.txt
-command! -nargs=0 Todo :$tabe $HOME/xhome/notes/todo.md
-command! -nargs=1 Z :call luaeval("require'x.z'.zNavi('lcd', _A)", <f-args>)
-command! -nargs=1 Zg :call luaeval("require'x.z'.zNavi('cd', _A)", <f-args>)
-command! -nargs=0 OpenGit lua require'x.open_git'.openGit()
-command! -nargs=0 Rename lua vim.lsp.buf.rename()
-]]
+sm('n', '<leader>db', function () require'dap'.toggle_breakpoint() end)
+sm('n', '<F4>', function () require'dap'.terminate() end)
+sm('n', '<F5>', function () require'dap'.continue() end)
+sm('n', '<leader><F5>', function () require'dap'.run_to_cursor() end)
+sm('n', '<F7>', function () require'dap'.step_into() end)
+sm('n', '<F8>', function () require'dap'.step_over() end)
+sm('n', '<leader><F8>', function () require'dap'.step_out() end)
+sm('n', '<leader>K', function () require'dapui'.eval() end)
+sm('n', '<leader>dt', function() require'x.dap_go'.debug_test() end)
+-- # markdown
+cac('FileType', { pattern = 'markdown' , callback = function ()
+    -- TODO: add datetime
+    sm('n', '<leader>tdd', '^2f<Space>rx')
+    sm('n', '<leader>tdu', '^fxr<Space>')
+end})

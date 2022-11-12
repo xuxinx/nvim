@@ -1,4 +1,4 @@
-local lc = require('x.utils').lightenColor
+local lc = require('x.utils').lighten_color
 
 local white = '#ffffff'
 local black = '#24292f'
@@ -29,16 +29,16 @@ local syntax = {
 }
 
 local normal      = { bg = white, fg = black }
-local normalFloat = { bg = lc(green, 150) }
-local pmenu       = normalFloat
+local normal_float = { bg = lc(green, 150) }
+local pmenu       = normal_float
 local search      = { bg = yellow, fg = normal.fg }
 local visual      = { bg = lightBlue }
-local statusLine  = { bg = ash, fg = grey }
-local hopNextKey  = search
+local status_line  = { bg = ash, fg = grey }
+local hop_next_key  = search
 
 local groups = {
     Normal = normal, -- normal text
-    NormalFloat = normalFloat, -- Normal text in floating windows.
+    NormalFloat = normal_float, -- Normal text in floating windows.
     -- NormalNC     { }, -- normal text in non-current windows
     -- ColorColumn  { }, -- used for the columns set with 'colorcolumn'
     -- Conceal      { }, -- placeholder characters substituted for concealed text (see 'conceallevel')
@@ -84,9 +84,9 @@ local groups = {
     -- SpellCap     { }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
     -- SpellLocal   { }, -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
     -- SpellRare    { }, -- Word that is recognized by the spellchecker as one that is hardly ever used.  |spell| Combined with the highlighting used otherwise.
-    StatusLine = statusLine, -- status line of current window
-    StatusLineNC = { bg = statusLine.bg, fg = lc(statusLine.fg, 40) }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
-    TabLine = statusLine, -- tab pages line, not active tab page label
+    StatusLine = status_line, -- status line of current window
+    StatusLineNC = { bg = status_line.bg, fg = lc(status_line.fg, 40) }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
+    TabLine = status_line, -- tab pages line, not active tab page label
     TabLineFill = { bg = normal.bg }, -- tab pages line, where there are no labels
     TabLineSel = { bg = grey, fg = ash }, -- tab pages line, active tab page label
     -- Title        { }, -- titles for output from ":set all", ":autocmd" etc.
@@ -251,9 +251,9 @@ local groups = {
     GitSignsDelete = { fg = orange },
 
     -- Hop
-    HopNextKey = hopNextKey,
-    HopNextKey1 = hopNextKey,
-    HopNextKey2 = hopNextKey,
+    HopNextKey = hop_next_key,
+    HopNextKey1 = hop_next_key,
+    HopNextKey2 = hop_next_key,
     HopUnmatched = { fg = grey },
     -- HopCursor { },
 }

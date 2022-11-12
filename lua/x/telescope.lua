@@ -1,4 +1,4 @@
-local ignoreDirs = {
+local ignore_dirs = {
     '.git',
     '.vscode',
     '.idea',
@@ -8,22 +8,22 @@ local ignoreDirs = {
     'vendor',
     'dist',
 }
-local ignoreFileExtensions = {
+local ignore_file_extensions = {
     '.swp',
     '.min.js',
     '.min.css',
 }
 
-local fileIgnorePatterns = {}
+local file_ignore_patterns = {}
 
-for  _, v in pairs(ignoreDirs) do
+for  _, v in pairs(ignore_dirs) do
     local p = v:gsub('([.-])', '%%%1') .. '/'
-    table.insert(fileIgnorePatterns, '^' .. p)
-    table.insert(fileIgnorePatterns, '/' .. p)
+    table.insert(file_ignore_patterns, '^' .. p)
+    table.insert(file_ignore_patterns, '/' .. p)
 end
-for  _, v in pairs(ignoreFileExtensions) do
+for  _, v in pairs(ignore_file_extensions) do
     local p = v:gsub('([.-])', '%%%1') .. '$'
-    table.insert(fileIgnorePatterns, p)
+    table.insert(file_ignore_patterns, p)
 end
 
 require('telescope').setup{
@@ -38,7 +38,7 @@ require('telescope').setup{
             "--smart-case",
             "--hidden",
         },
-        file_ignore_patterns = fileIgnorePatterns,
+        file_ignore_patterns = file_ignore_patterns,
     },
     pickers = {
         buffers = {

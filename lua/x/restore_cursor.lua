@@ -1,8 +1,8 @@
 local M = {}
 
-function M.restoreCursor()
-    local exitLine = vim.fn.line('\'"')
-    if exitLine >= 1 and exitLine <= vim.fn.line('$') then
+function M.restore_cursor()
+    local exit_line = vim.fn.line('\'"')
+    if exit_line >= 1 and exit_line <= vim.fn.line('$') then
         vim.cmd [[normal! g`"]]
     end
 end

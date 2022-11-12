@@ -3,8 +3,8 @@ local cmplsp = require'cmp_nvim_lsp'
 
 local capabilities = cmplsp.default_capabilities()
 
-local serverOptions = {
-    ['sumneko_lua'] = function (opts)
+local server_options = {
+    sumneko_lua = function (opts)
         opts.settings = {
             Lua = {
                 runtime = {
@@ -29,7 +29,7 @@ local serverOptions = {
         }
     end,
 
-    ['gopls'] = function (opts)
+    gopls = function (opts)
         opts.settings = {
             gopls = {
                 analyses = {
@@ -41,11 +41,11 @@ local serverOptions = {
         }
     end,
 
-    ['tsserver'] = function (opts) end,
-    ['vuels'] = function (opts) end,
+    tsserver = function (opts) end,
+    vuels = function (opts) end,
 }
 
-for server, optf in pairs(serverOptions) do
+for server, optf in pairs(server_options) do
     local opts = {
         capabilities = capabilities,
     }

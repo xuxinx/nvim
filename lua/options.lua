@@ -1,10 +1,12 @@
+local cac = vim.api.nvim_create_autocmd
+
 vim.o.swapfile = false
 vim.o.backup = false
 vim.o.writebackup = false
 vim.o.undofile = true
 vim.o.number = true
 vim.o.relativenumber = true
--- vim.o.cursorline = true
+vim.o.cursorline = true
 vim.o.showcmd = true
 vim.o.ruler = true
 vim.o.mouse = 'a'
@@ -40,79 +42,33 @@ vim.g.netrw_banner = 0
 vim.g.netrw_bufsettings = 'nomodifiable nomodified number relativenumber nobuflisted nowrap readonly'
 
 -- # filetype
-vim.cmd [[
-augroup xFiletypes
-    autocmd!
-    autocmd BufNewFile,BufRead *.gohtml setlocal filetype=html
-augroup end
-]]
+cac({'BufNewFile', 'BufRead'}, { pattern = '*.gohtml' , callback = function () vim.bo.filetype = 'html' end})
 
 -- # indentations
-vim.cmd [[
-augroup xIndentations
-    autocmd!
-    autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-    autocmd FileType proto setlocal ts=2 sts=2 sw=2 expandtab
-augroup end
-]]
+cac('FileType', { pattern = {'yaml', 'proto'} , callback = function ()
+    vim.bo.tabstop = 2
+    vim.bo.softtabstop = 2
+    vim.bo.shiftwidth = 2
+    vim.bo.expandtab = true
+end})
 
 -- # off syntax
-vim.cmd [[
-augroup xOffSyntax
-    autocmd!
-    autocmd BufNewFile,BufRead go.sum syntax off
-augroup end
-]]
+cac({'BufNewFile', 'BufRead'}, { pattern = 'go.sum' , callback = function () vim.cmd('syntax off') end})
 
 -- # restore cursor
-vim.cmd [[
-augroup xRestoreCursor
-    autocmd!
-    autocmd BufReadPost * lua require'x.restore_cursor'.restoreCursor()
-augroup end
-]]
-
--- # cursorline
-vim.cmd [[
-augroup xCursorline
-    autocmd!
-    " TODO: is there a better way to check if win if Telescope popup
-    autocmd VimEnter,WinEnter,BufWinEnter * if nvim_win_get_config(0).relative != 'editor' | setlocal cursorline | endif
-    autocmd WinLeave * setlocal nocursorline
-augroup end
-]]
+cac({'BufReadPost'}, { callback = function () require'x.restore_cursor'.restore_cursor() end})
 
 -- # statusline
-vim.cmd [[
-augroup xStatusline
-    autocmd!
-    autocmd FileType dapui_watches,dapui_stacks,dapui_breakpoints,dapui_scopes setlocal statusline=%f
-    autocmd FileType dap-repl setlocal statusline=DAP\ REPL
-    " TODO: why this is not work
-    autocmd FileType dapui_console setlocal statusline=DAP\ Console
-augroup end
-]]
+cac('FileType', { pattern = {'dapui_watches', 'dapui_stacks', 'dapui_breakpoints', 'dapui_scopes'} , callback = function () vim.wo.statusline='%f' end})
+cac('FileType', { pattern = 'dap-repl' , callback = function () vim.wo.statusline='DAP REPL' end})
+-- FIXME: why this is not work
+cac('FileType', { pattern = 'dapui_console' , callback = function () vim.wo.statusline='DAP Console' end})
 
 -- # commentary
-vim.cmd [[
-augroup xCommentary
-    autocmd!
-    autocmd BufNewFile,BufRead *.mod,*.work setlocal commentstring=//\ %s
-augroup end
-]]
+cac({'BufNewFile', 'BufRead'}, { pattern = {'*.mod', '*.work'} , callback = function () vim.bo.commentstring='// %s' end})
 
 -- # auto format
-vim.cmd [[
-augroup xAutoFormat
-    autocmd!
-    autocmd BufWritePre *.go lua require'x.go'.goimports(1000)
-augroup end
-]]
+cac('BufWritePre', { pattern = '*.go' , callback = function () require'x.go'.goimports(1000) end})
 
 -- # go
-vim.cmd [[
-augroup xGo
-    autocmd!
-    autocmd BufNewFile *.go lua require'x.go'.newFileTpl()
-augroup end
-]]
+cac('BufNewFile', { pattern = '*.go' , callback = function () require'x.go'.new_file_tpl() end})
