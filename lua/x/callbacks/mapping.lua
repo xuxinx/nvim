@@ -29,6 +29,10 @@ function M.search_copied_expr()
     return require('x.search_copied').search_copied()
 end
 
+function M.find_help_doc()
+    return require('telescope.builtin').help_tags()
+end
+
 function M.new_tab()
     vim.cmd("$tabe")
 end

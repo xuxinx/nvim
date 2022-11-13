@@ -12,6 +12,7 @@ sm('n', '<leader>ff', cb.find_files, { desc = 'find files' })
 sm('n', '<leader>fb', cb.find_buffers, { desc = 'find buffers' })
 sm('n', '<leader>fs', cb.grep_string, { desc = 'find string' })
 sm('n', '<leader>fc', cb.search_copied_expr, { expr = true, desc = 'find copied string' })
+sm('n', '<leader>fh', cb.find_help_doc, { desc = 'find help doc' })
 -- # tab
 sm('n', '<leader>tt', cb.new_tab, { desc = 'new tab' })
 sm('n', '<leader>to', cb.new_tab_with_current_buffer, { desc = 'new tab with current buffer' })
