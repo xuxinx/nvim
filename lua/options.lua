@@ -1,5 +1,3 @@
-local cac = vim.api.nvim_create_autocmd
-
 vim.o.swapfile = false
 vim.o.backup = false
 vim.o.writebackup = false
@@ -40,38 +38,3 @@ vim.o.wildignore = vim.o.wildignore .. '.git,.DS_Store,.vscode,.idea,.local-hist
 -- # netrw
 vim.g.netrw_banner = 0
 vim.g.netrw_bufsettings = 'nomodifiable nomodified number relativenumber nobuflisted nowrap readonly'
-
--- # filetype
-cac({ 'BufNewFile', 'BufRead' }, { pattern = '*.gohtml', callback = function() vim.bo.filetype = 'html' end })
-
--- # indentations
-cac('FileType', { pattern = { 'yaml', 'proto' }, callback = function()
-    vim.bo.tabstop = 2
-    vim.bo.softtabstop = 2
-    vim.bo.shiftwidth = 2
-    vim.bo.expandtab = true
-end })
-
--- # off syntax
-cac({ 'BufNewFile', 'BufRead' }, { pattern = 'go.sum', callback = function() vim.cmd('syntax off') end })
-
--- # restore cursor
-cac({ 'BufReadPost' }, { callback = function() require('x.restore_cursor').restore_cursor() end })
-
--- # statusline
-cac('FileType',
-    { pattern = { 'dapui_watches', 'dapui_stacks', 'dapui_breakpoints', 'dapui_scopes' },
-        callback = function() vim.wo.statusline = '%f' end })
-cac('FileType', { pattern = 'dap-repl', callback = function() vim.wo.statusline = 'DAP REPL' end })
--- FIXME: why this is not work
-cac('FileType', { pattern = 'dapui_console', callback = function() vim.wo.statusline = 'DAP Console' end })
-
--- # commentary
-cac({ 'BufNewFile', 'BufRead' },
-    { pattern = { '*.mod', '*.work' }, callback = function() vim.bo.commentstring = '// %s' end })
-
--- # auto format
-cac('BufWritePre', { pattern = '*.go', callback = function() require('x.go').goimports(1000) end })
-
--- # go
-cac('BufNewFile', { pattern = '*.go', callback = function() require('x.go').new_file_tpl() end })

@@ -51,6 +51,7 @@ local function update_lsp_diagnostic_info()
 end
 
 vim.api.nvim_create_autocmd({ 'BufEnter', 'DiagnosticChanged' }, {
+    desc = 'update diagnostic info for statusline',
     pattern = { '*' },
     callback = update_lsp_diagnostic_info,
 })
