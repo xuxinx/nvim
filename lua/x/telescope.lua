@@ -13,6 +13,9 @@ local ignore_file_extensions = {
     '.min.js',
     '.min.css',
 }
+local ignore_files = {
+    '.DS_Store',
+}
 
 local file_ignore_patterns = {}
 
@@ -24,6 +27,11 @@ end
 for _, v in pairs(ignore_file_extensions) do
     local p = v:gsub('([.-])', '%%%1') .. '$'
     table.insert(file_ignore_patterns, p)
+end
+for _, v in pairs(ignore_files) do
+    local p = v:gsub('([.-])', '%%%1') .. '$'
+    table.insert(file_ignore_patterns, '^' .. p)
+    table.insert(file_ignore_patterns, '/' .. p)
 end
 
 require('telescope').setup {
