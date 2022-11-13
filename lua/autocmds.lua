@@ -1,100 +1,51 @@
+local cb = require('x.callbacks.autocmd')
+
 local cac = vim.api.nvim_create_autocmd
 
 -- # filetype
-cac({ 'BufNewFile', 'BufRead' },
-    {
-        desc = 'set filetype to html',
-        pattern = { '*.gohtml' },
-        callback = function()
-            vim.bo.filetype = 'html'
-        end,
-    })
+cac({ 'BufNewFile', 'BufRead' }, { pattern = { '*.gohtml' },
+    desc = 'set filetype to html',
+    callback = cb.set_filetype_func('html') })
 
 -- # indentations
-cac('FileType',
-    {
-        desc = 'set tab to 2 space',
-        pattern = { 'yaml', 'proto' },
-        callback = function()
-            vim.bo.tabstop = 2
-            vim.bo.softtabstop = 2
-            vim.bo.shiftwidth = 2
-            vim.bo.expandtab = true
-        end,
-    })
+cac('FileType', { pattern = { 'yaml', 'proto' },
+    desc = 'set tab to 2 spaces',
+    callback = cb.set_tab_to_n_spaces_func(2) })
 
 -- # off syntax
-cac({ 'BufNewFile', 'BufRead' },
-    {
-        desc = 'off syntax',
-        pattern = { 'go.sum' },
-        callback = function()
-            vim.cmd('syntax off')
-        end,
-    })
+cac({ 'BufNewFile', 'BufWinEnter' }, { pattern = { 'go.sum' },
+    desc = 'off syntax',
+    callback = cb.off_syntax })
 
 -- # restore cursor
-cac({ 'BufReadPost' },
-    {
-        desc = 'restore cursor',
-        callback = function()
-            require('x.restore_cursor').restore_cursor()
-        end,
-    })
+cac({ 'BufReadPost' }, {
+    desc = 'restore cursor',
+    callback = cb.restore_cursor
+})
 
 -- # statusline
-cac('FileType',
-    {
-        desc = 'dap window statusline',
-        pattern = { 'dapui_watches', 'dapui_stacks', 'dapui_breakpoints', 'dapui_scopes' },
-        callback = function()
-            vim.wo.statusline = '%f'
-        end,
-    })
-cac('FileType',
-    {
-        desc = 'dap window statusline',
-        pattern = 'dap-repl',
-        callback = function()
-            vim.wo.statusline = 'DAP REPL'
-        end,
-    })
+cac('FileType', { pattern = { 'dapui_watches', 'dapui_stacks', 'dapui_breakpoints', 'dapui_scopes' },
+    desc = 'dap window statusline',
+    callback = cb.set_statusline_func('%f') })
+cac('FileType', { pattern = 'dap-repl',
+    desc = 'dap window statusline',
+    callback = cb.set_statusline_func('DAP REPL') })
 -- FIXME: why this is not work
-cac('FileType',
-    {
-        desc = 'dap window statusline',
-        pattern = 'dapui_console',
-        callback = function()
-            vim.wo.statusline = 'DAP Console'
-        end,
-    })
+cac('FileType', { pattern = 'dapui_console',
+    desc = 'dap window statusline',
+    callback = cb.set_statusline_func('DAP Console') })
 
 -- # commentary
-cac({ 'BufNewFile', 'BufRead' },
-    {
-        desc = 'set comment string',
-        pattern = { '*.mod', '*.work' },
-        callback = function()
-            vim.bo.commentstring = '// %s'
-        end,
-    })
+cac({ 'BufNewFile', 'BufRead' }, { pattern = { '*.mod', '*.work' },
+    desc = 'set comment string',
+    callback = cb.set_commentstring_func('// %s') })
 
 -- # auto format
-cac('BufWritePre',
-    {
-        desc = 'auto format go',
-        pattern = '*.go',
-        callback = function()
-            require('x.go').goimports(1000)
-        end,
-    })
+cac('BufWritePre', { pattern = '*.go',
+    desc = 'auto format go',
+    callback = cb.format_go })
 
 -- # go
-cac('BufNewFile',
-    {
-        desc = 'new go template',
-        pattern = '*.go',
-        callback = function()
-            require('x.go').new_file_tpl()
-        end,
-    })
+cac('BufNewFile', { pattern = '*.go',
+    desc = 'new go template',
+    callback = cb.new_go_file_tpl })
