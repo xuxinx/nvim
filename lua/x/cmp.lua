@@ -6,11 +6,23 @@ cmp.setup({
             vim.fn["UltiSnips#Anon"](args.body)
         end
     },
-    sources = require('cmp').config.sources {
+    sources = cmp.config.sources({
         { name = 'nvim_lsp' },
-        { name = 'buffer' },
+        {
+            name = 'buffer',
+            option = {
+                get_bufnrs = function()
+                    local bufs = {}
+                    for _, buf in ipairs(vim.fn.tabpagebuflist()) do
+                        bufs[buf] = true
+                    end
+                    print(vim.inspect(bufs))
+                    return vim.tbl_keys(bufs)
+                end,
+            },
+        },
         { name = 'path' },
         { name = 'ultisnips' },
-    },
+    }),
     mapping = require('cmp.config.mapping').preset.insert()
 })
