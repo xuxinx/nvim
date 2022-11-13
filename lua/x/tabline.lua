@@ -2,7 +2,7 @@ local M = {}
 
 local function get_curr_buf_names(tab_count)
     local buf_names = {}
-    for tab_num=1,tab_count do
+    for tab_num = 1, tab_count do
         local win_num = vim.fn.tabpagewinnr(tab_num)
         local buf_list = vim.fn.tabpagebuflist(tab_num)
         local buf_num = buf_list[win_num]
@@ -41,7 +41,7 @@ function M.tabline()
     local s = ''
     local tab_count = vim.fn.tabpagenr('$')
     local buf_names = get_curr_buf_names(tab_count)
-    for tab_num=1,tab_count do
+    for tab_num = 1, tab_count do
         local win_num = vim.fn.tabpagewinnr(tab_num)
         local buf_list = vim.fn.tabpagebuflist(tab_num)
         local buf_num = buf_list[win_num]

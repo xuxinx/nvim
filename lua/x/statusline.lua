@@ -50,8 +50,8 @@ local function update_lsp_diagnostic_info()
     lsp_diagnostic_info[vim.api.nvim_buf_get_name(0)] = s
 end
 
-vim.api.nvim_create_autocmd({'BufEnter', 'DiagnosticChanged'}, {
-    pattern = {'*'},
+vim.api.nvim_create_autocmd({ 'BufEnter', 'DiagnosticChanged' }, {
+    pattern = { '*' },
     callback = update_lsp_diagnostic_info,
 })
 
@@ -70,7 +70,7 @@ function M.statusline()
     s = s .. utils.base_cwd() .. ':'
 
     -- filepath
-    s = s .. [[ %{v:lua.require'x.statusline'.helpers.curr_file_path()}]]
+    s = s .. [[ %{v:lua.require('x.statusline').helpers.curr_file_path()}]]
 
     -- modified readonly help preview
     s = s .. '%m%r%h%w'
@@ -79,7 +79,7 @@ function M.statusline()
     s = s .. [[ %{get(b:,'gitsigns_status','')}]]
 
     -- lsp diagnostics
-    s = s .. [[ %{v:lua.require'x.statusline'.helpers.get_lsp_diagnostic_info()}]]
+    s = s .. [[ %{v:lua.require('x.statusline').helpers.get_lsp_diagnostic_info()}]]
 
     -- spacer
     s = s .. '%='

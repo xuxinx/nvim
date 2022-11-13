@@ -1,4 +1,4 @@
-require'nvim-treesitter.configs'.setup {
+require('nvim-treesitter.configs').setup {
     ensure_installed = {
         'bash', 'c', 'cpp', 'css', 'go', 'gomod', 'gowork', 'graphql',
         'html', 'javascript', 'json', 'lua', 'proto', 'python', 'regex',
@@ -10,4 +10,3 @@ require'nvim-treesitter.configs'.setup {
         additional_vim_regex_highlighting = false,
     },
 }
-

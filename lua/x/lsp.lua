@@ -1,10 +1,10 @@
-local lspconfig = require'lspconfig'
-local cmplsp = require'cmp_nvim_lsp'
+local lspconfig = require('lspconfig')
+local cmplsp = require('cmp_nvim_lsp')
 
 local capabilities = cmplsp.default_capabilities()
 
 local server_options = {
-    sumneko_lua = function (opts)
+    sumneko_lua = function(opts)
         opts.settings = {
             Lua = {
                 runtime = {
@@ -13,7 +13,7 @@ local server_options = {
                 },
                 diagnostics = {
                     -- Get the language server to recognize the `vim` global
-                    globals = {'vim'},
+                    globals = { 'vim' },
                 },
                 workspace = {
                     -- Make the server aware of Neovim runtime files
@@ -29,7 +29,7 @@ local server_options = {
         }
     end,
 
-    gopls = function (opts)
+    gopls = function(opts)
         opts.settings = {
             gopls = {
                 analyses = {
@@ -41,8 +41,8 @@ local server_options = {
         }
     end,
 
-    tsserver = function (opts) end,
-    vuels = function (opts) end,
+    tsserver = function(opts) end,
+    vuels = function(opts) end,
 }
 
 for server, optf in pairs(server_options) do

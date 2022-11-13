@@ -3,7 +3,7 @@ local M = {}
 -- https://github.com/neovim/nvim-lspconfig/issues/115#issuecomment-616844477
 function M.goimports(wait_ms)
     local params = vim.lsp.util.make_range_params()
-    params.context = {only = {"source.organizeImports"}}
+    params.context = { only = { "source.organizeImports" } }
     local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, wait_ms)
     for _, res in pairs(result or {}) do
         for _, r in pairs(res.result or {}) do
@@ -22,7 +22,7 @@ function M.goimports(wait_ms)
 end
 
 function M.new_file_tpl()
-    vim.fn.append(0, 'package ' .. require'x.utils'.curr_dir())
+    vim.fn.append(0, 'package ' .. require('x.utils').curr_dir())
     vim.fn.append(1, '')
 end
 

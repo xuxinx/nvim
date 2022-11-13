@@ -16,17 +16,17 @@ local ignore_file_extensions = {
 
 local file_ignore_patterns = {}
 
-for  _, v in pairs(ignore_dirs) do
+for _, v in pairs(ignore_dirs) do
     local p = v:gsub('([.-])', '%%%1') .. '/'
     table.insert(file_ignore_patterns, '^' .. p)
     table.insert(file_ignore_patterns, '/' .. p)
 end
-for  _, v in pairs(ignore_file_extensions) do
+for _, v in pairs(ignore_file_extensions) do
     local p = v:gsub('([.-])', '%%%1') .. '$'
     table.insert(file_ignore_patterns, p)
 end
 
-require('telescope').setup{
+require('telescope').setup {
     defaults = {
         vimgrep_arguments = {
             "rg",

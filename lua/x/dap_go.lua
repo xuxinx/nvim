@@ -1,7 +1,7 @@
 local M = {}
 
 function M.setup()
-    local dap = require'dap'
+    local dap = require('dap')
 
     dap.adapters.go = function(callback, config)
         local stdout = vim.loop.new_pipe(false)
@@ -10,8 +10,8 @@ function M.setup()
         local pid_or_err
         local port = 38697
         local opts = {
-            stdio = {nil, stdout, stderr},
-            args = {"dap", "-l", "127.0.0.1:" .. port},
+            stdio = { nil, stdout, stderr },
+            args = { "dap", "-l", "127.0.0.1:" .. port },
             detached = true
         }
         handle, pid_or_err = vim.loop.spawn("dlv", opts, function(code)
@@ -27,7 +27,7 @@ function M.setup()
             assert(not err, err)
             if chunk then
                 vim.schedule(function()
-                    require'dap.repl'.append(chunk)
+                    require('dap.repl').append(chunk)
                 end)
             end
         end)
@@ -35,16 +35,16 @@ function M.setup()
             assert(not err, err)
             if chunk then
                 vim.schedule(function()
-                    require'dap.repl'.append(chunk)
+                    require('dap.repl').append(chunk)
                 end)
             end
         end)
         -- Wait for delve to start
         vim.defer_fn(
-        function()
-            callback({type = "server", host = "127.0.0.1", port = port})
-        end,
-        100)
+            function()
+                callback({ type = "server", host = "127.0.0.1", port = port })
+            end,
+            100)
     end
     -- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
     dap.configurations.go = {
@@ -59,7 +59,7 @@ function M.setup()
             name = "Attach",
             mode = "local",
             request = "attach",
-            processId = require'dap.utils'.pick_process,
+            processId = require('dap.utils').pick_process,
         },
         -- {
         --     type = "go",
@@ -72,7 +72,7 @@ function M.setup()
 end
 
 function M.debug_test()
-    local dap = require'dap'
+    local dap = require('dap')
     dap.run({
         type = "go",
         name = "Debug test",
@@ -81,7 +81,7 @@ function M.debug_test()
         program = "${fileDirname}",
         args = function()
             local input = vim.fn.input("Test name: ")
-            return {'-test.run', input}
+            return { '-test.run', input }
         end,
     })
 end

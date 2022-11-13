@@ -28,13 +28,13 @@ local syntax = {
     operator = blue,
 }
 
-local normal      = { bg = white, fg = black }
+local normal       = { bg = white, fg = black }
 local normal_float = { bg = lc(green, 150) }
-local pmenu       = normal_float
-local search      = { bg = yellow, fg = normal.fg }
-local visual      = { bg = lightBlue }
+local pmenu        = normal_float
+local search       = { bg = yellow, fg = normal.fg }
+local visual       = { bg = lightBlue }
 local status_line  = { bg = ash, fg = grey }
-local hop_next_key  = search
+local hop_next_key = search
 
 local groups = {
     Normal = normal, -- normal text

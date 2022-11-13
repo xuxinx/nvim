@@ -1,5 +1,5 @@
 local packer_bootstrap
-local install_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
     packer_bootstrap = vim.fn.system({
         'git', 'clone',
@@ -16,7 +16,7 @@ vim.cmd([[
   augroup end
 ]])
 
-require'packer'.startup(function(use)
+require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
     use 'tpope/vim-vinegar'
     use {
@@ -24,14 +24,14 @@ require'packer'.startup(function(use)
         after = {
             'nvim-cmp',
         },
-        config = function ()
-            require'x.lsp'
+        config = function()
+            require('x.lsp')
         end
     }
     use {
         'williamboman/mason.nvim',
-        config = function ()
-            require'mason'.setup()
+        config = function()
+            require('mason').setup()
         end
     }
     use {
@@ -44,15 +44,15 @@ require'packer'.startup(function(use)
             'quangnguyen30192/cmp-nvim-ultisnips',
             'honza/vim-snippets',
         },
-        config = function ()
-            require'x.cmp'
+        config = function()
+            require('x.cmp')
         end
     }
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
-        config = function ()
-            require'x.treesitter'
+        config = function()
+            require('x.treesitter')
         end
     }
     use {
@@ -60,21 +60,21 @@ require'packer'.startup(function(use)
         requires = {
             'nvim-lua/plenary.nvim',
         },
-        config = function ()
-            require'x.telescope'
+        config = function()
+            require('x.telescope')
         end
     }
     use {
         'phaazon/hop.nvim',
-        config = function ()
-            require'hop'.setup()
+        config = function()
+            require('hop').setup()
         end
     }
     use 'tpope/vim-commentary'
     use {
         'jiangmiao/auto-pairs',
         config = function()
-            require'x.auto_pairs'
+            require('x.auto_pairs')
         end
     }
     use {
@@ -83,14 +83,14 @@ require'packer'.startup(function(use)
             'nvim-lua/plenary.nvim'
         },
         config = function()
-            require'gitsigns'.setup()
+            require('gitsigns').setup()
         end
     }
     use 'majutsushi/tagbar'
     use {
         'norcalli/nvim-colorizer.lua',
         config = function()
-            require'colorizer'.setup()
+            require('colorizer').setup()
         end
     }
     use {
@@ -98,8 +98,8 @@ require'packer'.startup(function(use)
         after = {
             'nvim-dap-ui',
         },
-        config = function ()
-            require'x.dap'
+        config = function()
+            require('x.dap')
         end
     }
     use 'rcarriga/nvim-dap-ui'
@@ -110,8 +110,8 @@ require'packer'.startup(function(use)
     use {
         'dinhhuy258/vim-local-history',
         run = ':UpdateRemotePlugins',
-        config = function ()
-            require'x.local_history'
+        config = function()
+            require('x.local_history')
         end
     }
     use {
@@ -123,6 +123,6 @@ require'packer'.startup(function(use)
 
     if packer_bootstrap then
         print('packer bootstrap')
-        require'packer'.sync()
+        require('packer').sync()
     end
 end)

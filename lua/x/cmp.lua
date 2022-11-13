@@ -1,4 +1,4 @@
-local cmp = require'cmp'
+local cmp = require('cmp')
 
 cmp.setup({
     snippet = {
@@ -6,11 +6,11 @@ cmp.setup({
             vim.fn["UltiSnips#Anon"](args.body)
         end
     },
-    sources = require'cmp'.config.sources{
+    sources = require('cmp').config.sources {
         { name = 'nvim_lsp' },
         { name = 'buffer' },
         { name = 'path' },
         { name = 'ultisnips' },
     },
-    mapping = require'cmp.config.mapping'.preset.insert()
+    mapping = require('cmp.config.mapping').preset.insert()
 })
