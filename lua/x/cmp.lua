@@ -16,7 +16,6 @@ cmp.setup({
                     for _, buf in ipairs(vim.fn.tabpagebuflist()) do
                         bufs[buf] = true
                     end
-                    print(vim.inspect(bufs))
                     return vim.tbl_keys(bufs)
                 end,
             },
