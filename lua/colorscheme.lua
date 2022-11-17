@@ -1,97 +1,97 @@
-local lc = require('x.utils').lighten_color
-
 local white = '#ffffff'
 local black = '#24292f'
+local ashL10 = '#f9f9f9'
 local ash = '#f5f5f5'
+local ashD10 = '#eaeaea'
+local greyL40 = '#9ba3ad'
 local grey = '#6e7781'
 local red = '#cf222e'
+local greenL40 = '#309b4f'
 local green = '#116329'
 local yellow = '#ffff00'
 local orange = '#c9510c'
+local blueL80 = '#bddfff'
+local blueL60 = '#3f7cc9'
 local blue = '#0550ae'
-local lightBlue = '#bddfff'
+local blueD60 = '#0a3069'
 local magenta = '#8250df'
+local cyanL60 = '#31badc'
 local cyan = '#0598bc'
-
 
 local syntax = {
     comment = grey,
-    constant = blue,
-    string = lc(blue, -100),
+    constant = black,
+    string = blueD60,
     variable = black,
     keyword = red,
     func = magenta,
     param = black,
-    json_label = blue,
+    json_label = green,
     field = blue,
     type = black,
     operator = blue,
+    tag = green,
+    attr = magenta,
 }
 
-local normal       = { bg = white, fg = black }
-local normal_float = { bg = lc(green, 150) }
-local pmenu        = normal_float
-local search       = { bg = yellow, fg = normal.fg }
-local visual       = { bg = lightBlue }
-local status_line  = { bg = ash, fg = grey }
-local hop_next_key = search
+local unknown = { bg = '#ef62eb', bold = true, underline = true, italic = true }
 
 local groups = {
-    Normal = normal, -- normal text
-    NormalFloat = normal_float, -- Normal text in floating windows.
+    Normal       = { bg = white, fg = black }, -- normal text
+    NormalFloat  = { bg = ashD10 }, -- Normal text in floating windows.
     -- NormalNC     { }, -- normal text in non-current windows
     -- ColorColumn  { }, -- used for the columns set with 'colorcolumn'
-    -- Conceal      { }, -- placeholder characters substituted for concealed text (see 'conceallevel')
+    Conceal      = { fg = green }, -- placeholder characters substituted for concealed text (see 'conceallevel')
     -- Cursor       { }, -- character under the cursor
     -- lCursor      { }, -- the character under the cursor when |language-mapping| is used (see 'guicursor')
     -- CursorIM     { }, -- like Cursor, but used when in IME mode |CursorIM|
     -- CursorColumn { }, -- Screen-column at the cursor, when 'cursorcolumn' is set.
-    CursorLine = { bg = ash }, -- Screen-line at the cursor, when 'cursorline' is set.  Low-priority if foreground (ctermfg OR guifg) is not set.
+    CursorLine   = { bg = ashL10 }, -- Screen-line at the cursor, when 'cursorline' is set.  Low-priority if foreground (ctermfg OR guifg) is not set.
     -- Directory    { }, -- directory names (and other special names in listings)
-    -- DiffAdd      { }, -- diff mode: Added line |diff.txt|
-    -- DiffChange   { }, -- diff mode: Changed line |diff.txt|
-    -- DiffDelete   { }, -- diff mode: Deleted line |diff.txt|
-    -- DiffText     { }, -- diff mode: Changed text within a changed line |diff.txt|
+    DiffAdd      = { fg = greenL40 }, -- diff mode: Added line |diff.txt|
+    DiffChange   = { fg = blueL60 }, -- diff mode: Changed line |diff.txt|
+    DiffDelete   = { fg = red }, -- diff mode: Deleted line |diff.txt|
+    DiffText     = { fg = blue }, -- diff mode: Changed text within a changed line |diff.txt|
     -- EndOfBuffer  { }, -- filler lines (~) after the end of the buffer.  By default, this is highlighted like |hl-NonText|.
     -- TermCursor   { }, -- cursor in a focused terminal
     -- TermCursorNC { }, -- cursor in an unfocused terminal
     -- ErrorMsg     { }, -- error messages on the command line
-    VertSplit = { fg = black }, -- the column separating vertically split windows
+    VertSplit    = { fg = black }, -- the column separating vertically split windows
     -- Folded       { }, -- line used for closed folds
     -- FoldColumn   { }, -- 'foldcolumn'
-    SignColumn = { bg = normal.bg }, -- column where |signs| are displayed
+    SignColumn   = { bg = white }, -- column where |signs| are displayed
     -- IncSearch    { }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
-    Search = search, -- Last search pattern highlighting (see 'hlsearch').  Also used for similar items that need to stand out.
-    Substitute = search, -- |:substitute| replacement text highlighting
-    LineNr = { fg = grey }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
+    Search       = { bg = yellow, fg = black }, -- Last search pattern highlighting (see 'hlsearch').  Also used for similar items that need to stand out.
+    Substitute   = { link = 'Search' }, -- |:substitute| replacement text highlighting
+    LineNr       = { fg = grey }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
     CursorLineNr = { fg = black }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
-    MatchParen = { bg = lc(cyan, 120) }, -- The character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
+    MatchParen   = { bg = cyanL60 }, -- The character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
     -- ModeMsg      { }, -- 'showmode' message (e.g., "-- INSERT -- ")
     -- MsgArea      { }, -- Area for messages and cmdline
     -- MsgSeparator { }, -- Separator for scrolled messages, `msgsep` flag of 'display'
     -- MoreMsg      { }, -- |more-prompt|
     -- NonText      { }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
-    Pmenu = pmenu, -- Popup menu: normal item.
-    PmenuSel = { bg = lc(pmenu.bg, -20) }, -- Popup menu: selected item.
-    PmenuSbar = { bg = lc(pmenu.bg, -20) }, -- Popup menu: scrollbar.
-    PmenuThumb = { bg = lc(pmenu.bg, -60) }, -- Popup menu: Thumb of the scrollbar.
+    Pmenu        = { link = 'NormalFloat' }, -- Popup menu: normal item.
+    PmenuSel     = { link = 'Visual' }, -- Popup menu: selected item.
+    PmenuSbar    = { bg = greyL40 }, -- Popup menu: scrollbar.
+    PmenuThumb   = { bg = grey }, -- Popup menu: Thumb of the scrollbar.
     -- Question     { }, -- |hit-enter| prompt and yes/no questions
-    Visual = visual, -- Visual mode selection
-    QuickFixLine = visual, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
-    WildMenu = visual, -- current match in 'wildmenu' completion
+    Visual       = { bg = blueL80 }, -- Visual mode selection
+    QuickFixLine = { link = 'Visual' }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
+    WildMenu     = { link = 'Visual' }, -- current match in 'wildmenu' completion
     -- SpecialKey   { }, -- Unprintable characters: text displayed differently from what it really is.  But not 'listchars' whitespace. |hl-Whitespace|
     -- SpellBad     { }, -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
     -- SpellCap     { }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
     -- SpellLocal   { }, -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
     -- SpellRare    { }, -- Word that is recognized by the spellchecker as one that is hardly ever used.  |spell| Combined with the highlighting used otherwise.
-    StatusLine = status_line, -- status line of current window
-    StatusLineNC = { bg = status_line.bg, fg = lc(status_line.fg, 40) }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
-    TabLine = status_line, -- tab pages line, not active tab page label
-    TabLineFill = { bg = normal.bg }, -- tab pages line, where there are no labels
-    TabLineSel = { bg = grey, fg = ash }, -- tab pages line, active tab page label
-    -- Title        { }, -- titles for output from ":set all", ":autocmd" etc.
+    StatusLine   = { bg = ash, fg = grey }, -- status line of current window
+    StatusLineNC = { bg = ash, fg = greyL40 }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
+    TabLine      = { link = 'StatusLine' }, -- tab pages line, not active tab page label
+    TabLineFill  = { bg = white }, -- tab pages line, where there are no labels
+    TabLineSel   = { bg = grey, fg = ash }, -- tab pages line, active tab page label
+    Title        = { bold = true }, -- titles for output from ":set all", ":autocmd" etc.
     -- VisualNOS    { }, -- Visual mode selection when vim is "Not Owning the Selection".
-    -- WarningMsg   { }, -- warning messages
+    WarningMsg   = { fg = red }, -- warning messages
     -- Whitespace   { }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
 
     -- These groups are not listed as default vim groups,
@@ -100,28 +100,28 @@ local groups = {
     -- default,
     -- Uncomment and edit if you want more specific syntax highlighting.
 
-    Comment = { fg = syntax.comment, italic = true }, -- any comment
-    Constant = { fg = syntax.constant }, -- (preferred) any constant
-    String = { fg = syntax.string }, --   a string constant: "this is a string"
+    Comment   = { fg = syntax.comment, italic = true }, -- any comment
+    Constant  = { fg = syntax.constant }, -- (preferred) any constant
+    String    = { fg = syntax.string }, --   a string constant: "this is a string"
     Character = { fg = syntax.variable }, --  a character constant: 'c', '\n'
-    -- Number         { }, --   a number constant: 234, 0xff
-    -- Boolean        { }, --  a boolean constant: TRUE, false
-    -- Float          { }, --    a floating point constant: 2.3e10
+    Number    = { fg = syntax.variable }, --   a number constant: 234, 0xff
+    Boolean   = { fg = syntax.variable }, --  a boolean constant: TRUE, false
+    Float     = { fg = syntax.variable }, --    a floating point constant: 2.3e10
 
     Identifier = { fg = syntax.variable }, -- (preferred) any variable name
     Function = { fg = syntax.func }, -- function name (also: methods for classes)
 
-    Statement = { fg = syntax.keyword }, -- (preferred) any statement
-    -- Conditional    { }, --  if, then, else, endif, switch, etc.
-    -- Repeat         { }, --   for, do, while, etc.
-    -- Label          { }, --    case, default, etc.
-    Operator = { fg = syntax.operator }, -- "sizeof", "+", "*", etc.
-    Keyword = { fg = syntax.keyword }, --  any other keyword
-    -- Exception      { }, --  try, catch, throw
+    Statement   = { fg = syntax.keyword }, -- (preferred) any statement
+    Conditional = { fg = syntax.keyword }, --  if, then, else, endif, switch, etc.
+    Repeat      = { fg = syntax.keyword }, --   for, do, while, etc.
+    Label       = { fg = syntax.json_label }, --    case, default, etc.
+    Operator    = { fg = syntax.operator }, -- "sizeof", "+", "*", etc.
+    Keyword     = { fg = syntax.keyword }, --  any other keyword
+    Exception   = { fg = syntax.keyword }, --  try, catch, throw
 
     PreProc = { fg = syntax.keyword }, -- (preferred) generic Preprocessor
-    -- Include        { }, --  preprocessor #include
-    -- Define         { }, --   preprocessor #define
+    Include = { fg = syntax.keyword }, --  preprocessor #include
+    Define  = { link = 'Constant' }, --   preprocessor #define
     -- Macro          { }, --    same as Define
     -- PreCondit      { }, --  preprocessor #if, #else, #endif, etc.
 
@@ -130,11 +130,11 @@ local groups = {
     -- Structure      { }, --  struct, union, enum, etc.
     -- Typedef        { }, --  A typedef
 
-    -- Special        { }, -- (preferred) any special symbol.
-    -- SpecialChar    { }, --  special character in a constant
-    -- Tag            { }, --    you can use CTRL-] on this
-    -- Delimiter      { }, --  character that needs attention
-    -- SpecialComment { }, -- special things inside a comment
+    Special        = { fg = magenta }, -- (preferred) any special symbol. telescope matched characters
+    SpecialChar    = { fg = red }, --  special character in a constant
+    Tag            = { fg = green }, --    you can use CTRL-] on this
+    Delimiter      = { fg = black }, --  character that needs attention
+    SpecialComment = unknown, -- special things inside a comment
     -- Debug          { }, --    debugging statements
 
     Underlined = { underline = true }, -- (preferred) text that stands out, HTML links
@@ -142,118 +142,106 @@ local groups = {
     Italic = { italic = true },
 
     -- ("Ignore", below, may be invisible...)
-    -- Ignore         { }, -- (preferred) left blank, hidden  |hl-Ignore|
+    Ignore = unknown, -- (preferred) left blank, hidden  |hl-Ignore|
+    -- Error  = { fg = red }, -- (preferred) any erroneous construct
+    Todo   = { fg = blue }, -- (preferred) anything that needs extra attention; mostly the keywords TODO FIXME and XXX
 
-    -- Error          { }, -- (preferred) any erroneous construct
-
-    -- Todo           { }, -- (preferred) anything that needs extra attention; mostly the keywords TODO FIXME and XXX
-
-    -- These groups are for the native LSP client. Some other LSP clients may
-    -- use these groups, or use their own. Consult your LSP client's
-    -- documentation.
-
-    -- LspReferenceText                     { }, -- used for highlighting "text" references
-    -- LspReferenceRead                     { }, -- used for highlighting "read" references
-    -- LspReferenceWrite                    { }, -- used for highlighting "write" references
-
-    -- LspDiagnosticsDefaultError           { }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
-    -- LspDiagnosticsDefaultWarning         { }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
-    -- LspDiagnosticsDefaultInformation     { }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
-    -- LspDiagnosticsDefaultHint            { }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
-
-    -- LspDiagnosticsVirtualTextError       { }, -- Used for "Error" diagnostic virtual text
-    -- LspDiagnosticsVirtualTextWarning     { }, -- Used for "Warning" diagnostic virtual text
-    -- LspDiagnosticsVirtualTextInformation { }, -- Used for "Information" diagnostic virtual text
-    -- LspDiagnosticsVirtualTextHint        { }, -- Used for "Hint" diagnostic virtual text
-
-    -- LspDiagnosticsUnderlineError         { }, -- Used to underline "Error" diagnostics
-    -- LspDiagnosticsUnderlineWarning       { }, -- Used to underline "Warning" diagnostics
-    -- LspDiagnosticsUnderlineInformation   { }, -- Used to underline "Information" diagnostics
-    -- LspDiagnosticsUnderlineHint          { }, -- Used to underline "Hint" diagnostics
-
-    -- LspDiagnosticsFloatingError          { }, -- Used to color "Error" diagnostic messages in diagnostics float
-    -- LspDiagnosticsFloatingWarning        { }, -- Used to color "Warning" diagnostic messages in diagnostics float
-    -- LspDiagnosticsFloatingInformation    { }, -- Used to color "Information" diagnostic messages in diagnostics float
-    -- LspDiagnosticsFloatingHint           { }, -- Used to color "Hint" diagnostic messages in diagnostics float
-
-    -- LspDiagnosticsSignError              { }, -- Used for "Error" signs in sign column
-    -- LspDiagnosticsSignWarning            { }, -- Used for "Warning" signs in sign column
-    -- LspDiagnosticsSignInformation        { }, -- Used for "Information" signs in sign column
-    -- LspDiagnosticsSignHint               { }, -- Used for "Hint" signs in sign column
-
-    -- LspCodeLens                          { }, -- Used to color the virtual text of the codelens
-
-    TSAttribute = { bg = red }, -- Annotations that can be attached to the code to denote some kind of meta information. e.g. C++/Dart attributes.
-    TSBoolean = { fg = syntax.constant }, -- Boolean literals: `True` and `False` in Python.
-    TSCharacter = { fg = syntax.variable }, -- Character literals: `'a'` in C.
-    TSComment = { fg = syntax.comment, italic = true }, -- Line comments and block comments.
-    TSConditional = { fg = syntax.keyword }, -- Keywords related to conditionals: `if`, `when`, `cond`, etc.
-    TSConstant = { fg = syntax.constant }, -- Constants identifiers. These might not be semantically constant. E.g. uppercase variables in Python.
-    TSConstBuiltin = { fg = syntax.constant }, -- Built-in constant values: `nil` in Lua.
-    TSConstMacro = { fg = syntax.constant }, -- Constants defined by macros: `NULL` in C.
-    TSConstructor = { fg = syntax.variable }, -- Constructor calls and definitions: `{}` in Lua, and Java constructors.
-    -- TSError { }, -- Syntax/parser errors. This might highlight large sections of code while the user is typing still incomplete code, use a sensible highlight.
-    TSException = { fg = syntax.keyword }, -- Exception related keywords: `try`, `except`, `finally` in Python.
-    TSField = { fg = syntax.field }, -- Object and struct fields.
-    TSFloat = { fg = syntax.constant }, -- Floating-point number literals.
-    TSFunction = { fg = syntax.func }, -- Function calls and definitions.
-    TSFuncBuiltin = { fg = syntax.func }, -- Built-in functions: `print` in Lua.
-    TSFuncMacro = { fg = syntax.func }, -- Macro defined functions (calls and definitions): each `macro_rules` in Rust.
-    TSInclude = { fg = syntax.keyword }, -- File or module inclusion keywords: `#include` in C, `use` or `extern crate` in Rust.
-    TSKeyword = { fg = syntax.keyword }, -- Keywords that don't fit into other categories.
-    TSKeywordFunction = { fg = syntax.keyword }, -- Keywords used to define a function: `function` in Lua, `def` and `lambda` in Python.
-    TSKeywordOperator = { fg = syntax.operator }, -- Unary and binary operators that are English words: `and`, `or` in Python; `sizeof` in C.
-    TSKeywordReturn = { fg = syntax.keyword }, -- Keywords like `return` and `yield`.
-    TSLabel = { fg = syntax.json_label }, -- GOTO labels: `label:` in C, and `::label::` in Lua.
-    TSMethod = { fg = syntax.func }, -- Method calls and definitions.
-    TSNamespace = { fg = normal.fg }, -- Identifiers referring to modules and namespaces.
-    -- TSNone {}, -- No highlighting (sets all highlight arguments to `NONE`). this group is used to clear certain ranges, for example, string interpolations. Don't change the values of this highlight group.
-    TSNumber = { fg = syntax.constant }, -- Numeric literals that don't fit into other categories.
-    TSOperator = { fg = syntax.operator }, -- Binary or unary operators: `+`, and also `->` and `*` in C.
-    TSParameter = { fg = syntax.param }, -- Parameters of a function.
-    TSParameterReference = { bg = red }, -- References to parameters of a function.
-    TSProperty = { fg = syntax.field }, -- Same as `TSField`.
-    TSPunctDelimiter = { fg = normal.fg }, -- Punctuation delimiters: Periods, commas, semicolons, etc.
-    TSPunctBracket = { fg = normal.fg }, -- Brackets, braces, parentheses, etc.
-    TSPunctSpecial = { fg = normal.fg }, -- Special punctuation that doesn't fit into the previous categories.
-    TSRepeat = { fg = syntax.keyword }, -- Keywords related to loops: `for`, `while`, etc.
-    TSString = { fg = syntax.string },
-    TSStringRegex = { fg = syntax.variable }, -- Regular expression literals.
-    TSStringEscape = { fg = syntax.keyword }, -- Escape characters within a string: `\n`, `\t`, etc.
-    TSStringSpecial = { fg = syntax.string }, -- Strings with special meaning that don't fit into the previous categories.
-    TSSymbol = { bg = red }, -- Identifiers referring to symbols or atoms.
-    TSTag = { fg = green }, -- Tags like HTML tag names.
-    TSTagAttribute = { fg = blue }, -- HTML tag attributes.
-    TSTagDelimiter = { fg = normal.fg }, -- Tag delimiters like `<` `>` `/`.
-    TSText = { fg = normal.fg }, -- Non-structured text. Like text in a markup language.
-    -- TSStrong {}, -- Text to be represented in bold.
-    -- TSEmphasis {}, -- Text to be represented with emphasis.
-    -- TSUnderline {}, -- Text to be represented with an underline.
-    -- TSStrike {}, -- Strikethrough text.
-    TSTitle = { fg = normal.fg }, -- Text that is part of a title.
-    -- TSLiteral {}, -- Literal or verbatim text.
-    -- TSURI {}, -- URIs like hyperlinks or email addresses.
-    -- TSMath {}, -- Math environments like LaTeX's `$ ... $`
-    TSTextReference = { fg = syntax.keyword }, -- Footnotes, text references, citations, etc.
-    -- TSEnvironment {}, -- Text environments of markup languages.
-    -- TSEnvironmentName {}, -- Text/string indicating the type of text environment. Like the name of a `\begin` block in LaTeX.
-    TSNote = { bg = blue, fg = white },
-    TSWarning = { bg = orange, fg = white },
-    TSDanger = { bg = red, fg = white },
-    TSType = { fg = syntax.type }, -- Type (and class) definitions and annotations.
-    TSTypeBuiltin = { fg = syntax.type }, -- Built-in types: `i32` in Rust.
-    TSVariable = { fg = syntax.variable }, -- Variable names that don't fit into other categories.
-    TSVariableBuiltin = { fg = syntax.variable }, -- Variable names defined by the language: `this` or `self` in Javascript.
+    -- # treesitter groups
+    -- # https://github.com/nvim-treesitter/nvim-treesitter/blob/00b42ac6d4c852d34619eaf2ea822266588d75e3/CONTRIBUTING.md
+    -- Misc
+    ['@comment'] = { link = 'Comment' }, --  ; line and block comments
+    -- ['@error'] = {}, --    ; syntax/parser errors
+    ['@none'] = {}, --     ; completely disable the highlight
+    ['@preproc'] = { link = 'PreProc' }, --  ; various preprocessor directives & shebangs
+    ['@define'] = { link = 'Define' }, --   ; preprocessor definition directives
+    ['@operator'] = { link = 'Operator' }, -- ; symbolic operators (e.g. `+` / `*`)
+    -- Punctuation
+    ['@punctuation.delimiter'] = { link = 'Delimiter' }, -- ; delimiters (e.g. `;` / `.` / `,`)
+    ['@punctuation.bracket'] = { link = 'Delimiter' }, --   ; brackets (e.g. `()` / `{}` / `[]`)
+    ['@punctuation.special'] = { link = 'Delimiter' }, --   ; special symbols (e.g. `{}` in string interpolation)
+    -- Literals
+    ['@string'] = { link = 'String' }, --            ; string literals
+    ['@string.regex'] = { link = 'String' }, --      ; regular expressions
+    ['@string.escape'] = { link = 'SpecialChar' }, --     ; escape sequences
+    ['@string.special'] = { link = 'SpecialChar' }, --    ; other special strings (e.g. dates)
+    ['@character'] = { link = 'Character' }, --         ; character literals
+    ['@character.special'] = { link = 'SpecialChar' }, -- ; special characters (e.g. wildcards)
+    ['@boolean'] = { link = 'Boolean' }, --           ; boolean literals
+    ['@number'] = { link = 'Number' }, --            ; numeric literals
+    ['@float'] = { link = 'Float' }, --             ; floating-point number literals
+    -- Functions
+    ['@function'] = { link = 'Function' }, --         ; function definitions
+    ['@function.builtin'] = { link = 'Function' }, -- ; built-in functions
+    ['@function.call'] = { link = 'Function' }, --    ; function calls
+    ['@function.macro'] = { link = 'Function' }, --   ; preprocessor macros
+    ['@method'] = { link = 'Function' }, --           ; method definitions
+    ['@method.call'] = { link = 'Function' }, --      ; method calls
+    ['@constructor'] = { link = 'Identifier' }, --      ; constructor calls and definitions
+    ['@parameter'] = { link = 'Identifier' }, --        ; parameters of a function
+    -- Keywords
+    ['@keyword'] = { link = 'Keyword' }, --          ; various keywords
+    ['@keyword.function'] = { link = 'Keyword' }, -- ; keywords that define a function (e.g. `func` in Go, `def` in Python)
+    ['@keyword.operator'] = { link = 'Keyword' }, -- ; operators that are English words (e.g. `and` / `or`)
+    ['@keyword.return'] = { link = 'Keyword' }, --   ; keywords like `return` and `yield`
+    ['@conditional'] = { link = 'Conditional' }, --      ; keywords related to conditionals (e.g. `if` / `else`)
+    ['@repeat'] = { link = 'Repeat' }, --           ; keywords related to loops (e.g. `for` / `while`)
+    ['@debug'] = { link = 'Keyword' }, --            ; keywords related to debugging
+    ['@label'] = { link = 'Label' }, --            ; GOTO and other labels (e.g. `label:` in C)
+    ['@include'] = { link = 'Include' }, --          ; keywords for including modules (e.g. `import` / `from` in Python)
+    ['@exception'] = { link = 'Exception' }, --        ; keywords related to exceptions (e.g. `throw` / `catch`)
+    -- Types
+    ['@type'] = { link = 'Type' }, --                  ; type or class definitions and annotations
+    ['@type.builtin'] = { link = 'Type' }, --          ; built-in types
+    ['@type.definition'] = { link = 'Type' }, --       ; type definitions (e.g. `typedef` in C)
+    ['@type.qualifier'] = { link = 'Type' }, --        ; type qualifiers (e.g. `const`)
+    ['@storageclass'] = { link = 'Keyword' }, --          ; visibility/life-time modifiers
+    ['@storageclass.lifetime'] = { link = 'Keyword' }, -- ; life-time modifiers (e.g. `static`)
+    ['@attribute'] = { link = 'Keyword' }, --             ; attribute annotations (e.g. Python decorators)
+    ['@field'] = { fg = syntax.field }, --                 ; object and struct fields
+    ['@property'] = { link = '@field' }, --              ; similar to `@field`
+    -- Identifiers
+    ['@variable'] = { link = 'Identifier' }, --         ; various variable names
+    ['@variable.builtin'] = { link = 'Identifier' }, -- ; built-in variable names (e.g. `this`)
+    ['@constant'] = { link = 'Constant' }, --          ; constant identifiers
+    ['@constant.builtin'] = { link = 'Constant' }, --  ; built-in constant values
+    ['@constant.macro'] = { link = 'Constant' }, --    ; constants defined by the preprocessor
+    ['@namespace'] = { link = 'Identifier' }, --        ; modules or namespaces
+    ['@symbol'] = { link = 'Identifier' }, --           ; symbols or atoms
+    -- Text
+    ['@text'] = { link = "@none" }, --                  ; non-structured text
+    ['@text.strong'] = { bold = true }, --           ; bold text
+    ['@text.emphasis'] = { italic = true }, --         ; text with emphasis
+    ['@text.underline'] = { underline = true }, --        ; underlined text
+    ['@text.strike'] = { strikethrough = true }, --           ; strikethrough text
+    ['@text.title'] = { link = 'Title' }, --            ; text that is part of a title
+    ['@text.literal'] = { link = 'String' }, --          ; literal or verbatim text
+    ['@text.uri'] = { link = 'Underlined' }, --              ; URIs (e.g. hyperlinks)
+    ['@text.math'] = { link = 'Special' }, --             ; math environments (e.g. `$ ... $` in LaTeX)
+    ['@text.environment'] = unknown, --      ; text environments of markup languages
+    ['@text.environment.name'] = unknown, -- ; text indicating the type of an environment
+    ['@text.reference'] = { link = 'Constant' }, --        ; text references, footnotes, citations, etc.
+    ['@text.todo'] = { link = 'Todo' }, --             ; todo notes
+    ['@text.note'] = { fg = green }, --             ; info notes
+    ['@text.warning'] = { link = 'WarningMsg' }, --          ; warning notes
+    ['@text.danger'] = { link = 'WarningMsg' }, --           ; danger/error notes
+    ['@text.diff.add'] = { link = 'DiffAdd' }, --         ; added text (for diff files)
+    ['@text.diff.delete'] = { link = 'DiffDelete' }, --      ; deleted text (for diff files)
+    -- Tags
+    ['@tag'] = { link = 'Tag' }, --           ; XML tag names
+    ['@tag.attribute'] = { fg = syntax.attr }, -- ; XML tag attributes
+    ['@tag.delimiter'] = { link = 'Delimiter' }, -- ; XML tag delimiters
+    -- Conceal
+    ['@conceal'] = { link = 'Conceal' }, -- ; for captures that are only used for concealing
 
     -- GitSigns
-    GitSignsAdd = { fg = lc(green, 100) },
-    GitSignsChange = { fg = lc(blue, 60) },
-    GitSignsDelete = { fg = orange },
+    GitSignsAdd = { link = 'DiffAdd' },
+    GitSignsChange = { link = 'DiffChange' },
+    GitSignsDelete = { link = 'DiffDelete' },
 
     -- Hop
-    HopNextKey = hop_next_key,
-    HopNextKey1 = hop_next_key,
-    HopNextKey2 = hop_next_key,
+    HopNextKey = { link = 'Search' },
+    HopNextKey1 = { link = 'Search' },
+    HopNextKey2 = { link = 'Search' },
     HopUnmatched = { fg = grey },
     -- HopCursor { },
 }
