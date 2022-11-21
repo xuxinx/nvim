@@ -22,7 +22,11 @@ function M.goimports(wait_ms)
 end
 
 function M.new_file_tpl()
-    vim.fn.append(0, 'package ' .. require('x.utils').curr_dir())
+    local pn = require('x.utils').curr_dir()
+    if vim.fn.expand('%:t') == 'main.go' or vim.fn.filereadable(vim.fs.dirname(vim.api.nvim_buf_get_name(0)) .. '/main.go') == 1 then
+        pn = 'main'
+    end
+    vim.fn.append(0, 'package ' .. pn)
     vim.fn.append(1, '')
 end
 
