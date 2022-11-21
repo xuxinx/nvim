@@ -56,6 +56,10 @@ require('packer').startup(function(use)
         end
     }
     use {
+        'nvim-treesitter/playground',
+        opt = true
+    }
+    use {
         'nvim-telescope/telescope.nvim',
         requires = {
             'nvim-lua/plenary.nvim',
@@ -63,10 +67,6 @@ require('packer').startup(function(use)
         config = function()
             require('x.telescope')
         end
-    }
-    use {
-        'nvim-treesitter/playground',
-        opt = true
     }
     use {
         'nvim-telescope/telescope-fzf-native.nvim',
@@ -78,7 +78,12 @@ require('packer').startup(function(use)
             require('hop').setup()
         end
     }
-    use 'tpope/vim-commentary'
+    use {
+        'numToStr/Comment.nvim',
+        config = function()
+            require('Comment').setup()
+        end
+    }
     use {
         'jiangmiao/auto-pairs',
         config = function()
