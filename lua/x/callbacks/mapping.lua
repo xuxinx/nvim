@@ -144,11 +144,11 @@ function M.debug_test()
 end
 
 function M.markdown_done_todo_expr()
-    return '^2f<Space>rx<esc>jA [D ' .. os.date("%Y-%m-%d %H:%M %a") .. ']<esc>k0'
+    return '$?- [<cr>2f<Space>rx<esc>/[C<cr>A [D ' .. os.date("%Y-%m-%d %H:%M %a") .. ']<esc>?- [<cr>:noh<cr>'
 end
 
 function M.markdown_undone_todo_expr()
-    return '^fxr<Space>j0/[D<cr>da[xk0'
+    return '$?- [<cr>fxr<Space>/[D<cr>da[x?- [<cr>:noh<cr>'
 end
 
 return M
