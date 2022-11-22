@@ -11,6 +11,9 @@ cac({ 'BufNewFile', 'BufRead' }, { pattern = { '*.gohtml' },
 cac('FileType', { pattern = { 'yaml', 'proto' },
     desc = 'set tab to 2 spaces',
     callback = cb.set_tab_to_n_spaces_func(2) })
+cac('FileType', { pattern = { 'snippets' },
+    desc = 'set tab length = 8 spaces',
+    callback = cb.set_tab_to_n_spaces_func(8, false) })
 
 -- # off syntax
 cac({ 'BufNewFile', 'BufWinEnter' }, { pattern = { 'go.sum' },

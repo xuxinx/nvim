@@ -6,12 +6,15 @@ function M.set_filetype_func(ft)
     end
 end
 
-function M.set_tab_to_n_spaces_func(n)
+function M.set_tab_to_n_spaces_func(n, expandtab)
+    if expandtab == nil then
+        expandtab = true
+    end
     return function()
         vim.bo.tabstop = n
         vim.bo.softtabstop = n
         vim.bo.shiftwidth = n
-        vim.bo.expandtab = true
+        vim.bo.expandtab = expandtab
     end
 end
 

@@ -40,8 +40,8 @@ require('packer').startup(function(use)
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-buffer',
             'hrsh7th/cmp-path',
-            'SirVer/ultisnips',
-            'quangnguyen30192/cmp-nvim-ultisnips',
+            'L3MON4D3/LuaSnip',
+            'saadparwaiz1/cmp_luasnip',
             'honza/vim-snippets',
         },
         config = function()

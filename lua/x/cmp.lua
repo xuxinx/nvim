@@ -1,9 +1,10 @@
 local cmp = require('cmp')
+local luasnip = require('luasnip')
 
 cmp.setup({
     snippet = {
         expand = function(args)
-            vim.fn["UltiSnips#Anon"](args.body)
+            luasnip.lsp_expand(args.body)
         end
     },
     sources = cmp.config.sources({
@@ -21,7 +22,24 @@ cmp.setup({
             },
         },
         { name = 'path' },
-        { name = 'ultisnips' },
+        { name = 'luasnip' },
     }),
-    mapping = require('cmp.config.mapping').preset.insert()
+    mapping = require('cmp.config.mapping').preset.insert({
+        ['<C-j>'] = cmp.mapping(function(fallback)
+            if luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
+        ['<C-k>'] = cmp.mapping(function(fallback)
+            if luasnip.jumpable(-1) then
+                luasnip.jump(-1)
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
+    })
 })
+
+require("luasnip.loaders.from_snipmate").lazy_load()
