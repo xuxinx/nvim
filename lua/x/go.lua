@@ -23,11 +23,19 @@ end
 
 function M.new_file_tpl()
     local pn = require('x.utils').curr_dir()
-    if vim.fn.expand('%:t') == 'main.go' or vim.fn.filereadable(vim.fs.dirname(vim.api.nvim_buf_get_name(0)) .. '/main.go') == 1 then
+    local is_main = vim.fn.expand('%:t') == 'main.go'
+    if is_main or vim.fn.filereadable(vim.fs.dirname(vim.api.nvim_buf_get_name(0)) .. '/main.go') == 1 then
         pn = 'main'
     end
     vim.fn.append(0, 'package ' .. pn)
     vim.fn.append(1, '')
+    if is_main then
+        vim.fn.append(2, 'func main() {')
+        vim.fn.append(3, '}')
+        vim.api.nvim_win_set_cursor(0, {3, 0})
+        -- FIXME: lsp not work before calling write
+        vim.api.nvim_input('o')
+    end
 end
 
 return M
