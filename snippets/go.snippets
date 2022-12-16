@@ -21,10 +21,11 @@ snippet tc "test cases"
 		}{
 			{},
 		}{
-			assert.Equal(t, c.$2, $1(), c.name)
-			if diff := cmp.Diff(c.$2, $1()); diff != "" {
-				t.Fatalf("%s: %s\n", c.name, diff)
-			}
+			t.Run(c.name, func(t *testing.T) {
+				if diff := cmp.Diff(c.$2, $1()); diff != "" {
+					t.Fatalf("%s: %s\n", c.name, diff)
+				}
+			})
 		}
 	}
 
