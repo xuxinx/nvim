@@ -27,16 +27,12 @@ cac({ 'BufReadPost' }, {
 })
 
 -- # statusline
-cac('FileType', { pattern = { 'dapui_watches', 'dapui_stacks', 'dapui_breakpoints', 'dapui_scopes' },
-    desc = 'dap window statusline',
-    callback = cb.set_statusline_func('%f') })
+cac({ 'BufWinEnter' }, { pattern = { 'dap-scopes-*' },
+    desc = 'debug scopes',
+    callback = cb.set_statusline_func('Scopes') })
 cac('FileType', { pattern = 'dap-repl',
-    desc = 'dap window statusline',
-    callback = cb.set_statusline_func('DAP REPL') })
--- FIXME: why this is not work
-cac('FileType', { pattern = 'dapui_console',
-    desc = 'dap window statusline',
-    callback = cb.set_statusline_func('DAP Console') })
+    desc = 'debug repl',
+    callback = cb.set_statusline_func('REPL') })
 
 -- # commentary
 cac({ 'BufNewFile', 'BufRead' }, { pattern = { '*.mod', '*.work' },

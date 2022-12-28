@@ -1,15 +1,25 @@
-local dap, dapui = require("dap"), require("dapui")
+local dap = require("dap")
+local widgets = require('dap.ui.widgets')
 
-dapui.setup()
+local scopes = widgets.sidebar(widgets.scopes, { width = 50 })
 
-dap.listeners.after.event_initialized["dapui_config"] = function()
-    dapui.open()
+dap.listeners.after.event_initialized["ui_config"] = function()
+    dap.repl.open({ height = 20 })
+    scopes.open()
 end
-dap.listeners.before.event_terminated["dapui_config"] = function()
-    dapui.close()
+
+dap.listeners.before.event_terminated["ui_config"] = function()
+    dap.repl.close()
+    scopes.close()
 end
-dap.listeners.before.event_exited["dapui_config"] = function()
-    dapui.close()
+
+dap.listeners.before.event_exited["ui_config"] = function()
+    dap.repl.close()
+    scopes.close()
 end
 
 require('x.dap_go').setup()
+
+return {
+    scopes = scopes,
+}

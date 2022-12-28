@@ -135,14 +135,6 @@ function M.step_out()
     require('dap').step_out()
 end
 
-function M.eval_cursor_var()
-    require('dapui').eval()
-end
-
-function M.debug_test()
-    require('x.dap_go').debug_test()
-end
-
 function M.markdown_done_todo_expr()
     return '$?- [<cr>2f<Space>rx<esc>/[C<cr>A [D ' .. os.date("%Y-%m-%d %H:%M %a") .. ']<esc>?- [<cr>:noh<cr>'
 end

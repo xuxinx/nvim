@@ -36,4 +36,16 @@ function M.rename_var()
     vim.lsp.buf.rename()
 end
 
+function M.debug_test()
+    require('x.dap_go').debug_test()
+end
+
+function M.toggle_debug_scopes()
+    require('x.dap').scopes.toggle()
+end
+
+function M.toggle_debug_repl()
+    require('dap').repl.toggle()
+end
+
 return M

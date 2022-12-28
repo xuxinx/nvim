@@ -108,14 +108,10 @@ require('packer').startup(function(use)
     }
     use {
         'mfussenegger/nvim-dap',
-        after = {
-            'nvim-dap-ui',
-        },
         config = function()
             require('x.dap')
         end
     }
-    use 'rcarriga/nvim-dap-ui'
     use {
         'github/copilot.vim',
         opt = true,

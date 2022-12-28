@@ -44,8 +44,6 @@ sm('n', '<leader><F5>', cb.run_to_cursor, { desc = 'debug run to cursor' })
 sm('n', '<F7>', cb.step_into, { desc = 'debug step into' })
 sm('n', '<F8>', cb.step_over, { desc = 'debug step over' })
 sm('n', '<leader><F8>', cb.step_out, { desc = 'debug step out' })
-sm('n', '<leader>K', cb.eval_cursor_var, { desc = 'debug eval cursor var' })
-sm('n', '<leader>dt', cb.debug_test, { desc = 'debug test' })
 -- # markdown
 cac('FileType', { pattern = 'markdown', callback = function()
     sm('n', '<leader>tdd', cb.markdown_done_todo_expr, { expr = true, desc = 'markdown done todo' })
