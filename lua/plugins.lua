@@ -46,6 +46,7 @@ require('packer').startup(function(use)
         },
         config = function()
             require('x.cmp')
+            require('x.luasnip')
         end
     }
     use {

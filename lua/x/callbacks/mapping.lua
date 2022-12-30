@@ -107,6 +107,27 @@ function M.prev_diagnostic()
     vim.diagnostic.goto_prev()
 end
 
+function M.snip_expand_or_jump()
+    local luasnip = require("luasnip")
+    if luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+    end
+end
+
+function M.snip_jump_back()
+    local luasnip = require("luasnip")
+    if luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+    end
+end
+
+function M.snip_select_choice()
+    local luasnip = require("luasnip")
+    if luasnip.choice_active() then
+        require("luasnip.extras.select_choice")()
+    end
+end
+
 function M.toggle_breakpoint()
     require('dap').toggle_breakpoint()
 end
