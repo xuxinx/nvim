@@ -6,7 +6,7 @@ local d = ls.dynamic_node
 local c = ls.choice_node
 local f = ls.function_node
 local sn = ls.snippet_node
-local fmt = require('luasnip.extras.fmt').fmt
+local fmt = require('luasnip.extras.fmt').fmta
 local rep = require('luasnip.extras').rep
 
 return {
@@ -18,20 +18,20 @@ return {
 
     -- cases test
     s('ct', fmt([[
-	func Test{func}(t *testing.T) {{
-		for _, c := range []struct {{
+	func Test<func>(t *testing.T) {
+		for _, c := range []struct {
 			name string
-			{expect} {expect_type}
-		}}{{
-			{{}},
-		}}{{
-			t.Run(c.name, func(t *testing.T) {{
-				if diff := cmp.Diff(c.{expect_rep}, {func_rep}()); diff != "" {{
+			<expect> <expect_type>
+		}{
+			{},
+		}{
+			t.Run(c.name, func(t *testing.T) {
+				if diff := cmp.Diff(c.<expect_rep>, <func_rep>()); diff != "" {
 					t.Fatalf("%s: %s\n", c.name, diff)
-				}}
-			}})
-		}}
-	}}
+				}
+			})
+		}
+	}
     ]], {
         func = i(1, 'func'),
         expect = i(2, 'expect'),
@@ -43,7 +43,7 @@ return {
     -- debug print
     s('dp', fmt([[
 	fmt.Println("#########################################start")
-	testingutils.PrintlnJson({args})
+	testingutils.PrintlnJson(<args>)
 	fmt.Println("#########################################end")
     ]], {
         args = i(1),
@@ -51,9 +51,9 @@ return {
 
     -- http handler
     s('hh', fmt([[
-	func(w http.ResponseWriter, r *http.Request) {{
-        {body}
-	}}
+	func(w http.ResponseWriter, r *http.Request) {
+        <body>
+	}
     ]], {
         body = i(1, 'body'),
     })),
@@ -66,7 +66,7 @@ return {
 
     -- fmt.Sprintf
     s('spf', fmt([[
-	fmt.Sprintf("{str}", {vars})
+	fmt.Sprintf("<str>", <vars>)
     ]], {
         str = i(1, 'str'),
         vars = i(2, 'vars'),

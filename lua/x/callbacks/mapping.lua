@@ -121,10 +121,10 @@ function M.snip_jump_back()
     end
 end
 
-function M.snip_select_choice()
+function M.snip_toggle_choices()
     local luasnip = require("luasnip")
     if luasnip.choice_active() then
-        require("luasnip.extras.select_choice")()
+        luasnip.change_choice(1)
     end
 end
 
