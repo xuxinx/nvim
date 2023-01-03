@@ -100,7 +100,7 @@ function M.statusline()
     end
 
     -- git branch
-    s = s .. [[ | %{get(b:,'gitsigns_head','')}]]
+    s = s .. [[ %{get(b:,'gitsigns_head','') != '' ? '| ' .. get(b:,'gitsigns_head','') : ''}]]
 
     return s
 end
