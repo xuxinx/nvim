@@ -21,4 +21,10 @@ function M.set(list)
     return set
 end
 
+M.set_same_value_entries = function (t, tk, ...)
+    for _, k in pairs({...}) do
+        t[k] = t[tk]
+    end
+end
+
 return M

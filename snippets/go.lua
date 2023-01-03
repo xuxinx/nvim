@@ -8,6 +8,19 @@ local f = ls.function_node
 local sn = ls.snippet_node
 local fmt = require('luasnip.extras.fmt').fmta
 local rep = require('luasnip.extras').rep
+local xutils = require('x.utils')
+local xts = require('x.treesitter')
+
+local go_zero_values = {
+    int = '0',
+    bool = 'false',
+    string = [[""]],
+}
+
+xutils.set_same_value_entries(go_zero_values, 'int',
+    'int8', 'int16', 'int32', 'int64',
+    'uint', 'uint8', 'uint16', 'uint32', 'uint64',
+    'float32', 'float64')
 
 return {
     s('pkd', t('import _ "github.com/lib/pq"')),
@@ -70,5 +83,44 @@ return {
     ]], {
         str = i(1, 'str'),
         vars = i(2, 'vars'),
+    })),
+
+    -- error check
+    s('ec', fmt([[
+    if <err> != nil {
+        return <returns>
+    }
+    ]], {
+        err = i(1, 'err'),
+        returns = d(2, function(args)
+            local result = {}
+            local rets = xts.go_return_types()
+            local info = {
+                index = 0,
+                err_name = args[1][1],
+            }
+            for idx, ret in ipairs(rets) do
+                local val = t('nil')
+                if ret == 'error' then
+                    info.index = info.index + 1
+                    val = c(info.index, {
+                        t(info.err_name),
+                        sn(nil, fmt([[
+                            fmt.Errorf("<msg>: %w", <err>)
+                            ]], {
+                            msg = i(1, 'error occurred'),
+                            err = t(info.err_name),
+                        }))
+                    })
+                elseif go_zero_values[ret] ~= nil then
+                    val = t(go_zero_values[ret])
+                end
+                table.insert(result, val)
+                if idx ~= #rets then
+                    table.insert(result, t(', '))
+                end
+            end
+            return sn(nil, result)
+        end, { 1 }),
     })),
 }
