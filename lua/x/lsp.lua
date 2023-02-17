@@ -41,6 +41,7 @@ local server_options = {
         }
     end,
 
+    clangd = function(opts) end,
     tsserver = function(opts) end,
     vuels = function(opts) end,
 }
