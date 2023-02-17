@@ -1,3 +1,5 @@
+vim.g.mapleader = ' '
+
 require('globals')
 require('options')
 require('colorscheme')

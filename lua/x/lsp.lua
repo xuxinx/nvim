@@ -4,7 +4,7 @@ local cmplsp = require('cmp_nvim_lsp')
 local capabilities = cmplsp.default_capabilities()
 
 local server_options = {
-    sumneko_lua = function(opts)
+    lua_ls = function(opts)
         opts.settings = {
             Lua = {
                 runtime = {
@@ -17,7 +17,7 @@ local server_options = {
                 },
                 workspace = {
                     -- Make the server aware of Neovim runtime files
-                    library = vim.api.nvim_get_runtime_file("", true),
+                    library = vim.api.nvim_get_runtime_file('', true),
                     -- https://github.com/neovim/nvim-lspconfig/issues/1700#issuecomment-1033127328
                     checkThirdParty = false,
                 },

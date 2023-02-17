@@ -2,8 +2,6 @@ local cb = require('x.callbacks.mapping')
 local sm = vim.keymap.set
 local cac = vim.api.nvim_create_autocmd
 
-vim.g.mapleader = ' '
-
 -- # quickfix list
 sm('n', '<leader>co', cb.open_quickfix, { desc = 'open quickfix list' })
 sm('n', '<leader>cc', cb.close_quickfix, { desc = 'close quickfix list' })
@@ -37,9 +35,9 @@ sm('n', '<leader>F', cb.format_buffer, { desc = 'format buffer' })
 sm('n', ']e', cb.next_diagnostic, { desc = 'next diagnostic' })
 sm('n', '[e', cb.prev_diagnostic, { desc = 'prev diagnostic' })
 -- snip
-sm({"i", "s"}, '<C-j>', cb.snip_expand_or_jump, {desc = 'snippet expand or jump'})
-sm({"i", "s"}, '<C-k>', cb.snip_jump_back, {desc = 'snippet jump back'})
-sm({"i", "s"}, '<C-l>', cb.snip_toggle_choices, {desc = 'snippet toggle choices'})
+sm({ "i", "s" }, '<C-j>', cb.snip_expand_or_jump, { desc = 'snippet expand or jump' })
+sm({ "i", "s" }, '<C-k>', cb.snip_jump_back, { desc = 'snippet jump back' })
+sm({ "i", "s" }, '<C-l>', cb.snip_toggle_choices, { desc = 'snippet toggle choices' })
 -- # dap
 sm('n', '<leader>db', cb.toggle_breakpoint, { desc = 'toggle debug breakpoint' })
 sm('n', '<F4>', cb.terminate_debug, { desc = 'terminate debug' })
