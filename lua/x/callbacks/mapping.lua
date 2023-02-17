@@ -107,10 +107,17 @@ function M.prev_diagnostic()
     vim.diagnostic.goto_prev()
 end
 
-function M.snip_expand_or_jump()
+function M.snip_expand()
     local luasnip = require("luasnip")
-    if luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
+    if luasnip.expandable() then
+        luasnip.expand()
+    end
+end
+
+function M.snip_jump_forward()
+    local luasnip = require("luasnip")
+    if luasnip.jumpable(1) then
+        luasnip.jump(1)
     end
 end
 

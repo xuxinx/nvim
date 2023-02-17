@@ -35,7 +35,8 @@ sm('n', '<leader>F', cb.format_buffer, { desc = 'format buffer' })
 sm('n', ']e', cb.next_diagnostic, { desc = 'next diagnostic' })
 sm('n', '[e', cb.prev_diagnostic, { desc = 'prev diagnostic' })
 -- snip
-sm({ "i", "s" }, '<C-j>', cb.snip_expand_or_jump, { desc = 'snippet expand or jump' })
+sm({ "i", "s" }, '<C-o>', cb.snip_expand, { desc = 'snippet expand' })
+sm({ "i", "s" }, '<C-j>', cb.snip_jump_forward, { desc = 'snippet jump forward' })
 sm({ "i", "s" }, '<C-k>', cb.snip_jump_back, { desc = 'snippet jump back' })
 sm({ "i", "s" }, '<C-l>', cb.snip_toggle_choices, { desc = 'snippet toggle choices' })
 -- # dap
