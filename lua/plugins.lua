@@ -43,7 +43,6 @@ require('lazy').setup({
             require('x.cmp')
             require('x.luasnip')
         end,
-        lazy = true,
     },
     {
         'nvim-treesitter/nvim-treesitter',
@@ -68,7 +67,6 @@ require('lazy').setup({
         config = function()
             require('x.telescope')
         end,
-        lazy = true,
     },
     {
         'phaazon/hop.nvim',
