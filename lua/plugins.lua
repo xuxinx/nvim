@@ -1,6 +1,6 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-     vim.fn.system({
+    vim.fn.system({
         "git",
         "clone",
         "--filter=blob:none",
@@ -12,7 +12,10 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-    'tpope/vim-vinegar',
+    {
+        'tpope/vim-vinegar',
+        keys = '-',
+    },
     {
         'neovim/nvim-lspconfig',
         config = function()
@@ -39,7 +42,8 @@ require('lazy').setup({
         config = function()
             require('x.cmp')
             require('x.luasnip')
-        end
+        end,
+        lazy = true,
     },
     {
         'nvim-treesitter/nvim-treesitter',
@@ -56,20 +60,22 @@ require('lazy').setup({
         'nvim-telescope/telescope.nvim',
         dependencies = {
             'nvim-lua/plenary.nvim',
+            {
+                'nvim-telescope/telescope-fzf-native.nvim',
+                build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
+            },
         },
         config = function()
             require('x.telescope')
-        end
-    },
-    {
-        'nvim-telescope/telescope-fzf-native.nvim',
-        build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
+        end,
+        lazy = true,
     },
     {
         'phaazon/hop.nvim',
         config = function()
             require('hop').setup()
-        end
+        end,
+        lazy = true,
     },
     {
         'numToStr/Comment.nvim',
@@ -92,7 +98,10 @@ require('lazy').setup({
             require('gitsigns').setup()
         end
     },
-    'majutsushi/tagbar',
+    {
+        'majutsushi/tagbar',
+        cmd = 'TagbarToggle',
+    },
     {
         'norcalli/nvim-colorizer.lua',
         config = function()
@@ -103,7 +112,8 @@ require('lazy').setup({
         'mfussenegger/nvim-dap',
         config = function()
             require('x.dap')
-        end
+        end,
+        lazy = true,
     },
     {
         'github/copilot.vim',
@@ -120,8 +130,12 @@ require('lazy').setup({
         'iamcco/markdown-preview.nvim',
         build = function()
             vim.fn["mkdp#util#install"]()
-        end
+        end,
+        ft = 'markdown',
     },
-    'prettier/vim-prettier',
+    {
+        'prettier/vim-prettier',
+        cmd = 'Prettier',
+    },
     'editorconfig/editorconfig-vim',
 })
