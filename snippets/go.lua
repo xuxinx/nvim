@@ -123,4 +123,15 @@ return {
             return sn(nil, result)
         end, { 1 }),
     })),
+
+    -- gracefully shutdown services
+    s('gss', fmt([[
+    ch := make(chan os.Signal, 1)
+    signal.Notify(ch, os.Interrupt, syscall.SIGTERM)
+    <<-ch
+    // gracefully shutdown services: http server, cron ...
+    <todo>
+    ]], {
+        todo = i(1),
+    })),
 }
