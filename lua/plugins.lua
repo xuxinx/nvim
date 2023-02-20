@@ -101,7 +101,7 @@ require('lazy').setup({
         cmd = 'TagbarToggle',
     },
     {
-        'norcalli/nvim-colorizer.lua',
+        'NvChad/nvim-colorizer.lua',
         config = function()
             require('colorizer').setup()
         end
