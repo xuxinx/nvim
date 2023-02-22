@@ -82,9 +82,9 @@ require('lazy').setup({
         end
     },
     {
-        'jiangmiao/auto-pairs',
+        'windwp/nvim-autopairs',
         config = function()
-            require('x.auto_pairs')
+            require('nvim-autopairs').setup()
         end
     },
     {
