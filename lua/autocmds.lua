@@ -12,7 +12,7 @@ cac({ 'BufNewFile', 'BufRead' }, { pattern = { '*.gohtml' },
     callback = cb.set_filetype_func('html') })
 
 -- # indentations
-cac('FileType', { pattern = { 'yaml', 'proto' },
+cac('FileType', { pattern = { 'yaml', 'proto', 'c', 'cpp' },
     desc = 'set tab to 2 spaces',
     callback = cb.set_tab_to_n_spaces_func(2) })
 cac('FileType', { pattern = { 'snippets' },
