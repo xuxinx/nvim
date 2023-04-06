@@ -77,6 +77,19 @@ return {
 	gde.Setenv("./dev_env")
     ]], {})),
 
+    -- fmt.Println
+    s('pl', fmt([[
+    fmt.Println(<vars>)
+    ]], {
+        vars = i(1, 'any'),
+    })),
+    -- fmt.Printf
+    s('pf', fmt([[
+	fmt.Printf("<str>", <vars>)
+    ]], {
+        str = i(1, 'str'),
+        vars = i(2, 'vars'),
+    })),
     -- fmt.Sprintf
     s('spf', fmt([[
 	fmt.Sprintf("<str>", <vars>)
