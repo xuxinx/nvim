@@ -28,7 +28,6 @@ local server_options = {
             },
         }
     end,
-
     gopls = function(opts)
         opts.settings = {
             gopls = {
@@ -40,10 +39,13 @@ local server_options = {
             },
         }
     end,
-
-    clangd = function(opts) end,
-    tsserver = function(opts) end,
-    vuels = function(opts) end,
+    clangd = function(opts)
+        opts.filetypes = { "c", "cpp", "objc", "objcpp", "cuda" }
+    end,
+    tsserver = function(opts)
+    end,
+    vuels = function(opts)
+    end,
 }
 
 for server, optf in pairs(server_options) do
