@@ -97,6 +97,13 @@ return {
         str = i(1, 'str'),
         vars = i(2, 'vars'),
     })),
+    -- fmt.Errorf
+    s('ef', fmt([[
+	fmt.Errorf("<str>", <vars>)
+    ]], {
+        str = i(1, 'str'),
+        vars = i(2, 'err'),
+    })),
 
     -- error check
     s('ec', fmt([[
