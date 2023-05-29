@@ -134,6 +134,5 @@ require('lazy').setup({
     {
         'prettier/vim-prettier',
         cmd = 'Prettier',
-    },
-    'editorconfig/editorconfig-vim',
+    }
 })
