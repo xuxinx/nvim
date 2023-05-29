@@ -52,10 +52,6 @@ require('lazy').setup({
         end
     },
     {
-        'nvim-treesitter/playground',
-        lazy = true
-    },
-    {
         'nvim-telescope/telescope.nvim',
         dependencies = {
             'nvim-lua/plenary.nvim',
