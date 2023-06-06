@@ -6,6 +6,7 @@ local M = {}
 M.setup = function()
     require('nvim-treesitter.configs').setup {
         ensure_installed = 'all',
+        ignore_install = { 'sql' },
         sync_install = false,
         highlight = {
             enable = true,
