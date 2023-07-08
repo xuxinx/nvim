@@ -154,4 +154,21 @@ return {
     ]], {
         todo = i(1),
     })),
+
+    -- print memory usage
+    s('pm', fmt([[
+	go func() {
+		ticker := time.NewTicker(time.Second)
+		for range ticker.C {
+			var m runtime.MemStats
+			runtime.ReadMemStats(&m)
+			fmt.Println("#########################################")
+			fmt.Printf("Alloc = %v MiB", m.Alloc/1024/1024)
+			fmt.Printf("\tTotalAlloc = %v MiB", m.TotalAlloc/1024/1024)
+			fmt.Printf("\tSys = %v MiB", m.Sys/1024/1024)
+			fmt.Printf("\tNumGC = %v\n", m.NumGC)
+			fmt.Println("#########################################")
+		}
+	}()
+    ]], {}))
 }
