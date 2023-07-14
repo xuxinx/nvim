@@ -27,4 +27,14 @@ M.set_same_value_entries = function (t, tk, ...)
     end
 end
 
+M.merge_arrays = function (...)
+    local r = {}
+    for _, arr in ipairs({...}) do
+        for _, v in ipairs(arr) do
+            table.insert(r, v)
+        end
+    end
+    return r
+end
+
 return M

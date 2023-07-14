@@ -1,4 +1,6 @@
-local ignore_dirs = {
+local utils = require('x.utils')
+
+local ignore_dirs = utils.merge_arrays({
     '.git',
     '.vscode',
     '.idea',
@@ -7,15 +9,17 @@ local ignore_dirs = {
     'testdata/fuzz',
     'vendor',
     'dist',
-}
-local ignore_file_extensions = {
+}, PCFG.telescope.ignore_dirs)
+local ignore_file_extensions = utils.merge_arrays({
     '.swp',
     '.min.js',
     '.min.css',
-}
-local ignore_files = {
+}, PCFG.telescope.ignore_file_extensions)
+local ignore_files = utils.merge_arrays({
     '.DS_Store',
-}
+}, PCFG.telescope.ignore_files)
+local ignore_free_patterns = utils.merge_arrays({
+}, PCFG.telescope.ignore_free_patterns)
 
 local file_ignore_patterns = {}
 
@@ -32,6 +36,9 @@ for _, v in pairs(ignore_files) do
     local p = v:gsub('([.-])', '%%%1') .. '$'
     table.insert(file_ignore_patterns, '^' .. p)
     table.insert(file_ignore_patterns, '/' .. p)
+end
+for _, v in pairs(ignore_free_patterns) do
+    table.insert(file_ignore_patterns, v)
 end
 
 require('telescope').setup {

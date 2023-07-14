@@ -52,3 +52,8 @@ cac('BufWritePre', { pattern = '*.go',
 cac('BufNewFile', { pattern = '*.go',
     desc = 'new go template',
     callback = cb.new_go_file_tpl })
+
+-- # lua
+cac('BufNewFile', { pattern = 'pnvim.lua',
+    desc = 'new pnvim.lua',
+    callback = cb.new_pnvim_lua_file })

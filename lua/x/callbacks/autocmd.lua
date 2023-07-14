@@ -46,4 +46,8 @@ function M.new_go_file_tpl()
     require('x.go').new_file_tpl()
 end
 
+function M.new_pnvim_lua_file()
+    require('x.lua').new_pnvim_file()
+end
+
 return M
