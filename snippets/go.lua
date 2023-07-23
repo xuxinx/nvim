@@ -113,11 +113,15 @@ return {
     ]], {
         err = i(1, 'err'),
         returns = d(2, function(args)
+            local err_name = args[1][1]
+            if err_name == '' then
+                return
+            end
             local result = {}
             local rets = xts.go_return_types()
             local info = {
                 index = 0,
-                err_name = args[1][1],
+                err_name = err_name,
             }
             for idx, ret in ipairs(rets) do
                 local val = t('nil')
