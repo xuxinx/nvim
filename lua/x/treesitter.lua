@@ -8,6 +8,7 @@ M.setup = function()
         ensure_installed = 'all',
         ignore_install = { 'sql' },
         sync_install = false,
+        auto_install = false,
         highlight = {
             enable = true,
             additional_vim_regex_highlighting = false,
@@ -22,7 +23,7 @@ local function_node_types = {
 }
 
 M.go_return_types = function()
-    local cursor_node = utils.get_node_at_cursor()
+    local cursor_node = assert(utils.get_node_at_cursor())
     local scope = locals.get_scope_tree(cursor_node, 0)
     local function_node
     for _, v in ipairs(scope) do
