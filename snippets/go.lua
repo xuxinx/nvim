@@ -40,7 +40,7 @@ return {
 		}{
 			t.Run(c.name, func(t *testing.T) {
 				if diff := cmp.Diff(c.<expect_rep>, <func_rep>()); diff != "" {
-					t.Fatalf("%s: %s\n", c.name, diff)
+					t.Fatalf("got diff %s\n", diff)
 				}
 			})
 		}
