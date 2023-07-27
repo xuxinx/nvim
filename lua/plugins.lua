@@ -52,6 +52,12 @@ require('lazy').setup({
         end
     },
     {
+        'nvim-treesitter/nvim-treesitter-textobjects',
+        dependencies = {
+            'nvim-treesitter/nvim-treesitter',
+        },
+    },
+    {
         'nvim-telescope/telescope.nvim',
         dependencies = {
             'nvim-lua/plenary.nvim',

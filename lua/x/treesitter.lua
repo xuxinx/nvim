@@ -7,11 +7,35 @@ M.setup = function()
     require('nvim-treesitter.configs').setup {
         ensure_installed = 'all',
         ignore_install = { 'sql' },
-        sync_install = false,
-        auto_install = false,
         highlight = {
             enable = true,
             additional_vim_regex_highlighting = false,
+        },
+        textobjects = {
+            select = {
+                enable = true,
+                lookahead = true,
+                keymaps = {
+                    ['af'] = { query = '@function.outer', desc = 'select around function' },
+                    ['if'] = { query = '@function.inner', desc = 'select inside function' },
+                    ['ao'] = { query = '@class.outer', desc = 'select around class' },
+                    ['io'] = { query = '@class.inner', desc = 'select inside class' },
+                    ['al'] = { query = '@loop.outer', desc = 'select around loop' },
+                    ['il'] = { query = '@loop.inner', desc = 'select inside loop' },
+                },
+            },
+            move = {
+                enable = true,
+                set_jumps = true,
+                goto_next_start = {
+                    [']f'] = { query = '@function.outer', desc = 'go to next function' },
+                    [']o'] = { query = '@class.outer', desc = 'go to next class' },
+                },
+                goto_previous_start = {
+                    ['[f'] = { query = '@function.outer', desc = 'go to previous function' },
+                    ['[o'] = { query = '@class.outer', desc = 'go to previous class' },
+                },
+            },
         },
     }
 end
