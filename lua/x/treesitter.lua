@@ -9,6 +9,14 @@ M.setup = function()
         ignore_install = { 'sql' },
         highlight = {
             enable = true,
+            disable = function(lang, bufnr)
+                local filepath = vim.api.nvim_buf_get_name(bufnr)
+                local stats = vim.loop.fs_stat(filepath)
+                if stats and stats.size / vim.api.nvim_buf_line_count(bufnr) > 1024 then
+                    return true
+                end
+                return false
+            end,
             additional_vim_regex_highlighting = false,
         },
         textobjects = {

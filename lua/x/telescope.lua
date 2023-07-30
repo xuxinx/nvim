@@ -1,4 +1,5 @@
 local utils = require('x.utils')
+local previewers = require('telescope.previewers')
 
 local ignore_dirs = utils.merge_arrays({
     '.git',
@@ -41,6 +42,17 @@ for _, v in pairs(ignore_free_patterns) do
     table.insert(file_ignore_patterns, v)
 end
 
+local new_maker = function(filepath, bufnr, opts)
+    opts = opts or {}
+    filepath = vim.fn.expand(filepath)
+    local stats = vim.loop.fs_stat(filepath)
+    -- FIXME: vim.api.nvim_buf_line_count(bufnr) always 1 here
+    if stats and stats.size > 100 * 1024 then
+        opts.use_ft_detect = false
+    end
+    previewers.buffer_previewer_maker(filepath, bufnr, opts)
+end
+
 require('telescope').setup {
     defaults = {
         vimgrep_arguments = {
@@ -54,6 +66,7 @@ require('telescope').setup {
             "--hidden",
         },
         file_ignore_patterns = file_ignore_patterns,
+        buffer_previewer_maker = new_maker,
     },
     pickers = {
         buffers = {
