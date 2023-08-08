@@ -8,7 +8,7 @@ sm('n', '<leader>cc', cb.close_quickfix, { desc = 'close quickfix list' })
 -- # search file/string
 sm('n', '<leader>ff', cb.find_files, { desc = 'find files' })
 sm('n', '<leader>fb', cb.find_buffers, { desc = 'find buffers' })
-sm('n', '<leader>fs', cb.grep_string, { desc = 'find string' })
+sm('n', '<leader>fg', cb.grep_string, { desc = 'find by grep' })
 sm('n', '<leader>fc', cb.search_copied_expr, { expr = true, desc = 'find copied string' })
 sm('n', '<leader>fh', cb.find_help_doc, { desc = 'find help doc' })
 -- # tab
