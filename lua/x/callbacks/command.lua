@@ -48,4 +48,12 @@ function M.toggle_debug_repl()
     require('dap').repl.toggle()
 end
 
+function M.save_session(opts)
+    require('x.mksession').save_session(opts.args)
+end
+
+function M.load_session()
+    require('x.mksession').select_session()
+end
+
 return M

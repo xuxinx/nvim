@@ -21,20 +21,24 @@ function M.set(list)
     return set
 end
 
-M.set_same_value_entries = function (t, tk, ...)
-    for _, k in pairs({...}) do
+M.set_same_value_entries = function(t, tk, ...)
+    for _, k in pairs({ ... }) do
         t[k] = t[tk]
     end
 end
 
-M.merge_arrays = function (...)
+M.merge_arrays = function(...)
     local r = {}
-    for _, arr in ipairs({...}) do
+    for _, arr in ipairs({ ... }) do
         for _, v in ipairs(arr) do
             table.insert(r, v)
         end
     end
     return r
+end
+
+M.trim_prefix = function(str, prefix)
+    return (str:sub(0, #prefix) == prefix) and str:sub(#prefix + 1) or str
 end
 
 return M

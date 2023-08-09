@@ -50,4 +50,11 @@ function M.new_pnvim_lua_file()
     require('x.lua').new_pnvim_file()
 end
 
+function M.auto_save_session()
+    if vim.fn.expand('%') == '.git/COMMIT_EDITMSG' then
+        return
+    end
+    require('x.mksession').save_session()
+end
+
 return M
