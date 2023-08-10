@@ -56,4 +56,8 @@ function M.load_session()
     require('x.mksession').select_session()
 end
 
+function M.edit_project_config()
+    require('x.project_config').edit()
+end
+
 return M

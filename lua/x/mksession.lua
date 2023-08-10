@@ -3,6 +3,7 @@ local utils = require('x.utils')
 local M = {}
 
 local store_dir = vim.fn.stdpath('data') .. '/sessions/'
+vim.fn.mkdir(store_dir, 'p')
 
 local function fname(sname)
     if sname == nil or sname == '' then

@@ -46,10 +46,6 @@ function M.new_go_file_tpl()
     require('x.go').new_file_tpl()
 end
 
-function M.new_pnvim_lua_file()
-    require('x.lua').new_pnvim_file()
-end
-
 function M.auto_save_session()
     if vim.fn.expand('%') == '.git/COMMIT_EDITMSG' then
         return
