@@ -1,7 +1,8 @@
 local lspconfig = require('lspconfig')
 local cmplsp = require('cmp_nvim_lsp')
-
 local capabilities = cmplsp.default_capabilities()
+
+local M = {}
 
 local server_options = {
     lua_ls = function(opts)
@@ -48,12 +49,16 @@ local server_options = {
     end,
 }
 
-for server, optf in pairs(server_options) do
-    local opts = {
-        capabilities = capabilities,
-    }
+M.setup = function()
+    for server, optf in pairs(server_options) do
+        local opts = {
+            capabilities = capabilities,
+        }
 
-    optf(opts)
+        optf(opts)
 
-    lspconfig[server].setup(opts)
+        lspconfig[server].setup(opts)
+    end
 end
+
+return M

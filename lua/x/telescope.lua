@@ -1,6 +1,8 @@
 local utils = require('x.utils')
 local previewers = require('telescope.previewers')
 
+local M = {}
+
 local ignore_dirs = utils.merge_arrays({
     '.git',
     '.vscode',
@@ -53,28 +55,32 @@ local new_maker = function(filepath, bufnr, opts)
     previewers.buffer_previewer_maker(filepath, bufnr, opts)
 end
 
-require('telescope').setup {
-    defaults = {
-        vimgrep_arguments = {
-            "rg",
-            "--color=never",
-            "--no-heading",
-            "--with-filename",
-            "--line-number",
-            "--column",
-            "--smart-case",
-            "--hidden",
+M.setup = function()
+    require('telescope').setup {
+        defaults = {
+            vimgrep_arguments = {
+                "rg",
+                "--color=never",
+                "--no-heading",
+                "--with-filename",
+                "--line-number",
+                "--column",
+                "--smart-case",
+                "--hidden",
+            },
+            file_ignore_patterns = file_ignore_patterns,
+            buffer_previewer_maker = new_maker,
         },
-        file_ignore_patterns = file_ignore_patterns,
-        buffer_previewer_maker = new_maker,
-    },
-    pickers = {
-        buffers = {
-            ignore_current_buffer = false,
-            sort_mru = true,
-            sort_lastused = true,
+        pickers = {
+            buffers = {
+                ignore_current_buffer = false,
+                sort_mru = true,
+                sort_lastused = true,
+            },
         },
-    },
-}
+    }
 
-require('telescope').load_extension('fzf')
+    require('telescope').load_extension('fzf')
+end
+
+return M

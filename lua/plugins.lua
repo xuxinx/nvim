@@ -19,7 +19,7 @@ require('lazy').setup({
     {
         'neovim/nvim-lspconfig',
         config = function()
-            require('x.lsp')
+            require('x.lsp').setup()
         end
     },
     {
@@ -40,8 +40,8 @@ require('lazy').setup({
             'nvim-treesitter/nvim-treesitter',
         },
         config = function()
-            require('x.cmp')
-            require('x.luasnip')
+            require('x.cmp').setup()
+            require('x.luasnip').setup()
         end,
     },
     {
@@ -67,7 +67,7 @@ require('lazy').setup({
             },
         },
         config = function()
-            require('x.telescope')
+            require('x.telescope').setup()
         end,
     },
     {
@@ -86,7 +86,7 @@ require('lazy').setup({
     {
         'jiangmiao/auto-pairs',
         config = function()
-            require('x.auto_pairs')
+            require('x.auto_pairs').setup()
         end
     },
     {
@@ -111,7 +111,7 @@ require('lazy').setup({
     {
         'mfussenegger/nvim-dap',
         config = function()
-            require('x.dap')
+            require('x.dap').setup()
         end,
         lazy = true,
     },
@@ -123,7 +123,7 @@ require('lazy').setup({
         'dinhhuy258/vim-local-history',
         build = ':UpdateRemotePlugins',
         config = function()
-            require('x.local_history')
+            require('x.local_history').setup()
         end
     },
     {
