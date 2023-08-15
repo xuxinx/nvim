@@ -12,6 +12,19 @@ local function fname(sname)
     return string.gsub(vim.fn.getcwd() .. '/' .. sname, '/', '%%')
 end
 
+local function cwd_sessions()
+    local sessions = {}
+    local all_sessions = vim.split(vim.fn.glob(store_dir .. "*"), '\n')
+    local prefix = store_dir .. string.gsub(vim.fn.getcwd() .. '/', '/', '%%')
+    for _, s in ipairs(all_sessions) do
+        local name = utils.trim_prefix(s, prefix)
+        if (not string.find(name, '%%')) and (not string.find(name, '/')) then
+            table.insert(sessions, name)
+        end
+    end
+    return sessions
+end
+
 M.save_session = function(sname)
     vim.cmd('mksession! ' .. vim.fn.fnameescape(store_dir .. fname(sname)))
 end
@@ -24,16 +37,16 @@ M.load_session = function(sname)
     vim.cmd('source ' .. vim.fn.fnameescape(store_dir .. fname(sname)))
 end
 
-M.select_session = function()
-    local sessions = {}
-    local all_sessions = vim.split(vim.fn.glob(store_dir .. "*"), '\n')
-    local prefix = store_dir .. string.gsub(vim.fn.getcwd() .. '/', '/', '%%')
-    for _, s in ipairs(all_sessions) do
-        local name = utils.trim_prefix(s, prefix)
-        if (not string.find(name, '%%')) and (not string.find(name, '/')) then
-            table.insert(sessions, name)
-        end
+M.delete_session = function(sname)
+    if vim.fn.filereadable(store_dir .. fname(sname)) ~= 1 then
+        print('session not found')
+        return
     end
+    os.remove(store_dir .. fname(sname))
+end
+
+M.select_session_to_load = function()
+    local sessions = cwd_sessions()
     if next(sessions) == nil then
         print('no sessions')
         return
@@ -45,6 +58,22 @@ M.select_session = function()
             return
         end
         M.load_session(selected)
+    end)
+end
+
+M.select_session_to_delete = function()
+    local sessions = cwd_sessions()
+    if next(sessions) == nil then
+        print('no sessions')
+        return
+    end
+    vim.ui.select(sessions, {
+        prompt = 'select a session to delete',
+    }, function(selected, _)
+        if not selected then
+            return
+        end
+        M.delete_session(selected)
     end)
 end
 

@@ -53,7 +53,11 @@ function M.save_session(opts)
 end
 
 function M.load_session()
-    require('x.mksession').select_session()
+    require('x.mksession').select_session_to_load()
+end
+
+function M.delete_session()
+    require('x.mksession').select_session_to_delete()
 end
 
 function M.edit_project_config()
