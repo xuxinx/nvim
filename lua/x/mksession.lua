@@ -3,11 +3,13 @@ local utils = require('x.utils')
 local M = {}
 
 local store_dir = vim.fn.stdpath('data') .. '/sessions/'
+local auto_session_name = 'auto_session'
+
 vim.fn.mkdir(store_dir, 'p')
 
 local function fname(sname)
     if sname == nil or sname == '' then
-        sname = 'auto_session'
+        sname = auto_session_name
     end
     return string.gsub(vim.fn.getcwd() .. '/' .. sname, '/', '%%')
 end
@@ -19,7 +21,11 @@ local function cwd_sessions()
     for _, s in ipairs(all_sessions) do
         local name = utils.trim_prefix(s, prefix)
         if (not string.find(name, '%%')) and (not string.find(name, '/')) then
-            table.insert(sessions, name)
+            if (name == auto_session_name) then
+                table.insert(sessions, 1, name)
+            else
+                table.insert(sessions, name)
+            end
         end
     end
     return sessions
