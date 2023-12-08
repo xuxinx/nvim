@@ -71,7 +71,7 @@ cac('BufNewFile', {
     callback = cb.new_go_file_tpl
 })
 
--- # mksession
+-- # session
 cac('VimLeave', {
     desc = 'auto save session',
     callback = cb.auto_save_session,

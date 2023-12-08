@@ -50,7 +50,7 @@ function M.auto_save_session()
     if vim.fn.expand('%') == '.git/COMMIT_EDITMSG' then
         return
     end
-    require('x.mksession').save_session()
+    require('x.session').save_session()
 end
 
 return M

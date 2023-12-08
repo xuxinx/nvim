@@ -49,15 +49,15 @@ function M.toggle_debug_repl()
 end
 
 function M.save_session(opts)
-    require('x.mksession').save_session(opts.args)
+    require('x.session').save_session(opts.args)
 end
 
 function M.load_session()
-    require('x.mksession').select_session_to_load()
+    require('x.session').select_session_to_load()
 end
 
 function M.delete_session()
-    require('x.mksession').select_session_to_delete()
+    require('x.session').select_session_to_delete()
 end
 
 function M.edit_project_config()
