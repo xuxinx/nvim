@@ -1,11 +1,14 @@
 local utils = require('x.utils')
+local breakpoints = require('dap.breakpoints')
 
 local M = {}
 
 local store_dir = vim.fn.stdpath('data') .. '/sessions/'
+local breakpoints_dir = store_dir .. 'breakpoints/'
 local auto_session_name = 'auto_session'
 
 vim.fn.mkdir(store_dir, 'p')
+vim.fn.mkdir(breakpoints_dir, 'p')
 
 local function fname(sname)
     if sname == nil or sname == '' then
@@ -31,8 +34,55 @@ local function cwd_sessions()
     return sessions
 end
 
+-- https://github.com/mfussenegger/nvim-dap/issues/198
+local function save_breakpoints(sname)
+    local bps = {}
+    local breakpoints_by_buf = breakpoints.get()
+    if next(breakpoints_by_buf) == nil then
+        return
+    end
+    for buf, buf_bps in pairs(breakpoints_by_buf) do
+        bps[vim.api.nvim_buf_get_name(buf)] = buf_bps
+    end
+    local fpath = breakpoints_dir .. fname(sname)
+    local fp = assert(io.open(fpath, 'w'))
+    fp:write(vim.fn.json_encode(bps))
+    fp:close()
+end
+
+local function load_breakpoints(sname)
+    breakpoints.clear()
+    local fpath = breakpoints_dir .. fname(sname)
+    if vim.fn.filereadable(fpath) ~= 1 then
+        return
+    end
+    local fp = assert(io.open(fpath, 'r'))
+    local content = fp:read('*a')
+    fp:close()
+    local bps = vim.fn.json_decode(content)
+    local loaded_bufs = {}
+    for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+        loaded_bufs[vim.api.nvim_buf_get_name(buf)] = buf
+    end
+    for buf_name, buf_bps in pairs(bps) do
+        local buf = loaded_bufs[buf_name]
+        if buf ~= nil then
+            for _, bp in pairs(buf_bps) do
+                local line = bp.line
+                local opts = {
+                    condition = bp.condition,
+                    log_message = bp.logMessage,
+                    hit_condition = bp.hitCondition
+                }
+                breakpoints.set(opts, buf, line)
+            end
+        end
+    end
+end
+
 M.save_session = function(sname)
     vim.cmd('mksession! ' .. vim.fn.fnameescape(store_dir .. fname(sname)))
+    save_breakpoints(sname)
 end
 
 M.load_session = function(sname)
@@ -41,6 +91,7 @@ M.load_session = function(sname)
         return
     end
     vim.cmd('source ' .. vim.fn.fnameescape(store_dir .. fname(sname)))
+    load_breakpoints(sname)
 end
 
 M.delete_session = function(sname)
@@ -49,6 +100,7 @@ M.delete_session = function(sname)
         return
     end
     os.remove(store_dir .. fname(sname))
+    os.remove(breakpoints_dir .. fname(sname))
 end
 
 M.select_session_to_load = function()
