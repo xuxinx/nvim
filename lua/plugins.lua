@@ -136,5 +136,8 @@ require('lazy').setup({
     {
         'prettier/vim-prettier',
         cmd = 'Prettier',
+    },
+    {
+        'folke/neodev.nvim',
     }
 })
