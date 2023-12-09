@@ -34,6 +34,8 @@ vim.o.signcolumn = 'yes:2'
 vim.o.termguicolors = true
 vim.o.background = 'light'
 vim.o.wildignore = vim.o.wildignore .. '.git,.DS_Store,.vscode,.idea,.local-history'
+vim.o.laststatus = 3
+-- vim.o.cmdheight = 0 -- too many bugs
 
 -- # netrw
 vim.g.netrw_banner = 0
