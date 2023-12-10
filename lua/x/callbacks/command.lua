@@ -4,10 +4,6 @@ function M.edit_note()
     vim.cmd('$tabe $HOME/xhome/notes/notes.md')
 end
 
-function M.edit_xnote()
-    vim.cmd('$tabe $HOME/xhome/notes/xnotes.md')
-end
-
 function M.edit_tmp()
     vim.cmd('$tabe $HOME/xhome/notes/tmp.txt')
 end
