@@ -41,4 +41,8 @@ M.trim_prefix = function(str, prefix)
     return (str:sub(0, #prefix) == prefix) and str:sub(#prefix + 1) or str
 end
 
+M.get_file_extension = function(fname)
+    return fname:match("^.+%.(.+)$")
+end
+
 return M

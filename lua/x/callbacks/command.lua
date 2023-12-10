@@ -1,15 +1,11 @@
 local M = {}
 
-function M.edit_note()
-    vim.cmd('$tabe $HOME/xhome/notes/notes.md')
+function M.find_note()
+    require('x.note').find_note()
 end
 
-function M.edit_tmp()
-    vim.cmd('$tabe $HOME/xhome/notes/tmp.txt')
-end
-
-function M.edit_todo()
-    vim.cmd('$tabe $HOME/xhome/notes/todo.md')
+function M.grep_note()
+    require('x.note').grep_note()
 end
 
 -- args
