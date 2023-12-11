@@ -5,7 +5,9 @@ local ash = '#f5f5f5'
 local ashD10 = '#eaeaea'
 local greyL40 = '#9ba3ad'
 local grey = '#6e7781'
+local redL80 = '#fb8181'
 local red = '#cf222e'
+local greenL80 = '#79f379'
 local greenL40 = '#309b4f'
 local green = '#116329'
 local yellow = '#ffff00'
@@ -91,7 +93,7 @@ local groups = {
     TabLineSel   = { bg = grey, fg = ash }, -- tab pages line, active tab page label
     Title        = { bold = true }, -- titles for output from ":set all", ":autocmd" etc.
     -- VisualNOS    { }, -- Visual mode selection when vim is "Not Owning the Selection".
-    WarningMsg   = { fg = red }, -- warning messages
+    WarningMsg   = { fg = black, bg = yellow, bold = true }, -- warning messages
     -- Whitespace   { }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
 
     -- These groups are not listed as default vim groups,
@@ -144,7 +146,7 @@ local groups = {
     -- ("Ignore", below, may be invisible...)
     Ignore = unknown, -- (preferred) left blank, hidden  |hl-Ignore|
     -- Error  = { fg = red }, -- (preferred) any erroneous construct
-    Todo   = { fg = blue }, -- (preferred) anything that needs extra attention; mostly the keywords TODO FIXME and XXX
+    Todo   = { fg = black, bg = blueL80, bold = true }, -- (preferred) anything that needs extra attention; mostly the keywords TODO FIXME and XXX
 
     -- # treesitter groups
     -- # https://github.com/nvim-treesitter/nvim-treesitter/blob/00b42ac6d4c852d34619eaf2ea822266588d75e3/CONTRIBUTING.md
@@ -221,9 +223,9 @@ local groups = {
     ['@text.environment.name'] = unknown, -- ; text indicating the type of an environment
     ['@text.reference'] = { link = 'Constant' }, --        ; text references, footnotes, citations, etc.
     ['@text.todo'] = { link = 'Todo' }, --             ; todo notes
-    ['@text.note'] = { fg = green }, --             ; info notes
+    ['@text.note'] = { fg = black, bg = greenL80, bold = true }, --             ; info notes
     ['@text.warning'] = { link = 'WarningMsg' }, --          ; warning notes
-    ['@text.danger'] = { link = 'WarningMsg' }, --           ; danger/error notes
+    ['@text.danger'] = { fg = white, bg = redL80, bold = true }, --           ; danger/error notes
     ['@text.diff.add'] = { link = 'DiffAdd' }, --         ; added text (for diff files)
     ['@text.diff.delete'] = { link = 'DiffDelete' }, --      ; deleted text (for diff files)
     -- Tags
