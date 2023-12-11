@@ -63,7 +63,8 @@ require('lazy').setup({
             'nvim-lua/plenary.nvim',
             {
                 'nvim-telescope/telescope-fzf-native.nvim',
-                build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
+                build =
+                'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
             },
         },
         config = function()
@@ -105,7 +106,7 @@ require('lazy').setup({
     {
         'NvChad/nvim-colorizer.lua',
         config = function()
-            require('colorizer').setup()
+            require('colorizer').setup {}
         end
     },
     {
@@ -139,5 +140,11 @@ require('lazy').setup({
     },
     {
         'folke/neodev.nvim',
+    },
+    {
+        'karb94/neoscroll.nvim',
+        config = function()
+            require('x.scroll').setup()
+        end,
     }
 })
