@@ -148,4 +148,10 @@ require('lazy').setup({
     --         require('x.scroll').setup()
     --     end,
     -- }
+    {
+        'lukas-reineke/indent-blankline.nvim',
+        config = function ()
+            require('x.indent_guide').setup()
+        end
+    },
 })

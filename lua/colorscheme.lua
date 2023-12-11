@@ -244,6 +244,8 @@ local groups = {
     HopNextKey2 = { link = 'Search' },
     HopUnmatched = { fg = grey },
     -- HopCursor { },
+
+    IndentGuide = { fg = ash, bold = false },
 }
 
 for g, v in pairs(groups) do
