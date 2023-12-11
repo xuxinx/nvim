@@ -141,10 +141,11 @@ require('lazy').setup({
     {
         'folke/neodev.nvim',
     },
-    {
-        'karb94/neoscroll.nvim',
-        config = function()
-            require('x.scroll').setup()
-        end,
-    }
+    -- scroll makes my eyes tired.
+    -- {
+    --     'karb94/neoscroll.nvim',
+    --     config = function()
+    --         require('x.scroll').setup()
+    --     end,
+    -- }
 })
