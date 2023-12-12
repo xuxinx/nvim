@@ -6,7 +6,7 @@
   "cmp-nvim-lsp": { "branch": "main", "commit": "5af77f54de1b16c34b23cba810150689a3a90312" },
   "cmp-path": { "branch": "main", "commit": "91ff86cd9c29299a64f968ebb45846c485725f23" },
   "cmp_luasnip": { "branch": "master", "commit": "05a9ab28b53f71d1aece421ef32fee2cb857a843" },
-  "copilot.vim": { "branch": "release", "commit": "2c31989063b145830d5f0bea8ab529d2aef2427b" },
+  "copilot.vim": { "branch": "release", "commit": "5b19fb001d7f31c4c7c5556d7a97b243bd29f45f" },
   "gitsigns.nvim": { "branch": "main", "commit": "6e05045fb1a4845fe44f5c54aafe024444c422ba" },
   "hop.nvim": { "branch": "master", "commit": "df0b5b693ef8c3d414b5b85e4bc11cea99c4958d" },
   "indent-blankline.nvim": { "branch": "master", "commit": "7206c77cb931f79885fc47f88ae18f99148392eb" },
@@ -18,7 +18,7 @@
   "nvim-colorizer.lua": { "branch": "master", "commit": "dde3084106a70b9a79d48f426f6d6fec6fd203f7" },
   "nvim-dap": { "branch": "master", "commit": "bbe2c6f3438542a37cc2141a8e385f7dfe07d87d" },
   "nvim-lspconfig": { "branch": "master", "commit": "bd405e45c5fb122c16af8f87fa2dd7ab1981b243" },
-  "nvim-treesitter": { "branch": "master", "commit": "b6b9ca448b7f236e2e60f8393a729902511f9db9" },
+  "nvim-treesitter": { "branch": "master", "commit": "a6c655629cad421e432aa84af32cbfe35375113a" },
   "nvim-treesitter-textobjects": { "branch": "master", "commit": "ec1c5bdb3d87ac971749fa6c7dbc2b14884f1f6a" },
   "plenary.nvim": { "branch": "master", "commit": "55d9fe89e33efd26f532ef20223e5f9430c8b0c0" },
   "tagbar": { "branch": "master", "commit": "5d6990e4fc5b3e3b88a3af90146f2561c4f6d828" },
@@ -26,6 +26,6 @@
   "telescope.nvim": { "branch": "master", "commit": "6213322ab56eb27356fdc09a5078e41e3ea7f3bc" },
   "vim-local-history": { "branch": "master", "commit": "000b8acecd14ff005a4e1198c82be901c7fbe904" },
   "vim-prettier": { "branch": "master", "commit": "7dbdbb12c50a9f4ba72390cce2846248e4368fd0" },
-  "vim-snippets": { "branch": "master", "commit": "ec4ff7e9c9b274e93295924e59c82b4f51e2ae42" },
+  "vim-snippets": { "branch": "master", "commit": "a8dc763b3f534ec1a0c0ae5082689c10dcaf9d5f" },
   "vim-vinegar": { "branch": "master", "commit": "bb1bcddf43cfebe05eb565a84ab069b357d0b3d6" }
 }
