@@ -223,6 +223,8 @@ local groups = {
     ['@text.environment.name'] = unknown, -- ; text indicating the type of an environment
     ['@text.reference'] = { link = 'Constant' }, --        ; text references, footnotes, citations, etc.
     ['@text.todo'] = { link = 'Todo' }, --             ; todo notes
+    ['@text.todo.checked.markdown'] = { link = 'Normal' }, --             ; todo notes
+    -- ['@text.todo.unchecked.markdown'] = { link = '@text.todo' }, --             ; todo notes
     ['@text.note'] = { fg = black, bg = greenL80, bold = true }, --             ; info notes
     ['@text.warning'] = { link = 'WarningMsg' }, --          ; warning notes
     ['@text.danger'] = { fg = white, bg = redL80, bold = true }, --           ; danger/error notes
