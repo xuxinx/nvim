@@ -93,7 +93,7 @@ local groups = {
     TabLineSel   = { bg = grey, fg = ash }, -- tab pages line, active tab page label
     Title        = { bold = true }, -- titles for output from ":set all", ":autocmd" etc.
     -- VisualNOS    { }, -- Visual mode selection when vim is "Not Owning the Selection".
-    WarningMsg   = { fg = black, bg = yellow, bold = true }, -- warning messages
+    WarningMsg   = { fg = red }, -- warning messages
     -- Whitespace   { }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
 
     -- These groups are not listed as default vim groups,
@@ -226,7 +226,7 @@ local groups = {
     ['@text.todo.checked.markdown'] = { link = 'Normal' }, --             ; todo notes
     -- ['@text.todo.unchecked.markdown'] = { link = '@text.todo' }, --             ; todo notes
     ['@text.note'] = { fg = black, bg = greenL80, bold = true }, --             ; info notes
-    ['@text.warning'] = { link = 'WarningMsg' }, --          ; warning notes
+    ['@text.warning'] = { fg = black, bg = yellow, bold = true }, --          ; warning notes
     ['@text.danger'] = { fg = white, bg = redL80, bold = true }, --           ; danger/error notes
     ['@text.diff.add'] = { link = 'DiffAdd' }, --         ; added text (for diff files)
     ['@text.diff.delete'] = { link = 'DiffDelete' }, --      ; deleted text (for diff files)
