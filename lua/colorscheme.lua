@@ -154,82 +154,81 @@ local groups = {
     ['@comment'] = { link = 'Comment' }, --  ; line and block comments
     -- ['@error'] = {}, --    ; syntax/parser errors
     ['@none'] = {}, --     ; completely disable the highlight
-    ['@preproc'] = { link = 'PreProc' }, --  ; various preprocessor directives & shebangs
-    ['@define'] = { link = 'Define' }, --   ; preprocessor definition directives
+    ['@keyword.directive'] = { link = 'PreProc' }, --  ; various preprocessor directives & shebangs
+    ['@keyword.define'] = { link = 'Define' }, --   ; preprocessor definition directives
     ['@operator'] = { link = 'Operator' }, -- ; symbolic operators (e.g. `+` / `*`)
     -- Punctuation
     ['@punctuation.delimiter'] = { link = 'Delimiter' }, -- ; delimiters (e.g. `;` / `.` / `,`)
     ['@punctuation.bracket'] = { link = 'Delimiter' }, --   ; brackets (e.g. `()` / `{}` / `[]`)
-    ['@punctuation.special'] = { link = 'Delimiter' }, --   ; special symbols (e.g. `{}` in string interpolation)
+    ['@markup.list'] = { link = 'Delimiter' }, --   ; special symbols (e.g. `{}` in string interpolation)
     -- Literals
     ['@string'] = { link = 'String' }, --            ; string literals
-    ['@string.regex'] = { link = 'String' }, --      ; regular expressions
+    ['@string.regexp'] = { link = 'String' }, --      ; regular expressions
     ['@string.escape'] = { link = 'SpecialChar' }, --     ; escape sequences
     ['@string.special'] = { link = 'SpecialChar' }, --    ; other special strings (e.g. dates)
     ['@character'] = { link = 'Character' }, --         ; character literals
     ['@character.special'] = { link = 'SpecialChar' }, -- ; special characters (e.g. wildcards)
     ['@boolean'] = { link = 'Boolean' }, --           ; boolean literals
     ['@number'] = { link = 'Number' }, --            ; numeric literals
-    ['@float'] = { link = 'Float' }, --             ; floating-point number literals
+    ['@number.float'] = { link = 'Float' }, --             ; floating-point number literals
     -- Functions
     ['@function'] = { link = 'Function' }, --         ; function definitions
     ['@function.builtin'] = { link = 'Function' }, -- ; built-in functions
     ['@function.call'] = { link = 'Function' }, --    ; function calls
     ['@function.macro'] = { link = 'Function' }, --   ; preprocessor macros
-    ['@method'] = { link = 'Function' }, --           ; method definitions
-    ['@method.call'] = { link = 'Function' }, --      ; method calls
+    ['@function.method'] = { link = 'Function' }, --           ; method definitions
+    ['@function.method.call'] = { link = 'Function' }, --      ; method calls
     ['@constructor'] = { link = 'Identifier' }, --      ; constructor calls and definitions
-    ['@parameter'] = { link = 'Identifier' }, --        ; parameters of a function
+    ['@variable.parameter'] = { link = 'Identifier' }, --        ; parameters of a function
     -- Keywords
     ['@keyword'] = { link = 'Keyword' }, --          ; various keywords
     ['@keyword.function'] = { link = 'Keyword' }, -- ; keywords that define a function (e.g. `func` in Go, `def` in Python)
     ['@keyword.operator'] = { link = 'Keyword' }, -- ; operators that are English words (e.g. `and` / `or`)
     ['@keyword.return'] = { link = 'Keyword' }, --   ; keywords like `return` and `yield`
-    ['@conditional'] = { link = 'Conditional' }, --      ; keywords related to conditionals (e.g. `if` / `else`)
-    ['@repeat'] = { link = 'Repeat' }, --           ; keywords related to loops (e.g. `for` / `while`)
-    ['@debug'] = { link = 'Keyword' }, --            ; keywords related to debugging
+    ['@keyword.conditional'] = { link = 'Conditional' }, --      ; keywords related to conditionals (e.g. `if` / `else`)
+    ['@keyword.repeat'] = { link = 'Repeat' }, --           ; keywords related to loops (e.g. `for` / `while`)
+    ['@keyword.debug'] = { link = 'Keyword' }, --            ; keywords related to debugging
     ['@label'] = { link = 'Label' }, --            ; GOTO and other labels (e.g. `label:` in C)
-    ['@include'] = { link = 'Include' }, --          ; keywords for including modules (e.g. `import` / `from` in Python)
-    ['@exception'] = { link = 'Exception' }, --        ; keywords related to exceptions (e.g. `throw` / `catch`)
+    ['@keyword.import'] = { link = 'Include' }, --          ; keywords for including modules (e.g. `import` / `from` in Python)
+    ['@keyword.exception'] = { link = 'Exception' }, --        ; keywords related to exceptions (e.g. `throw` / `catch`)
     -- Types
     ['@type'] = { link = 'Type' }, --                  ; type or class definitions and annotations
     ['@type.builtin'] = { link = 'Type' }, --          ; built-in types
     ['@type.definition'] = { link = 'Type' }, --       ; type definitions (e.g. `typedef` in C)
     ['@type.qualifier'] = { link = 'Type' }, --        ; type qualifiers (e.g. `const`)
-    ['@storageclass'] = { link = 'Keyword' }, --          ; visibility/life-time modifiers
-    ['@storageclass.lifetime'] = { link = 'Keyword' }, -- ; life-time modifiers (e.g. `static`)
+    ['@keyword.storage'] = { link = 'Keyword' }, --          ; visibility/life-time modifiers
+    ['@keyword.storage.lifetime'] = { link = 'Keyword' }, -- ; life-time modifiers (e.g. `static`)
     ['@attribute'] = { link = 'Keyword' }, --             ; attribute annotations (e.g. Python decorators)
-    ['@field'] = { fg = syntax.field }, --                 ; object and struct fields
-    ['@property'] = { link = '@field' }, --              ; similar to `@field`
+    ['@variable.member'] = { fg = syntax.field }, --                 ; object and struct fields
+    ['@property'] = { link = '@variable.member' }, --              ; similar to `@variable.member`
     -- Identifiers
     ['@variable'] = { link = 'Identifier' }, --         ; various variable names
     ['@variable.builtin'] = { link = 'Identifier' }, -- ; built-in variable names (e.g. `this`)
     ['@constant'] = { link = 'Constant' }, --          ; constant identifiers
     ['@constant.builtin'] = { link = 'Constant' }, --  ; built-in constant values
     ['@constant.macro'] = { link = 'Constant' }, --    ; constants defined by the preprocessor
-    ['@namespace'] = { link = 'Identifier' }, --        ; modules or namespaces
-    ['@symbol'] = { link = 'Identifier' }, --           ; symbols or atoms
+    ['@module'] = { link = 'Identifier' }, --        ; modules or namespaces
+    ['@string.special.symbol'] = { link = 'Identifier' }, --           ; symbols or atoms
     -- Text
-    ['@text'] = { link = "@none" }, --                  ; non-structured text
-    ['@text.strong'] = { bold = true }, --           ; bold text
-    ['@text.emphasis'] = { italic = true }, --         ; text with emphasis
-    ['@text.underline'] = { underline = true }, --        ; underlined text
-    ['@text.strike'] = { strikethrough = true }, --           ; strikethrough text
-    ['@text.title'] = { link = 'Title' }, --            ; text that is part of a title
-    ['@text.literal'] = { link = 'String' }, --          ; literal or verbatim text
-    ['@text.uri'] = { link = 'Underlined' }, --              ; URIs (e.g. hyperlinks)
-    ['@text.math'] = { link = 'Special' }, --             ; math environments (e.g. `$ ... $` in LaTeX)
-    ['@text.environment'] = unknown, --      ; text environments of markup languages
-    ['@text.environment.name'] = unknown, -- ; text indicating the type of an environment
-    ['@text.reference'] = { link = 'Constant' }, --        ; text references, footnotes, citations, etc.
-    ['@text.todo'] = { link = 'Todo' }, --             ; todo notes
-    ['@text.todo.checked.markdown'] = { link = 'Normal' }, --             ; todo notes
-    -- ['@text.todo.unchecked.markdown'] = { link = '@text.todo' }, --             ; todo notes
-    ['@text.note'] = { fg = black, bg = greenL80, bold = true }, --             ; info notes
-    ['@text.warning'] = { fg = black, bg = yellow, bold = true }, --          ; warning notes
-    ['@text.danger'] = { fg = white, bg = redL80, bold = true }, --           ; danger/error notes
-    ['@text.diff.add'] = { link = 'DiffAdd' }, --         ; added text (for diff files)
-    ['@text.diff.delete'] = { link = 'DiffDelete' }, --      ; deleted text (for diff files)
+    ['@markup'] = { link = "@none" }, --                  ; non-structured text
+    ['@markup.strong'] = { bold = true }, --           ; bold text
+    ['@markup.italic'] = { italic = true }, --         ; text with emphasis
+    ['@markup.underline'] = { underline = true }, --        ; underlined text
+    ['@markup.strikethrough'] = { strikethrough = true }, --           ; strikethrough text
+    ['@markup.heading'] = { link = 'Title' }, --            ; text that is part of a title
+    ['@markup.raw'] = { link = 'String' }, --          ; literal or verbatim text
+    ['@string.special.url'] = { link = 'Underlined' }, --              ; URIs (e.g. hyperlinks)
+    ['@markup.math'] = { link = 'Special' }, --             ; math environments (e.g. `$ ... $` in LaTeX)
+    ['@markup.environment'] = unknown, --      ; text environments of markup languages
+    ['@markup.link'] = { link = 'Constant' }, --        ; text references, footnotes, citations, etc.
+    ['@comment.todo'] = { link = 'Todo' }, --             ; todo notes
+    ['@comment.todo.checked.markdown'] = { link = 'Normal' }, --             ; todo notes
+    -- ['@comment.todo.unchecked.markdown'] = { link = '@comment.todo' }, --             ; todo notes
+    ['@comment.note'] = { fg = black, bg = greenL80, bold = true }, --             ; info notes
+    ['@comment.warning'] = { fg = black, bg = yellow, bold = true }, --          ; warning notes
+    ['@comment.danger'] = { fg = white, bg = redL80, bold = true }, --           ; danger/error notes
+    ['@diff.plus'] = { link = 'DiffAdd' }, --         ; added text (for diff files)
+    ['@diff.minus'] = { link = 'DiffDelete' }, --      ; deleted text (for diff files)
     -- Tags
     ['@tag'] = { link = 'Tag' }, --           ; XML tag names
     ['@tag.attribute'] = { fg = syntax.attr }, -- ; XML tag attributes
