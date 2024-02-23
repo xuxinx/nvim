@@ -1,8 +1,9 @@
+local ap = require('nvim-autopairs')
+
 local M = {}
 
 M.setup = function()
-    vim.g.AutoPairsCenterLine = 0
-    vim.g.AutoPairsMapCh = 0
+    ap.setup({})
 end
 
 return M
