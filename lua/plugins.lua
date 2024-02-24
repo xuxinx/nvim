@@ -74,7 +74,7 @@ require('lazy').setup({
         config = function()
             require('x.telescope').setup()
         end,
-        event = 'VeryLazy',
+        cmd = 'Telescope',
     },
     {
         'smoka7/hop.nvim',
