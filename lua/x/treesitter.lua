@@ -55,17 +55,14 @@ local function_node_types = {
 }
 
 M.go_return_types = function()
-    local cursor_node = assert(utils.get_node_at_cursor())
-    local scope = locals.get_scope_tree(cursor_node, 0)
-    local function_node
-    for _, v in ipairs(scope) do
-        if function_node_types[v:type()] then
-            function_node = v
+    local fnode = vim.treesitter.get_node()
+    while fnode ~= nil do
+        if function_node_types[fnode:type()] then
             break
         end
+        fnode = fnode:parent()
     end
-
-    if not function_node then
+    if not fnode then
         print('not inside of a function')
         return {}
     end
@@ -74,26 +71,25 @@ M.go_return_types = function()
         'go',
         [[
       [
-        (method_declaration result: (_) @id)
-        (function_declaration result: (_) @id)
-        (func_literal result: (_) @id)
+        (method_declaration result: (_) @type)
+        (function_declaration result: (_) @type)
+        (func_literal result: (_) @type)
       ]
     ]]
     )
 
-    for _, node in query:iter_captures(function_node, 0) do
-        if node:type() == 'parameter_list' then
+    for _, cnode in query:iter_captures(fnode, 0) do
+        if cnode:type() == 'parameter_list' then
             local result = {}
-            local count = node:named_child_count()
+            local count = cnode:named_child_count()
             for idx = 0, count - 1 do
-                local matching_node = node:named_child(idx)
+                local matching_node = cnode:named_child(idx)
                 local type_node = matching_node:field('type')[1]
                 table.insert(result, vim.treesitter.get_node_text(type_node, 0))
             end
-
             return result
-        elseif node:type() == 'type_identifier' then
-            return { vim.treesitter.get_node_text(node, 0) }
+        elseif cnode:type() == 'type_identifier' then
+            return { vim.treesitter.get_node_text(cnode, 0) }
         end
     end
 

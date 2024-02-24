@@ -113,27 +113,21 @@ return {
     ]], {
         err = i(1, 'err'),
         returns = d(2, function(args)
-            local err_name = args[1][1]
-            if err_name == '' then
-                return
-            end
             local result = {}
             local rets = xts.go_return_types()
-            local info = {
-                index = 0,
-                err_name = err_name,
-            }
+            local err_name = args[1][1]
+            local nIdx = 0
             for idx, ret in ipairs(rets) do
                 local val = t('nil')
                 if ret == 'error' then
-                    info.index = info.index + 1
-                    val = c(info.index, {
-                        t(info.err_name),
+                    nIdx = nIdx + 1
+                    val = c(nIdx, {
+                        t(err_name),
                         sn(nil, fmt([[
                             fmt.Errorf("<msg>: %w", <err>)
                             ]], {
                             msg = i(1, 'error occurred'),
-                            err = t(info.err_name),
+                            err = t(err_name),
                         }))
                     })
                 elseif go_zero_values[ret] ~= nil then
@@ -158,21 +152,4 @@ return {
     ]], {
         todo = i(1),
     })),
-
-    -- print memory usage
-    s('pm', fmt([[
-	go func() {
-		ticker := time.NewTicker(time.Second)
-		for range ticker.C {
-			var m runtime.MemStats
-			runtime.ReadMemStats(&m)
-			fmt.Println("#########################################")
-			fmt.Printf("Alloc = %v MiB", m.Alloc/1024/1024)
-			fmt.Printf("\tTotalAlloc = %v MiB", m.TotalAlloc/1024/1024)
-			fmt.Printf("\tSys = %v MiB", m.Sys/1024/1024)
-			fmt.Printf("\tNumGC = %v\n", m.NumGC)
-			fmt.Println("#########################################")
-		}
-	}()
-    ]], {}))
 }
