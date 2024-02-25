@@ -1,5 +1,5 @@
-local cmp = require('cmp')
-local ls = require('luasnip')
+local cmp = require("cmp")
+local ls = require("luasnip")
 
 local M = {}
 
@@ -11,9 +11,9 @@ M.setup = function()
             end
         },
         sources = cmp.config.sources({
-            { name = 'nvim_lsp' },
+            { name = "nvim_lsp" },
             {
-                name = 'buffer',
+                name = "buffer",
                 option = {
                     get_bufnrs = function()
                         local bufs = {}
@@ -24,10 +24,10 @@ M.setup = function()
                     end,
                 },
             },
-            { name = 'path' },
-            { name = 'luasnip' },
+            { name = "path" },
+            { name = "luasnip" },
         }),
-        mapping = require('cmp.config.mapping').preset.insert({})
+        mapping = require("cmp.config.mapping").preset.insert({})
     })
 end
 

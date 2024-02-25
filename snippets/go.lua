@@ -1,4 +1,4 @@
-local ls = require('luasnip')
+local ls = require("luasnip")
 local s = ls.s
 local i = ls.i
 local t = ls.t
@@ -6,31 +6,31 @@ local d = ls.dynamic_node
 local c = ls.choice_node
 local f = ls.function_node
 local sn = ls.snippet_node
-local fmt = require('luasnip.extras.fmt').fmta
-local rep = require('luasnip.extras').rep
-local xutils = require('x.utils')
-local xts = require('x.treesitter')
+local fmt = require("luasnip.extras.fmt").fmta
+local rep = require("luasnip.extras").rep
+local xutils = require("x.utils")
+local xts = require("x.treesitter")
 
 local go_zero_values = {
-    int = '0',
-    bool = 'false',
+    int = "0",
+    bool = "false",
     string = [[""]],
 }
 
-xutils.set_same_value_entries(go_zero_values, 'int',
-    'int8', 'int16', 'int32', 'int64',
-    'uint', 'uint8', 'uint16', 'uint32', 'uint64',
-    'float32', 'float64')
+xutils.set_same_value_entries(go_zero_values, "int",
+    "int8", "int16", "int32", "int64",
+    "uint", "uint8", "uint16", "uint32", "uint64",
+    "float32", "float64")
 
 return {
-    s('pkd', t('import _ "github.com/lib/pq"')),
-    s('pkl', t('import kitlog "github.com/theplant/appkit/log"')),
-    s('pkh', t('import h "github.com/theplant/htmlgo"')),
-    s('pkv', t('import . "github.com/qor5/ui/vuetify"')),
-    s('pkvx', t('import vx "github.com/qor5/ui/vuetifyx"')),
+    s("pkd", t('import _ "github.com/lib/pq"')),
+    s("pkl", t('import kitlog "github.com/theplant/appkit/log"')),
+    s("pkh", t('import h "github.com/theplant/htmlgo"')),
+    s("pkv", t('import . "github.com/qor5/ui/vuetify"')),
+    s("pkvx", t('import vx "github.com/qor5/ui/vuetifyx"')),
 
     -- cases test
-    s('ct', fmt([[
+    s("ct", fmt([[
 	func Test<func>(t *testing.T) {
 		for _, c := range []struct {
 			name string
@@ -46,15 +46,15 @@ return {
 		}
 	}
     ]], {
-        func = i(1, 'func'),
-        expect = i(2, 'expect'),
-        expect_type = i(3, 'type'),
+        func = i(1, "func"),
+        expect = i(2, "expect"),
+        expect_type = i(3, "type"),
         expect_rep = rep(2),
         func_rep = rep(1),
     })),
 
     -- debug print
-    s('dp', fmt([[
+    s("dp", fmt([[
 	fmt.Println("#########################################start")
 	testingutils.PrintlnJson(<args>)
 	fmt.Println("#########################################end")
@@ -63,70 +63,70 @@ return {
     })),
 
     -- http handler
-    s('hh', fmt([[
+    s("hh", fmt([[
 	func(w http.ResponseWriter, r *http.Request) {
         <body>
 	}
     ]], {
-        body = i(1, 'body'),
+        body = i(1, "body"),
     })),
 
     -- set debug env
-    s('gde', fmt([[
+    s("gde", fmt([[
 	// TODO: remove debug Setenv
 	gde.Setenv("./dev_env")
     ]], {})),
 
     -- fmt.Println
-    s('pl', fmt([[
+    s("pl", fmt([[
     fmt.Println(<vars>)
     ]], {
-        vars = i(1, 'any'),
+        vars = i(1, "any"),
     })),
     -- fmt.Printf
-    s('pf', fmt([[
+    s("pf", fmt([[
 	fmt.Printf("<str>", <vars>)
     ]], {
-        str = i(1, 'str'),
-        vars = i(2, 'vars'),
+        str = i(1, "str"),
+        vars = i(2, "vars"),
     })),
     -- fmt.Sprintf
-    s('spf', fmt([[
+    s("spf", fmt([[
 	fmt.Sprintf("<str>", <vars>)
     ]], {
-        str = i(1, 'str'),
-        vars = i(2, 'vars'),
+        str = i(1, "str"),
+        vars = i(2, "vars"),
     })),
     -- fmt.Errorf
-    s('ef', fmt([[
+    s("ef", fmt([[
 	fmt.Errorf("<str>", <vars>)
     ]], {
-        str = i(1, 'str'),
-        vars = i(2, 'err'),
+        str = i(1, "str"),
+        vars = i(2, "err"),
     })),
 
     -- error check
-    s('ec', fmt([[
+    s("ec", fmt([[
     if <err> != nil {
         return <returns>
     }
     ]], {
-        err = i(1, 'err'),
+        err = i(1, "err"),
         returns = d(2, function(args)
             local result = {}
             local rets = xts.go_return_types()
             local err_name = args[1][1]
             local nIdx = 0
             for idx, ret in ipairs(rets) do
-                local val = t('nil')
-                if ret == 'error' then
+                local val = t("nil")
+                if ret == "error" then
                     nIdx = nIdx + 1
                     val = c(nIdx, {
                         t(err_name),
                         sn(nil, fmt([[
                             fmt.Errorf("<msg>: %w", <err>)
                             ]], {
-                            msg = i(1, 'error occurred'),
+                            msg = i(1, "error occurred"),
                             err = t(err_name),
                         }))
                     })
@@ -135,7 +135,7 @@ return {
                 end
                 table.insert(result, val)
                 if idx ~= #rets then
-                    table.insert(result, t(', '))
+                    table.insert(result, t(", "))
                 end
             end
             return sn(nil, result)
@@ -143,7 +143,7 @@ return {
     })),
 
     -- gracefully shutdown services
-    s('gss', fmt([[
+    s("gss", fmt([[
     ch := make(chan os.Signal, 1)
     signal.Notify(ch, os.Interrupt, syscall.SIGTERM)
     <<-ch

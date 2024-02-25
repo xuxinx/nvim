@@ -3,4 +3,4 @@ P = function(v)
     return v
 end
 
-require('x.project_config').load()
+require("x.project_config").load()

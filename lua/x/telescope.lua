@@ -1,25 +1,25 @@
-local utils = require('x.utils')
-local previewers = require('telescope.previewers')
+local utils = require("x.utils")
+local previewers = require("telescope.previewers")
 
 local M = {}
 
 local ignore_dirs = utils.merge_arrays({
-    '.git',
-    '.vscode',
-    '.idea',
-    '.local-history',
-    'node_modules',
-    'testdata/fuzz',
-    'vendor',
-    'dist',
+    ".git",
+    ".vscode",
+    ".idea",
+    ".local-history",
+    "node_modules",
+    "testdata/fuzz",
+    "vendor",
+    "dist",
 }, PCFG.telescope.ignore_dirs)
 local ignore_file_extensions = utils.merge_arrays({
-    '.swp',
-    '.min.js',
-    '.min.css',
+    ".swp",
+    ".min.js",
+    ".min.css",
 }, PCFG.telescope.ignore_file_extensions)
 local ignore_files = utils.merge_arrays({
-    '.DS_Store',
+    ".DS_Store",
 }, PCFG.telescope.ignore_files)
 local ignore_free_patterns = utils.merge_arrays({
 }, PCFG.telescope.ignore_free_patterns)
@@ -27,18 +27,18 @@ local ignore_free_patterns = utils.merge_arrays({
 local file_ignore_patterns = {}
 
 for _, v in pairs(ignore_dirs) do
-    local p = v:gsub('([.-])', '%%%1') .. '/'
-    table.insert(file_ignore_patterns, '^' .. p)
-    table.insert(file_ignore_patterns, '/' .. p)
+    local p = v:gsub("([.-])", "%%%1") .. "/"
+    table.insert(file_ignore_patterns, "^" .. p)
+    table.insert(file_ignore_patterns, "/" .. p)
 end
 for _, v in pairs(ignore_file_extensions) do
-    local p = v:gsub('([.-])', '%%%1') .. '$'
+    local p = v:gsub("([.-])", "%%%1") .. "$"
     table.insert(file_ignore_patterns, p)
 end
 for _, v in pairs(ignore_files) do
-    local p = v:gsub('([.-])', '%%%1') .. '$'
-    table.insert(file_ignore_patterns, '^' .. p)
-    table.insert(file_ignore_patterns, '/' .. p)
+    local p = v:gsub("([.-])", "%%%1") .. "$"
+    table.insert(file_ignore_patterns, "^" .. p)
+    table.insert(file_ignore_patterns, "/" .. p)
 end
 for _, v in pairs(ignore_free_patterns) do
     table.insert(file_ignore_patterns, v)
@@ -56,7 +56,7 @@ local new_maker = function(filepath, bufnr, opts)
 end
 
 M.setup = function()
-    require('telescope').setup {
+    require("telescope").setup {
         defaults = {
             vimgrep_arguments = {
                 "rg",
@@ -80,7 +80,7 @@ M.setup = function()
         },
     }
 
-    require('telescope').load_extension('fzf')
+    require("telescope").load_extension("fzf")
 end
 
 return M

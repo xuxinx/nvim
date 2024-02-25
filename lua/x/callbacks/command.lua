@@ -1,59 +1,59 @@
 local M = {}
 
-function M.find_note()
-    require('x.note').find_note()
+M.find_note = function()
+    require("x.note").find_note()
 end
 
-function M.grep_note()
-    require('x.note').grep_note()
-end
-
--- args
---   - path
-function M.z_local_jump(opts)
-    require('x.z').z_navi('lcd', opts.args)
+M.grep_note = function()
+    require("x.note").grep_note()
 end
 
 -- args
 --   - path
-function M.z_global_jump(opts)
-    require('x.z').z_navi('cd', opts.args)
+M.z_local_jump = function(opts)
+    require("x.z").z_navi("lcd", opts.args)
 end
 
-function M.open_git()
-    require('x.open_git').open_git()
+-- args
+--   - path
+M.z_global_jump = function(opts)
+    require("x.z").z_navi("cd", opts.args)
 end
 
-function M.rename_var()
+M.open_git = function()
+    require("x.open_git").open_git()
+end
+
+M.rename_var = function()
     vim.lsp.buf.rename()
 end
 
-function M.debug_test()
-    require('x.dap_go').debug_test()
+M.debug_test = function()
+    require("x.dap_go").debug_test()
 end
 
-function M.toggle_debug_scopes()
-    require('x.dap').scopes.toggle()
+M.toggle_debug_scopes = function()
+    require("x.dap").scopes.toggle()
 end
 
-function M.toggle_debug_repl()
-    require('dap').repl.toggle()
+M.toggle_debug_repl = function()
+    require("dap").repl.toggle()
 end
 
-function M.save_session(opts)
-    require('x.session').save_session(opts.args)
+M.save_session = function(opts)
+    require("x.session").save_session(opts.args)
 end
 
-function M.load_session()
-    require('x.session').select_session_to_load()
+M.load_session = function()
+    require("x.session").select_session_to_load()
 end
 
-function M.delete_session()
-    require('x.session').select_session_to_delete()
+M.delete_session = function()
+    require("x.session").select_session_to_delete()
 end
 
-function M.edit_project_config()
-    require('x.project_config').edit()
+M.edit_project_config = function()
+    require("x.project_config").edit()
 end
 
 return M

@@ -1,12 +1,12 @@
-local utils = require('x.utils')
+local utils = require("x.utils")
 
 local M = {}
 M.helpers = {}
 
-function M.helpers.curr_file_path()
-    local path = utils.curr_file_path()
-    if (path == '') then
-        return '[No Name]'
+M.helpers.curr_file_path = function()
+    local path = utils.get_curr_file_relative_path()
+    if (path == "") then
+        return "[No Name]"
     end
     return path
 end
@@ -29,78 +29,78 @@ local function update_lsp_diagnostic_info()
         elseif v.severity == vim.diagnostic.severity.HINT then
             hint_count = hint_count + 1
         else
-            print('unknown diagnostic severity: ' .. v.severity)
+            print("unknown diagnostic severity: " .. v.severity)
         end
     end
 
-    local s = ''
+    local s = ""
     if error_count > 0 then
-        s = s .. 'E' .. error_count
+        s = s .. "E" .. error_count
     end
     if warn_count > 0 then
-        s = s .. 'W' .. warn_count
+        s = s .. "W" .. warn_count
     end
     if info_count > 0 then
-        s = s .. 'I' .. info_count
+        s = s .. "I" .. info_count
     end
     if hint_count > 0 then
-        s = s .. 'H' .. hint_count
+        s = s .. "H" .. hint_count
     end
 
     lsp_diagnostic_info[vim.api.nvim_buf_get_name(0)] = s
 end
 
-vim.api.nvim_create_autocmd({ 'BufEnter', 'DiagnosticChanged' }, {
-    desc = 'update diagnostic info for statusline',
-    pattern = { '*' },
+vim.api.nvim_create_autocmd({ "BufEnter", "DiagnosticChanged" }, {
+    desc = "update diagnostic info for statusline",
+    pattern = { "*" },
     callback = update_lsp_diagnostic_info,
 })
 
-function M.helpers.get_lsp_diagnostic_info()
+M.helpers.get_lsp_diagnostic_info = function()
     local v = lsp_diagnostic_info[vim.api.nvim_buf_get_name(0)]
     if v == nil then
-        return ''
+        return ""
     end
     return v
 end
 
-function M.statusline()
-    local s = ''
+M.statusline = function()
+    local s = ""
 
     -- base cwd
-    s = s .. utils.base_cwd_name() .. ':'
+    s = s .. utils.get_base_cwd_name() .. ":"
 
     -- filepath
-    s = s .. [[ %{v:lua.require('x.statusline').helpers.curr_file_path()}]]
+    s = s .. [[ %{v:lua.require("x.statusline").helpers.curr_file_path()}]]
 
     -- modified readonly help preview
-    s = s .. '%m%r%h%w'
+    s = s .. "%m%r%h%w"
 
     -- git status
-    s = s .. [[ %{get(b:,'gitsigns_status','')}]]
+    s = s .. [[ %{get(b:,"gitsigns_status","")}]]
 
     -- lsp diagnostics
-    s = s .. [[ %{v:lua.require('x.statusline').helpers.get_lsp_diagnostic_info()}]]
+    s = s .. [[ %{v:lua.require("x.statusline").helpers.get_lsp_diagnostic_info()}]]
 
     -- spacer
-    s = s .. '%='
+    s = s .. "%="
 
     -- row col
-    s = s .. '%l/%L,%c'
+    s = s .. "%l/%L,%c"
 
     -- file format
-    s = s .. ' | %{&fileformat}'
+    s = s .. " | %{&fileformat}"
 
     -- file encoding
     s = s .. [[ | %{&fileencoding ? &fileencoding : &encoding}]]
 
     -- filetype
-    if vim.bo.filetype ~= '' then
+    if vim.bo.filetype ~= "" then
         s = s .. [[ | %{&filetype}]]
     end
 
     -- git branch
-    s = s .. [[ %{get(b:,'gitsigns_head','') != '' ? '| ' .. get(b:,'gitsigns_head','') : ''}]]
+    s = s .. [[ %{get(b:,"gitsigns_head","") != "" ? "| " .. get(b:,"gitsigns_head","") : ""}]]
 
     return s
 end

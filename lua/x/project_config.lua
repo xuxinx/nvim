@@ -10,17 +10,17 @@ local PCFG_default = {
     }
 }
 
-local store_dir = vim.fn.stdpath('data') .. '/project_configs/'
-vim.fn.mkdir(store_dir, 'p')
+local store_dir = vim.fn.stdpath("data") .. "/project_configs/"
+vim.fn.mkdir(store_dir, "p")
 
 local function fname()
-    return string.gsub(vim.fn.getcwd() .. '.lua', '/', '%%')
+    return string.gsub(vim.fn.getcwd() .. ".lua", "/", "%%")
 end
 
 M.edit = function()
     local f = store_dir .. fname()
     if vim.fn.filereadable(f) ~= 1 then
-        local wf = assert(io.open(f, 'w'))
+        local wf = assert(io.open(f, "w"))
         wf:write([[
 PCFG = {
     telescope = {
@@ -33,15 +33,15 @@ PCFG = {
         ]])
         wf:close()
     end
-    vim.cmd('e ' .. vim.fn.fnameescape(f))
+    vim.cmd("e " .. vim.fn.fnameescape(f))
 end
 
 M.load = function()
     local f = store_dir .. fname()
     if vim.fn.filereadable(f) == 1 then
-        vim.cmd('luafile ' .. vim.fn.fnameescape(f))
+        vim.cmd("luafile " .. vim.fn.fnameescape(f))
     end
-    PCFG = vim.tbl_deep_extend('force', PCFG_default, PCFG)
+    PCFG = vim.tbl_deep_extend("force", PCFG_default, PCFG)
 end
 
 return M

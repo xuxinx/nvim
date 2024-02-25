@@ -1,4 +1,4 @@
-local ap = require('nvim-autopairs')
+local ap = require("nvim-autopairs")
 
 local M = {}
 

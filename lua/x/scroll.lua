@@ -1,4 +1,4 @@
-local neoscroll = require('neoscroll')
+local neoscroll = require("neoscroll")
 
 local M = {}
 

@@ -1,29 +1,29 @@
-local utils = require('x.utils')
-local breakpoints = require('dap.breakpoints')
+local utils = require("x.utils")
+local breakpoints = require("dap.breakpoints")
 
 local M = {}
 
-local store_dir = vim.fn.stdpath('data') .. '/sessions/'
-local breakpoints_dir = store_dir .. 'breakpoints/'
-local auto_session_name = 'auto_session'
+local store_dir = vim.fn.stdpath("data") .. "/sessions/"
+local breakpoints_dir = store_dir .. "breakpoints/"
+local auto_session_name = "auto_session"
 
-vim.fn.mkdir(store_dir, 'p')
-vim.fn.mkdir(breakpoints_dir, 'p')
+vim.fn.mkdir(store_dir, "p")
+vim.fn.mkdir(breakpoints_dir, "p")
 
 local function fname(sname)
-    if sname == nil or sname == '' then
+    if sname == nil or sname == "" then
         sname = auto_session_name
     end
-    return string.gsub(vim.fn.getcwd() .. '/' .. sname, '/', '%%')
+    return string.gsub(vim.fn.getcwd() .. "/" .. sname, "/", "%%")
 end
 
 local function cwd_sessions()
     local sessions = {}
-    local all_sessions = vim.split(vim.fn.glob(store_dir .. "*"), '\n')
-    local prefix = store_dir .. string.gsub(vim.fn.getcwd() .. '/', '/', '%%')
+    local all_sessions = vim.split(vim.fn.glob(store_dir .. "*"), "\n")
+    local prefix = store_dir .. string.gsub(vim.fn.getcwd() .. "/", "/", "%%")
     for _, s in ipairs(all_sessions) do
         local name = utils.trim_prefix(s, prefix)
-        if (not string.find(name, '%%')) and (not string.find(name, '/')) then
+        if (not string.find(name, "%%")) and (not string.find(name, "/")) then
             if (name == auto_session_name) then
                 table.insert(sessions, 1, name)
             else
@@ -45,7 +45,7 @@ local function save_breakpoints(sname)
         bps[vim.api.nvim_buf_get_name(buf)] = buf_bps
     end
     local fpath = breakpoints_dir .. fname(sname)
-    local fp = assert(io.open(fpath, 'w'))
+    local fp = assert(io.open(fpath, "w"))
     fp:write(vim.fn.json_encode(bps))
     fp:close()
 end
@@ -56,8 +56,8 @@ local function load_breakpoints(sname)
     if vim.fn.filereadable(fpath) ~= 1 then
         return
     end
-    local fp = assert(io.open(fpath, 'r'))
-    local content = fp:read('*a')
+    local fp = assert(io.open(fpath, "r"))
+    local content = fp:read("*a")
     fp:close()
     local bps = vim.fn.json_decode(content)
     local loaded_bufs = {}
@@ -81,22 +81,22 @@ local function load_breakpoints(sname)
 end
 
 M.save_session = function(sname)
-    vim.cmd('mksession! ' .. vim.fn.fnameescape(store_dir .. fname(sname)))
+    vim.cmd("mksession! " .. vim.fn.fnameescape(store_dir .. fname(sname)))
     save_breakpoints(sname)
 end
 
 M.load_session = function(sname)
     if vim.fn.filereadable(store_dir .. fname(sname)) ~= 1 then
-        print('session not found')
+        print("session not found")
         return
     end
-    vim.cmd('source ' .. vim.fn.fnameescape(store_dir .. fname(sname)))
+    vim.cmd("source " .. vim.fn.fnameescape(store_dir .. fname(sname)))
     load_breakpoints(sname)
 end
 
 M.delete_session = function(sname)
     if vim.fn.filereadable(store_dir .. fname(sname)) ~= 1 then
-        print('session not found')
+        print("session not found")
         return
     end
     os.remove(store_dir .. fname(sname))
@@ -106,11 +106,11 @@ end
 M.select_session_to_load = function()
     local sessions = cwd_sessions()
     if next(sessions) == nil then
-        print('no sessions')
+        print("no sessions")
         return
     end
     vim.ui.select(sessions, {
-        prompt = 'select a session',
+        prompt = "select a session",
     }, function(selected, _)
         if not selected then
             return
@@ -122,11 +122,11 @@ end
 M.select_session_to_delete = function()
     local sessions = cwd_sessions()
     if next(sessions) == nil then
-        print('no sessions')
+        print("no sessions")
         return
     end
     vim.ui.select(sessions, {
-        prompt = 'select a session to delete',
+        prompt = "select a session to delete",
     }, function(selected, _)
         if not selected then
             return

@@ -1,7 +1,7 @@
 local M = {}
 
-function M.setup()
-    local dap = require('dap')
+M.setup = function()
+    local dap = require("dap")
 
     dap.adapters.go = function(callback, config)
         local stdout = vim.loop.new_pipe(false)
@@ -19,15 +19,15 @@ function M.setup()
             stderr:close()
             handle:close()
             if code ~= 0 then
-                print('dlv exited with code', code)
+                print("dlv exited with code", code)
             end
         end)
-        assert(handle, 'Error running dlv: ' .. tostring(pid_or_err))
+        assert(handle, "Error running dlv: " .. tostring(pid_or_err))
         stdout:read_start(function(err, chunk)
             assert(not err, err)
             if chunk then
                 vim.schedule(function()
-                    require('dap.repl').append(chunk)
+                    require("dap.repl").append(chunk)
                 end)
             end
         end)
@@ -35,7 +35,7 @@ function M.setup()
             assert(not err, err)
             if chunk then
                 vim.schedule(function()
-                    require('dap.repl').append(chunk)
+                    require("dap.repl").append(chunk)
                 end)
             end
         end)
@@ -59,7 +59,7 @@ function M.setup()
             name = "Attach",
             mode = "local",
             request = "attach",
-            processId = require('dap.utils').pick_process,
+            processId = require("dap.utils").pick_process,
         },
         -- {
         --     type = "go",
@@ -71,8 +71,8 @@ function M.setup()
     }
 end
 
-function M.debug_test()
-    local dap = require('dap')
+M.debug_test = function()
+    local dap = require("dap")
     dap.run({
         type = "go",
         name = "Debug test",
@@ -81,7 +81,7 @@ function M.debug_test()
         program = "${fileDirname}",
         args = function()
             local input = vim.fn.input("Test name: ")
-            return { '-test.run', input }
+            return { "-test.run", input }
         end,
     })
 end

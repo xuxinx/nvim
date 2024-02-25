@@ -11,156 +11,156 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup({
+require("lazy").setup({
     {
-        'tpope/vim-vinegar',
-        keys = '-',
+        "tpope/vim-vinegar",
+        keys = "-",
     },
     {
-        'neovim/nvim-lspconfig',
+        "neovim/nvim-lspconfig",
         dependencies = {
-            'williamboman/mason.nvim',
+            "williamboman/mason.nvim",
         },
         config = function()
-            require('x.lsp').setup()
+            require("x.lsp").setup()
         end,
-        event = 'BufReadPre',
+        event = "BufReadPre",
     },
     {
-        'williamboman/mason.nvim',
+        "williamboman/mason.nvim",
         config = function()
-            require('mason').setup()
+            require("mason").setup()
         end,
-        cmd = 'Mason',
+        cmd = "Mason",
     },
     {
-        'hrsh7th/nvim-cmp',
+        "hrsh7th/nvim-cmp",
         dependencies = {
-            'hrsh7th/cmp-nvim-lsp',
-            'hrsh7th/cmp-buffer',
-            'hrsh7th/cmp-path',
-            'L3MON4D3/LuaSnip',
-            'saadparwaiz1/cmp_luasnip',
-            'honza/vim-snippets',
-            'nvim-treesitter/nvim-treesitter',
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-path",
+            "L3MON4D3/LuaSnip",
+            "saadparwaiz1/cmp_luasnip",
+            "honza/vim-snippets",
+            "nvim-treesitter/nvim-treesitter",
         },
         config = function()
-            require('x.cmp').setup()
-            require('x.luasnip').setup()
+            require("x.cmp").setup()
+            require("x.luasnip").setup()
         end,
-        event = 'InsertEnter',
+        event = "InsertEnter",
     },
     {
-        'nvim-treesitter/nvim-treesitter',
+        "nvim-treesitter/nvim-treesitter",
         dependencies = {
-            'nvim-treesitter/nvim-treesitter-textobjects',
+            "nvim-treesitter/nvim-treesitter-textobjects",
         },
-        build = ':TSUpdate',
+        build = ":TSUpdate",
         config = function()
-            require('x.treesitter').setup()
+            require("x.treesitter").setup()
         end,
-        event = 'BufReadPre',
+        event = "BufReadPre",
     },
     {
-        'nvim-telescope/telescope.nvim',
+        "nvim-telescope/telescope.nvim",
         dependencies = {
-            'nvim-lua/plenary.nvim',
+            "nvim-lua/plenary.nvim",
             {
-                'nvim-telescope/telescope-fzf-native.nvim',
+                "nvim-telescope/telescope-fzf-native.nvim",
                 build =
-                'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
+                "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
             },
         },
         config = function()
-            require('x.telescope').setup()
+            require("x.telescope").setup()
         end,
-        cmd = 'Telescope',
+        cmd = "Telescope",
     },
     {
-        'smoka7/hop.nvim',
+        "smoka7/hop.nvim",
         config = function()
-            require('hop').setup()
+            require("hop").setup()
         end,
         lazy = true,
     },
     {
-        'numToStr/Comment.nvim',
+        "numToStr/Comment.nvim",
         config = function()
-            require('Comment').setup()
+            require("Comment").setup()
         end,
-        event = 'VeryLazy',
+        event = "VeryLazy",
     },
     {
-        'windwp/nvim-autopairs',
+        "windwp/nvim-autopairs",
         config = function()
-            require('x.auto_pairs').setup()
+            require("x.auto_pairs").setup()
         end,
-        event = 'InsertEnter',
+        event = "InsertEnter",
     },
     {
-        'lewis6991/gitsigns.nvim',
+        "lewis6991/gitsigns.nvim",
         dependencies = {
-            'nvim-lua/plenary.nvim'
+            "nvim-lua/plenary.nvim"
         },
         config = function()
-            require('gitsigns').setup()
+            require("gitsigns").setup()
         end,
     },
     {
-        'majutsushi/tagbar',
-        cmd = 'TagbarToggle',
+        "majutsushi/tagbar",
+        cmd = "TagbarToggle",
     },
     {
-        'NvChad/nvim-colorizer.lua',
+        "NvChad/nvim-colorizer.lua",
         config = function()
-            require('colorizer').setup {}
+            require("colorizer").setup {}
         end,
     },
     {
-        'mfussenegger/nvim-dap',
+        "mfussenegger/nvim-dap",
         config = function()
-            require('x.dap').setup()
+            require("x.dap").setup()
         end,
         lazy = true,
     },
     {
-        'github/copilot.vim',
+        "github/copilot.vim",
         lazy = true,
     },
     {
-        'dinhhuy258/vim-local-history',
-        build = ':UpdateRemotePlugins',
+        "dinhhuy258/vim-local-history",
+        build = ":UpdateRemotePlugins",
         config = function()
-            require('x.local_history').setup()
+            require("x.local_history").setup()
         end,
-        event = 'VeryLazy',
+        event = "VeryLazy",
     },
     {
-        'iamcco/markdown-preview.nvim',
+        "iamcco/markdown-preview.nvim",
         build = function()
             vim.fn["mkdp#util#install"]()
         end,
-        ft = 'markdown',
+        ft = "markdown",
     },
     {
-        'prettier/vim-prettier',
-        cmd = 'Prettier',
+        "prettier/vim-prettier",
+        cmd = "Prettier",
     },
     {
-        'folke/neodev.nvim',
-        ft = 'lua',
+        "folke/neodev.nvim",
+        ft = "lua",
     },
     -- scroll makes my eyes tired.
     -- {
-    --     'karb94/neoscroll.nvim',
+    --     "karb94/neoscroll.nvim",
     --     config = function()
-    --         require('x.scroll').setup()
+    --         require("x.scroll").setup()
     --     end,
     -- }
     {
-        'lukas-reineke/indent-blankline.nvim',
+        "lukas-reineke/indent-blankline.nvim",
         config = function()
-            require('x.indent_guide').setup()
+            require("x.indent_guide").setup()
         end,
     },
 })

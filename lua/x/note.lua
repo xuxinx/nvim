@@ -1,8 +1,8 @@
-local telescope = require('telescope.builtin')
+local telescope = require("telescope.builtin")
 
 local M = {}
 
-local dir = '$HOME/xhome/notes'
+local dir = "$HOME/xhome/notes"
 
 M.find_note = function()
     telescope.find_files({

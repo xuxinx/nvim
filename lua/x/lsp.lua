@@ -1,7 +1,7 @@
 -- IMPORTANT: make sure to setup neodev BEFORE lspconfig
 require("neodev").setup({})
-local lspconfig = require('lspconfig')
-local cmplsp = require('cmp_nvim_lsp')
+local lspconfig = require("lspconfig")
+local cmplsp = require("cmp_nvim_lsp")
 local capabilities = cmplsp.default_capabilities()
 
 local M = {}

@@ -1,187 +1,187 @@
-local utils = require('x.utils')
+local utils = require("x.utils")
 
 local M = {}
 
-function M.open_quickfix()
-    vim.cmd('copen')
+M.open_quickfix = function()
+    vim.cmd("copen")
 end
 
-function M.close_quickfix()
-    vim.cmd('cclose')
+M.close_quickfix = function()
+    vim.cmd("cclose")
 end
 
-function M.find_files()
-    require('telescope.builtin').find_files({
+M.find_files = function()
+    require("telescope.builtin").find_files({
         hidden = true,
         no_ignore = true,
     })
 end
 
-function M.find_buffers()
-    require('telescope.builtin').buffers()
+M.find_buffers = function()
+    require("telescope.builtin").buffers()
 end
 
-function M.grep_string()
-    require('telescope.builtin').live_grep()
+M.grep_string = function()
+    require("telescope.builtin").live_grep()
 end
 
-function M.search_copied_expr()
-    return require('x.search_copied').search_copied()
+M.search_copied_expr = function()
+    return require("x.search_copied").search_copied()
 end
 
-function M.find_help_doc()
-    return require('telescope.builtin').help_tags()
+M.find_help_doc = function()
+    return require("telescope.builtin").help_tags()
 end
 
-function M.new_tab()
+M.new_tab = function()
     vim.cmd("$tabe")
 end
 
-function M.new_tab_with_current_buffer()
-    vim.cmd('$tab split')
+M.new_tab_with_current_buffer = function()
+    vim.cmd("$tab split")
 end
 
-function M.next_changed_hunk()
-    require('gitsigns').next_hunk()
+M.next_changed_hunk = function()
+    require("gitsigns").next_hunk()
 end
 
-function M.prev_changed_hunk()
-    require('gitsigns').prev_hunk()
+M.prev_changed_hunk = function()
+    require("gitsigns").prev_hunk()
 end
 
-function M.blame_line()
-    require('gitsigns').blame_line({ full = true })
+M.blame_line = function()
+    require("gitsigns").blame_line({ full = true })
 end
 
-function M.preview_changed_hunk()
-    require('gitsigns').preview_hunk()
+M.preview_changed_hunk = function()
+    require("gitsigns").preview_hunk()
 end
 
-function M.reset_changed_hunk()
-    require('gitsigns').reset_hunk()
+M.reset_changed_hunk = function()
+    require("gitsigns").reset_hunk()
 end
 
-function M.jump_to_char()
-    require('hop').hint_char1()
+M.jump_to_char = function()
+    require("hop").hint_char1()
 end
 
-function M.toggle_tagbar()
-    vim.cmd('TagbarToggle')
+M.toggle_tagbar = function()
+    vim.cmd("TagbarToggle")
 end
 
-function M.code_definition()
+M.code_definition = function()
     vim.lsp.buf.definition()
 end
 
-function M.code_action()
+M.code_action = function()
     vim.lsp.buf.code_action()
 end
 
-function M.hover_code_doc()
+M.hover_code_doc = function()
     vim.lsp.buf.hover()
 end
 
-function M.code_references()
-    require('telescope.builtin').lsp_references()
+M.code_references = function()
+    require("telescope.builtin").lsp_references()
 end
 
-function M.implementations()
-    require('telescope.builtin').lsp_implementations()
+M.implementations = function()
+    require("telescope.builtin").lsp_implementations()
 end
 
-local prettier_files = utils.list_to_set({ 'javascript', 'javascriptreact', 'typescript', 'typescriptreact',
-    'vue', 'css', 'less', 'scss', 'html', 'json', 'graphql', 'markdown', 'yaml' })
-function M.format_buffer()
+local prettier_files = utils.list_to_set({ "javascript", "javascriptreact", "typescript", "typescriptreact",
+    "vue", "css", "less", "scss", "html", "json", "graphql", "markdown", "yaml" })
+M.format_buffer = function()
     if prettier_files[vim.bo.filetype] then
-        vim.cmd('Prettier')
+        vim.cmd("Prettier")
     else
         vim.lsp.buf.format()
     end
 end
 
-function M.next_diagnostic()
+M.next_diagnostic = function()
     vim.diagnostic.goto_next()
 end
 
-function M.prev_diagnostic()
+M.prev_diagnostic = function()
     vim.diagnostic.goto_prev()
 end
 
-function M.snip_expand()
+M.snip_expand = function()
     local luasnip = require("luasnip")
     if luasnip.expandable() then
         luasnip.expand()
     end
 end
 
-function M.snip_jump_forward()
+M.snip_jump_forward = function()
     local luasnip = require("luasnip")
     if luasnip.jumpable(1) then
         luasnip.jump(1)
     end
 end
 
-function M.snip_jump_back()
+M.snip_jump_back = function()
     local luasnip = require("luasnip")
     if luasnip.jumpable(-1) then
         luasnip.jump(-1)
     end
 end
 
-function M.snip_toggle_choices()
+M.snip_toggle_choices = function()
     local luasnip = require("luasnip")
     if luasnip.choice_active() then
         luasnip.change_choice(1)
     end
 end
 
-function M.toggle_breakpoint()
-    require('dap').toggle_breakpoint()
+M.toggle_breakpoint = function()
+    require("dap").toggle_breakpoint()
 end
 
-function M.terminate_debug()
-    require('dap').terminate()
+M.terminate_debug = function()
+    require("dap").terminate()
 end
 
-function M.start_continue_debug()
-    require('dap').continue()
+M.start_continue_debug = function()
+    require("dap").continue()
 end
 
-function M.run_to_cursor()
-    require('dap').run_to_cursor()
+M.run_to_cursor = function()
+    require("dap").run_to_cursor()
 end
 
-function M.step_into()
-    require('dap').step_into()
+M.step_into = function()
+    require("dap").step_into()
 end
 
-function M.step_over()
-    require('dap').step_over()
+M.step_over = function()
+    require("dap").step_over()
 end
 
-function M.step_out()
-    require('dap').step_out()
+M.step_out = function()
+    require("dap").step_out()
 end
 
-function M.markdown_done_todo_expr()
-    return '$?- [<cr>2f<Space>rx<esc>/[C<cr>A [D ' .. os.date("%Y-%m-%d %H:%M %a") .. ']<esc>?- [<cr>:noh<cr>'
+M.markdown_done_todo_expr = function()
+    return "$?- [<cr>2f<Space>rx<esc>/[C<cr>A [D " .. os.date("%Y-%m-%d %H:%M %a") .. "]<esc>?- [<cr>:noh<cr>"
 end
 
-function M.markdown_undone_todo_expr()
-    return '$?- [<cr>fxr<Space>/[D<cr>da[x?- [<cr>:noh<cr>'
+M.markdown_undone_todo_expr = function()
+    return "$?- [<cr>fxr<Space>/[D<cr>da[x?- [<cr>:noh<cr>"
 end
 
 M.netrw_create_test_file = function()
     local cursor_file = vim.api.nvim_get_current_line()
-    local ext = utils.get_file_extension(cursor_file)
+    local ext = utils.get_filename_extension(cursor_file)
     local fname
-    if ext == 'go' then
-        fname = require('x.go').get_test_file_name(cursor_file)
+    if ext == "go" then
+        fname = require("x.go").get_test_file_name(cursor_file)
     else
-        vim.notify('file type of ' .. cursor_file .. ' is not supported', vim.log.levels.WARN)
+        vim.notify("file type of " .. cursor_file .. " is not supported", vim.log.levels.WARN)
         return
     end
-    vim.cmd('e ' .. vim.fn.expand('%:p') .. fname)
+    vim.cmd("e " .. vim.fn.expand("%:p") .. fname)
 end
 
 return M

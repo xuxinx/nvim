@@ -1,5 +1,5 @@
 local dap = require("dap")
-local widgets = require('dap.ui.widgets')
+local widgets = require("dap.ui.widgets")
 
 local M = {}
 
@@ -23,7 +23,7 @@ M.setup = function()
         scopes.close()
     end
 
-    require('x.dap_go').setup()
+    require("x.dap_go").setup()
 end
 
 return M

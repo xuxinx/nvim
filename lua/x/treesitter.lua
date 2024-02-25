@@ -1,12 +1,12 @@
-local locals = require('nvim-treesitter.locals')
-local utils = require('nvim-treesitter.ts_utils')
+local locals = require("nvim-treesitter.locals")
+local utils = require("nvim-treesitter.ts_utils")
 
 local M = {}
 
 M.setup = function()
-    require('nvim-treesitter.configs').setup {
-        ensure_installed = 'all',
-        ignore_install = { 'sql' },
+    require("nvim-treesitter.configs").setup {
+        ensure_installed = "all",
+        ignore_install = { "sql" },
         highlight = {
             enable = true,
             disable = function(lang, bufnr)
@@ -24,24 +24,24 @@ M.setup = function()
                 enable = true,
                 lookahead = true,
                 keymaps = {
-                    ['af'] = { query = '@function.outer', desc = 'select around function' },
-                    ['if'] = { query = '@function.inner', desc = 'select inside function' },
-                    ['ao'] = { query = '@class.outer', desc = 'select around class' },
-                    ['io'] = { query = '@class.inner', desc = 'select inside class' },
-                    ['al'] = { query = '@loop.outer', desc = 'select around loop' },
-                    ['il'] = { query = '@loop.inner', desc = 'select inside loop' },
+                    ["af"] = { query = "@function.outer", desc = "select around function" },
+                    ["if"] = { query = "@function.inner", desc = "select inside function" },
+                    ["ao"] = { query = "@class.outer", desc = "select around class" },
+                    ["io"] = { query = "@class.inner", desc = "select inside class" },
+                    ["al"] = { query = "@loop.outer", desc = "select around loop" },
+                    ["il"] = { query = "@loop.inner", desc = "select inside loop" },
                 },
             },
             move = {
                 enable = true,
                 set_jumps = true,
                 goto_next_start = {
-                    [']f'] = { query = '@function.outer', desc = 'go to next function' },
-                    [']o'] = { query = '@class.outer', desc = 'go to next class' },
+                    ["]f"] = { query = "@function.outer", desc = "go to next function" },
+                    ["]o"] = { query = "@class.outer", desc = "go to next class" },
                 },
                 goto_previous_start = {
-                    ['[f'] = { query = '@function.outer', desc = 'go to previous function' },
-                    ['[o'] = { query = '@class.outer', desc = 'go to previous class' },
+                    ["[f"] = { query = "@function.outer", desc = "go to previous function" },
+                    ["[o"] = { query = "@class.outer", desc = "go to previous class" },
                 },
             },
         },
@@ -63,12 +63,12 @@ M.go_return_types = function()
         fnode = fnode:parent()
     end
     if not fnode then
-        print('not inside of a function')
+        print("not inside of a function")
         return {}
     end
 
     local query = vim.treesitter.query.parse(
-        'go',
+        "go",
         [[
       [
         (method_declaration result: (_) @type)
@@ -79,21 +79,21 @@ M.go_return_types = function()
     )
 
     for _, cnode in query:iter_captures(fnode, 0) do
-        if cnode:type() == 'parameter_list' then
+        if cnode:type() == "parameter_list" then
             local result = {}
             local count = cnode:named_child_count()
             for idx = 0, count - 1 do
                 local matching_node = cnode:named_child(idx)
-                local type_node = matching_node:field('type')[1]
+                local type_node = matching_node:field("type")[1]
                 table.insert(result, vim.treesitter.get_node_text(type_node, 0))
             end
             return result
-        elseif cnode:type() == 'type_identifier' then
+        elseif cnode:type() == "type_identifier" then
             return { vim.treesitter.get_node_text(cnode, 0) }
         end
     end
 
-    print('cannot recognize return types')
+    print("cannot recognize return types")
     return {}
 end
 
