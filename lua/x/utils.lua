@@ -30,6 +30,18 @@ M.remove_filename_extension = function(fname)
     return fname:match("(.+)%..+")
 end
 
+M.join_path = function(...)
+    local raw
+    for i, path in ipairs({ ... }) do
+        if i == 1 then
+            raw = path
+        else
+            raw = raw .. "/" .. path
+        end
+    end
+    return vim.fn.resolve(raw)
+end
+
 -- # table
 
 -- http://www.lua.org/pil/11.5.html

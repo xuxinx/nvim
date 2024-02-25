@@ -1,3 +1,4 @@
+local utils = require("x.utils")
 local ls = require("luasnip")
 local types = require("luasnip.util.types")
 
@@ -17,7 +18,7 @@ M.setup = function()
     })
 
     require("luasnip.loaders.from_snipmate").lazy_load()
-    require("luasnip.loaders.from_lua").load({ paths = vim.fn.stdpath("config") .. "/snippets" })
+    require("luasnip.loaders.from_lua").load({ paths = utils.join_path(vim.fn.stdpath("config"), "snippets") })
 end
 
 return M

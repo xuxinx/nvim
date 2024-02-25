@@ -3,8 +3,8 @@ local breakpoints = require("dap.breakpoints")
 
 local M = {}
 
-local store_dir = vim.fn.stdpath("data") .. "/sessions/"
-local breakpoints_dir = store_dir .. "breakpoints/"
+local store_dir = utils.join_path(vim.fn.stdpath("data"), "sessions") .. "/"
+local breakpoints_dir = utils.join_path(store_dir, "breakpoints") .. "/"
 local auto_session_name = "auto_session"
 
 vim.fn.mkdir(store_dir, "p")

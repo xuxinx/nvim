@@ -1,3 +1,5 @@
+local utils = require("x.utils")
+
 local M = {}
 
 M.find_note = function()
@@ -54,6 +56,20 @@ end
 
 M.edit_project_config = function()
     require("x.project_config").edit()
+end
+
+M.create_test_file = function ()
+    local curr_fpath = vim.api.nvim_buf_get_name(0)
+    local curr_fname = vim.fs.basename(curr_fpath)
+    local ext = utils.get_filename_extension(curr_fname)
+    local fname
+    if ext == "go" then
+        fname = require("x.go").get_test_file_name(curr_fname)
+    else
+        vim.notify("file type of " .. curr_fname .. " is not supported", vim.log.levels.WARN)
+        return
+    end
+    vim.cmd("e " .. utils.join_path(vim.fs.dirname(curr_fpath), fname))
 end
 
 return M
