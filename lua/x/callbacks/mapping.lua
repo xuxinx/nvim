@@ -89,7 +89,7 @@ function M.implementations()
     require('telescope.builtin').lsp_implementations()
 end
 
-local prettier_files = utils.set({ 'javascript', 'javascriptreact', 'typescript', 'typescriptreact',
+local prettier_files = utils.list_to_set({ 'javascript', 'javascriptreact', 'typescript', 'typescriptreact',
     'vue', 'css', 'less', 'scss', 'html', 'json', 'graphql', 'markdown', 'yaml' })
 function M.format_buffer()
     if prettier_files[vim.bo.filetype] then
@@ -169,6 +169,19 @@ end
 
 function M.markdown_undone_todo_expr()
     return '$?- [<cr>fxr<Space>/[D<cr>da[x?- [<cr>:noh<cr>'
+end
+
+M.netrw_create_test_file = function()
+    local cursor_file = vim.api.nvim_get_current_line()
+    local ext = utils.get_file_extension(cursor_file)
+    local fname
+    if ext == 'go' then
+        fname = require('x.go').get_test_file_name(cursor_file)
+    else
+        vim.notify('file type of ' .. cursor_file .. ' is not supported', vim.log.levels.WARN)
+        return
+    end
+    vim.cmd('e ' .. vim.fn.expand('%:p') .. fname)
 end
 
 return M

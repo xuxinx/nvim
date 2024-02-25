@@ -1,10 +1,10 @@
 local M = {}
 
-function M.curr_dir()
+function M.curr_dir_name()
     return vim.fn.fnamemodify(vim.fn.expand('%:p:h'), ':t')
 end
 
-function M.base_cwd()
+function M.base_cwd_name()
     return vim.fn.substitute(vim.fn.getcwd(), '^.*/', '', '')
 end
 
@@ -13,7 +13,7 @@ function M.curr_file_path()
 end
 
 -- http://www.lua.org/pil/11.5.html
-function M.set(list)
+function M.list_to_set(list)
     local set = {}
     for _, l in ipairs(list) do
         set[l] = true
@@ -43,6 +43,10 @@ end
 
 M.get_file_extension = function(fname)
     return fname:match("^.+%.(.+)$")
+end
+
+M.get_file_name_without_extension = function(fname)
+    return fname:match("(.+)%..+")
 end
 
 return M

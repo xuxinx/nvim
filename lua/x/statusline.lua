@@ -68,7 +68,7 @@ function M.statusline()
     local s = ''
 
     -- base cwd
-    s = s .. utils.base_cwd() .. ':'
+    s = s .. utils.base_cwd_name() .. ':'
 
     -- filepath
     s = s .. [[ %{v:lua.require('x.statusline').helpers.curr_file_path()}]]
