@@ -1,6 +1,10 @@
 local cb = require('x.callbacks.mapping')
 local sm = vim.keymap.set
-local cac = vim.api.nvim_create_autocmd
+local group = vim.api.nvim_create_augroup("x_augroup_mappings", { clear = true })
+local cac = function(event, opts)
+    opts.group = group
+    vim.api.nvim_create_autocmd(event, opts)
+end
 
 -- # quickfix list
 sm('n', '<leader>co', cb.open_quickfix, { desc = 'open quickfix list' })
@@ -49,6 +53,6 @@ sm('n', '<F8>', cb.step_over, { desc = 'debug step over' })
 sm('n', '<leader><F8>', cb.step_out, { desc = 'debug step out' })
 -- # markdown
 cac('FileType', { pattern = 'markdown', callback = function()
-    sm('n', '<leader>tdd', cb.markdown_done_todo_expr, { expr = true, desc = 'markdown done todo' })
-    sm('n', '<leader>tdu', cb.markdown_undone_todo_expr, { expr = true, desc = 'markdown undone todo' })
+    sm('n', '<leader>tdd', cb.markdown_done_todo_expr, { expr = true, buffer = true, desc = 'markdown done todo' })
+    sm('n', '<leader>tdu', cb.markdown_undone_todo_expr, { expr = true, buffer = true, desc = 'markdown undone todo' })
 end })

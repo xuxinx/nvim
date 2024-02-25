@@ -1,6 +1,6 @@
 local cb = require('x.callbacks.autocmd')
 
-local group = vim.api.nvim_create_augroup("xgroup", { clear = true })
+local group = vim.api.nvim_create_augroup("x_augroup_autocmds", { clear = true })
 local cac = function(event, opts)
     opts.group = group
     vim.api.nvim_create_autocmd(event, opts)
