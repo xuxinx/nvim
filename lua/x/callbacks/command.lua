@@ -64,7 +64,21 @@ M.create_test_file = function ()
     local ext = utils.get_filename_extension(curr_fname)
     local fname
     if ext == "go" then
-        fname = require("x.go").get_test_file_name(curr_fname)
+        fname = utils.remove_filename_extension(curr_fname) .. "_test.go"
+    else
+        vim.notify("file type of " .. curr_fname .. " is not supported", vim.log.levels.WARN)
+        return
+    end
+    vim.cmd("e " .. utils.join_path(vim.fs.dirname(curr_fpath), fname))
+end
+
+M.create_setup_test_file = function ()
+    local curr_fpath = vim.api.nvim_buf_get_name(0)
+    local curr_fname = vim.fs.basename(curr_fpath)
+    local ext = utils.get_filename_extension(curr_fname)
+    local fname
+    if ext == "go" then
+        fname = "setup_test.go"
     else
         vim.notify("file type of " .. curr_fname .. " is not supported", vim.log.levels.WARN)
         return

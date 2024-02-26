@@ -23,10 +23,12 @@ M.goimports = function(wait_ms)
     })
 end
 
+-- TODO: call snippet instead
 M.new_file_tpl = function()
     local package_name
     local buf_name = vim.api.nvim_buf_get_name(0)
-    local is_main = vim.fs.basename(buf_name) == "main.go"
+    local fname = vim.fs.basename(buf_name)
+    local is_main = fname == "main.go"
     if is_main or vim.fn.filereadable(vim.fs.dirname(buf_name) .. "/main.go") == 1 then
         package_name = "main"
     else
@@ -40,11 +42,25 @@ M.new_file_tpl = function()
         vim.api.nvim_win_set_cursor(0, { 3, 0 })
         -- FIXME: lsp not work before calling write
         vim.api.nvim_input("o")
+    elseif fname == "setup_test.go" then
+-- import (
+-- 	"os"
+-- 	"testing"
+-- )
+--
+-- func TestMain(m *testing.M) {
+--     os.Exit(m.Run())
+-- }
+        vim.fn.append(2, "import (")
+        vim.fn.append(3, '	"os"')
+        vim.fn.append(4, '	"testing"')
+        vim.fn.append(5, ")")
+        vim.fn.append(6, "")
+        vim.fn.append(7, "func TestMain(m *testing.M) {")
+        vim.fn.append(8, "	os.Exit(m.Run())")
+        vim.fn.append(9, "}")
+        vim.api.nvim_win_set_cursor(0, { 8, 0 })
     end
-end
-
-M.get_test_file_name = function(target_file)
-    return utils.remove_filename_extension(target_file) .. "_test.go"
 end
 
 return M
