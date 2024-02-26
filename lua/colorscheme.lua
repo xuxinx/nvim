@@ -226,7 +226,7 @@ local groups = {
     -- ["@comment.todo.unchecked.markdown"] = { link = "@comment.todo" }, --             ; todo notes
     ["@comment.note"] = { fg = black, bg = greenL80, bold = true }, --             ; info notes
     ["@comment.warning"] = { fg = black, bg = yellow, bold = true }, --          ; warning notes
-    ["@comment.danger"] = { fg = white, bg = redL80, bold = true }, --           ; danger/error notes
+    ["@comment.error"] = { fg = white, bg = redL80, bold = true }, --           ; danger/error notes
     ["@diff.plus"] = { link = "DiffAdd" }, --         ; added text (for diff files)
     ["@diff.minus"] = { link = "DiffDelete" }, --      ; deleted text (for diff files)
     -- Tags
