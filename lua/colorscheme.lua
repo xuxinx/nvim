@@ -161,6 +161,7 @@ local groups = {
     ["@punctuation.delimiter"] = { link = "Delimiter" }, -- ; delimiters (e.g. `;` / `.` / `,`)
     ["@punctuation.bracket"] = { link = "Delimiter" }, --   ; brackets (e.g. `()` / `{}` / `[]`)
     ["@markup.list"] = { link = "Delimiter" }, --   ; special symbols (e.g. `{}` in string interpolation)
+    ["@markup.list.unchecked.markdown"] = { bg = blueL80 },
     -- Literals
     ["@string"] = { link = "String" }, --            ; string literals
     ["@string.regexp"] = { link = "String" }, --      ; regular expressions
