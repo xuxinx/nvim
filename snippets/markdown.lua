@@ -11,14 +11,15 @@ local rep = require("luasnip.extras").rep
 
 return {
     -- todo
-    s({ trig = "^%s*td", regTrig = true }, fmt([[
-- [ ] <todo>  
-  [C <datetime>]
+    s({ trig = "^%s*(%d?)td", regTrig = true }, fmt([[
+<tabs>- [ ] <todo>
       ]], {
         todo = i(1, "todo"),
-        datetime = f(function()
-            return os.date("%Y-%m-%d %H:%M %a")
+        tabs = f(function(_, snip)
+            if snip.captures[1] == "" then
+                return
+            end
+            return string.rep(" ", snip.captures[1])
         end),
     })),
 }
-

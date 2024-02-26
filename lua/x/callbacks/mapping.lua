@@ -168,11 +168,11 @@ M.step_out = function()
 end
 
 M.markdown_done_todo_expr = function()
-    return "$?- [<cr>2f<Space>rx<esc>/[C<cr>A [D " .. os.date("%Y-%m-%d %H:%M %a") .. "]<esc>?- [<cr>:noh<cr>"
+    return "mk$?- [<cr>2f<Space>rx`k:noh<cr>"
 end
 
 M.markdown_undone_todo_expr = function()
-    return "$?- [<cr>fxr<Space>/[D<cr>da[x?- [<cr>:noh<cr>"
+    return "mk$?- [<cr>fxr<Space>`k:noh<cr>"
 end
 
 return M
