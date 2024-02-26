@@ -15,6 +15,7 @@ sm("n", "<leader>fb", cb.find_buffers, { desc = "find buffers" })
 sm("n", "<leader>fg", cb.grep_string, { desc = "find by grep" })
 sm("n", "<leader>fc", cb.search_copied_expr, { expr = true, desc = "find copied string" })
 sm("n", "<leader>fh", cb.find_help_doc, { desc = "find help doc" })
+sm("n", "<leader>lc", cb.find_commands, { desc= "list(find) commands" })
 -- # tab
 sm("n", "<leader>tt", cb.new_tab, { desc = "new tab" })
 sm("n", "<leader>to", cb.new_tab_with_current_buffer, { desc = "new tab with current buffer" })

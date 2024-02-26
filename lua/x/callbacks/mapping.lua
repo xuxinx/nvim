@@ -30,7 +30,11 @@ M.search_copied_expr = function()
 end
 
 M.find_help_doc = function()
-    return require("telescope.builtin").help_tags()
+    require("telescope.builtin").help_tags()
+end
+
+M.find_commands = function()
+    require("telescope.builtin").commands()
 end
 
 M.new_tab = function()
