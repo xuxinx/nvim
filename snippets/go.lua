@@ -152,4 +152,18 @@ return {
     ]], {
         todo = i(1),
     })),
+
+    s("testmain", fmt([[
+import (
+	"os"
+	"testing"
+)
+
+func TestMain(m *testing.M) {
+    <sth>
+	os.Exit(m.Run())
+}
+    ]], {
+        sth = i(1),
+    })),
 }

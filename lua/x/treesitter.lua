@@ -1,6 +1,3 @@
-local locals = require("nvim-treesitter.locals")
-local utils = require("nvim-treesitter.ts_utils")
-
 local M = {}
 
 M.setup = function()

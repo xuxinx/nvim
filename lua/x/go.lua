@@ -23,7 +23,6 @@ M.goimports = function(wait_ms)
     })
 end
 
--- TODO: call snippet instead
 M.new_file_tpl = function()
     local package_name
     local buf_name = vim.api.nvim_buf_get_name(0)
@@ -36,30 +35,13 @@ M.new_file_tpl = function()
     end
     vim.fn.append(0, "package " .. package_name)
     vim.fn.append(1, "")
+    vim.api.nvim_win_set_cursor(0, { 3, 1 })
+    local ls = require("luasnip")
+    local snippets = require("x.luasnip").get_snippet_map("go")
     if is_main then
-        vim.fn.append(2, "func main() {")
-        vim.fn.append(3, "}")
-        vim.api.nvim_win_set_cursor(0, { 3, 0 })
-        -- FIXME: lsp not work before calling write
-        vim.api.nvim_input("o")
+        ls.snip_expand(snippets["main"])
     elseif fname == "setup_test.go" then
--- import (
--- 	"os"
--- 	"testing"
--- )
---
--- func TestMain(m *testing.M) {
---     os.Exit(m.Run())
--- }
-        vim.fn.append(2, "import (")
-        vim.fn.append(3, '	"os"')
-        vim.fn.append(4, '	"testing"')
-        vim.fn.append(5, ")")
-        vim.fn.append(6, "")
-        vim.fn.append(7, "func TestMain(m *testing.M) {")
-        vim.fn.append(8, "	os.Exit(m.Run())")
-        vim.fn.append(9, "}")
-        vim.api.nvim_win_set_cursor(0, { 8, 0 })
+        ls.snip_expand(snippets["testmain"])
     end
 end
 

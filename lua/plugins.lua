@@ -24,7 +24,7 @@ require("lazy").setup({
         config = function()
             require("x.lsp").setup()
         end,
-        event = "BufReadPre",
+        event = { "BufReadPre", "BufNewFile" },
     },
     {
         "williamboman/mason.nvim",
@@ -32,6 +32,27 @@ require("lazy").setup({
             require("mason").setup()
         end,
         cmd = "Mason",
+    },
+    {
+        "nvim-treesitter/nvim-treesitter",
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter-textobjects",
+        },
+        build = ":TSUpdate",
+        config = function()
+            require("x.treesitter").setup()
+        end,
+        event = "BufReadPre",
+    },
+    {
+        "L3MON4D3/LuaSnip",
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+        },
+        config = function()
+            require("x.luasnip").setup()
+        end,
+        event = "InsertEnter",
     },
     {
         "hrsh7th/nvim-cmp",
@@ -46,20 +67,8 @@ require("lazy").setup({
         },
         config = function()
             require("x.cmp").setup()
-            require("x.luasnip").setup()
         end,
         event = "InsertEnter",
-    },
-    {
-        "nvim-treesitter/nvim-treesitter",
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter-textobjects",
-        },
-        build = ":TSUpdate",
-        config = function()
-            require("x.treesitter").setup()
-        end,
-        event = "BufReadPre",
     },
     {
         "nvim-telescope/telescope.nvim",
