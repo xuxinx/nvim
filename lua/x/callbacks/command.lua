@@ -86,4 +86,8 @@ M.create_setup_test_file = function ()
     vim.cmd("e " .. utils.join_path(vim.fs.dirname(curr_fpath), fname))
 end
 
+M.open_terminal_for_current_dir = function ()
+    require("x.terminal").open_terminal_for_current_dir()
+end
+
 return M
