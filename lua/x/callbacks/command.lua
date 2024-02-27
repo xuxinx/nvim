@@ -58,7 +58,7 @@ M.edit_project_config = function()
     require("x.project_config").edit()
 end
 
-M.create_test_file = function ()
+M.create_test_file = function()
     local curr_fpath = vim.api.nvim_buf_get_name(0)
     local curr_fname = vim.fs.basename(curr_fpath)
     local ext = utils.get_filename_extension(curr_fname)
@@ -72,7 +72,7 @@ M.create_test_file = function ()
     vim.cmd("e " .. utils.join_path(vim.fs.dirname(curr_fpath), fname))
 end
 
-M.create_setup_test_file = function ()
+M.create_setup_test_file = function()
     local curr_fpath = vim.api.nvim_buf_get_name(0)
     local curr_fname = vim.fs.basename(curr_fpath)
     local ext = utils.get_filename_extension(curr_fname)
@@ -86,8 +86,12 @@ M.create_setup_test_file = function ()
     vim.cmd("e " .. utils.join_path(vim.fs.dirname(curr_fpath), fname))
 end
 
-M.open_terminal_for_current_dir = function ()
+M.open_terminal_for_current_dir = function()
     require("x.terminal").open_terminal_for_current_dir()
+end
+
+M.execute_go_generate = function()
+    require("x.go").execute_go_generate()
 end
 
 return M

@@ -1,7 +1,9 @@
 local cb = require("x.callbacks.command")
 
 local cc = vim.api.nvim_create_user_command
-local bcc = vim.api.nvim_buf_create_user_command
+local bcc = function (name, command, opts)
+    vim.api.nvim_buf_create_user_command(0, name, command, opts)
+end
 local group = vim.api.nvim_create_augroup("x_augroup_usercommands", { clear = true })
 local cac = function(event, opts)
     opts.group = group
@@ -24,5 +26,6 @@ cc("ProjectConfig", cb.edit_project_config, { desc = "edit project config" })
 cc("CreateTestFile", cb.create_test_file, { desc = "create test file" })
 cc("Term", cb.open_terminal_for_current_dir, { desc = "open terminal for current dir" })
 cac("FileType", { pattern = "go" ,callback = function ()
-    bcc(0, "CreateTestFileSetup", cb.create_setup_test_file, { desc = "create setup test file" })
+    bcc("CreateTestFileSetup", cb.create_setup_test_file, { desc = "create setup test file" })
+    bcc("GoGenerate", cb.execute_go_generate, { desc = "execute go:generate" })
 end})
