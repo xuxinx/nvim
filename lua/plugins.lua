@@ -112,7 +112,7 @@ require("lazy").setup({
             "nvim-lua/plenary.nvim"
         },
         config = function()
-            require("gitsigns").setup()
+            require("x.gitsigns").setup()
         end,
     },
     {
