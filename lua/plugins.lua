@@ -83,7 +83,8 @@ require("lazy").setup({
         config = function()
             require("x.telescope").setup()
         end,
-        cmd = "Telescope",
+        -- https://github.com/folke/lazy.nvim/issues/1038
+        event = "UIEnter",
     },
     {
         "smoka7/hop.nvim",

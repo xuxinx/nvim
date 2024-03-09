@@ -4,22 +4,10 @@ local previewers = require("telescope.previewers")
 local M = {}
 
 local ignore_dirs = utils.merge_arrays({
-    ".git",
-    ".vscode",
-    ".idea",
-    ".local-history",
-    "node_modules",
-    "testdata/fuzz",
-    "vendor",
-    "dist",
 }, PCFG.telescope.ignore_dirs)
 local ignore_file_extensions = utils.merge_arrays({
-    ".swp",
-    ".min.js",
-    ".min.css",
 }, PCFG.telescope.ignore_file_extensions)
 local ignore_files = utils.merge_arrays({
-    ".DS_Store",
 }, PCFG.telescope.ignore_files)
 local ignore_free_patterns = utils.merge_arrays({
 }, PCFG.telescope.ignore_free_patterns)
@@ -81,6 +69,16 @@ M.setup = function()
     }
 
     require("telescope").load_extension("fzf")
+end
+
+M.find_files = function (opts)
+    require("telescope.builtin").find_files(vim.tbl_deep_extend("force", {
+        find_command = {
+            "rg",
+            "--files",
+            "--hidden",
+        },
+    }, opts or {}))
 end
 
 return M

@@ -11,10 +11,7 @@ M.close_quickfix = function()
 end
 
 M.find_files = function()
-    require("telescope.builtin").find_files({
-        hidden = true,
-        no_ignore = true,
-    })
+    require("x.telescope").find_files()
 end
 
 M.find_buffers = function()

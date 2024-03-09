@@ -5,10 +5,8 @@ local M = {}
 local dir = "$HOME/xhome/notes"
 
 M.find_note = function()
-    telescope.find_files({
+    require("x.telescope").find_files({
         cwd = dir,
-        hidden = true,
-        no_ignore = true,
     })
 end
 
