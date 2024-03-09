@@ -134,7 +134,7 @@ require("lazy").setup({
     },
     {
         "github/copilot.vim",
-        lazy = true,
+        cmd = "Copilot",
     },
     {
         "dinhhuy258/vim-local-history",
