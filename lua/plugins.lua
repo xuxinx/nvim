@@ -14,24 +14,22 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     {
         "tpope/vim-vinegar",
-        keys = "-",
     },
     {
         "neovim/nvim-lspconfig",
         dependencies = {
             "williamboman/mason.nvim",
+            "folke/neodev.nvim",
         },
         config = function()
             require("x.lsp").setup()
         end,
-        event = { "BufReadPre", "BufNewFile" },
     },
     {
         "williamboman/mason.nvim",
         config = function()
             require("mason").setup()
         end,
-        cmd = "Mason",
     },
     {
         "nvim-treesitter/nvim-treesitter",
@@ -42,7 +40,6 @@ require("lazy").setup({
         config = function()
             require("x.treesitter").setup()
         end,
-        event = "BufReadPre",
     },
     {
         "L3MON4D3/LuaSnip",
@@ -52,7 +49,6 @@ require("lazy").setup({
         config = function()
             require("x.luasnip").setup()
         end,
-        event = "InsertEnter",
     },
     {
         "hrsh7th/nvim-cmp",
@@ -68,7 +64,6 @@ require("lazy").setup({
         config = function()
             require("x.cmp").setup()
         end,
-        event = "InsertEnter",
     },
     {
         "nvim-telescope/telescope.nvim",
@@ -83,29 +78,24 @@ require("lazy").setup({
         config = function()
             require("x.telescope").setup()
         end,
-        -- https://github.com/folke/lazy.nvim/issues/1038
-        event = "UIEnter",
     },
     {
         "smoka7/hop.nvim",
         config = function()
             require("hop").setup()
         end,
-        lazy = true,
     },
     {
         "numToStr/Comment.nvim",
         config = function()
             require("Comment").setup()
         end,
-        event = "VeryLazy",
     },
     {
         "windwp/nvim-autopairs",
         config = function()
-            require("x.auto_pairs").setup()
+            require("nvim-autopairs").setup()
         end,
-        event = "InsertEnter",
     },
     {
         "lewis6991/gitsigns.nvim",
@@ -118,12 +108,11 @@ require("lazy").setup({
     },
     {
         "majutsushi/tagbar",
-        cmd = "TagbarToggle",
     },
     {
         "NvChad/nvim-colorizer.lua",
         config = function()
-            require("colorizer").setup {}
+            require("colorizer").setup({})
         end,
     },
     {
@@ -131,11 +120,12 @@ require("lazy").setup({
         config = function()
             require("x.dap").setup()
         end,
-        lazy = true,
     },
     {
         "github/copilot.vim",
-        cmd = "Copilot",
+        config = function()
+            require("x.copilot").setup()
+        end,
     },
     {
         "dinhhuy258/vim-local-history",
@@ -143,30 +133,16 @@ require("lazy").setup({
         config = function()
             require("x.local_history").setup()
         end,
-        event = "VeryLazy",
     },
     {
         "iamcco/markdown-preview.nvim",
         build = function()
             vim.fn["mkdp#util#install"]()
         end,
-        ft = "markdown",
     },
     {
         "prettier/vim-prettier",
-        cmd = "Prettier",
     },
-    {
-        "folke/neodev.nvim",
-        ft = "lua",
-    },
-    -- scroll makes my eyes tired.
-    -- {
-    --     "karb94/neoscroll.nvim",
-    --     config = function()
-    --         require("x.scroll").setup()
-    --     end,
-    -- }
     {
         "lukas-reineke/indent-blankline.nvim",
         config = function()
