@@ -2,12 +2,13 @@ local dap = require("dap")
 local widgets = require("dap.ui.widgets")
 local repl = require("dap.repl")
 local utils = require("dap.utils")
+local xts = require("x.treesitter")
 
 local M = {}
 
 local scopes = widgets.sidebar(widgets.scopes, { width = 50 })
 
-M.toggle_scopes = function ()
+M.toggle_scopes = function()
     scopes.toggle()
 end
 
@@ -100,17 +101,24 @@ M.setup = function()
 end
 
 M.debug_test = function()
-    dap.run({
-        type = "go",
-        name = "Debug test",
-        request = "launch",
-        mode = "test",
-        program = "${fileDirname}",
-        args = function()
-            local input = vim.fn.input("Test name: ")
-            return { "-test.run", input }
-        end,
-    })
+    local ft = vim.bo.filetype
+    if ft == "go" then
+        dap.run({
+            type = "go",
+            name = "Debug test",
+            request = "launch",
+            mode = "test",
+            program = "${fileDirname}",
+            args = function()
+                local fname = xts.get_func_name({
+                    function_declaration = true,
+                })
+                return { "-test.run", fname }
+            end,
+        })
+    else
+        vim.notify(ft .. " is not support in debug_test", vim.log.levels.ERROR)
+    end
 end
 
 return M
