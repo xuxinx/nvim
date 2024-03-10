@@ -30,4 +30,28 @@ M.get_snippet_map = function (ft)
 	return result
 end
 
+M.snip_expand = function()
+    if ls.expandable() then
+        ls.expand()
+    end
+end
+
+M.snip_jump_forward = function()
+    if ls.jumpable(1) then
+        ls.jump(1)
+    end
+end
+
+M.snip_jump_back = function()
+    if ls.jumpable(-1) then
+        ls.jump(-1)
+    end
+end
+
+M.snip_toggle_choices = function()
+    if ls.choice_active() then
+        ls.change_choice(1)
+    end
+end
+
 return M

@@ -1,4 +1,6 @@
 local utils = require("x.utils")
+local ls = require("luasnip")
+local xls = require("x.luasnip")
 
 local M = {}
 
@@ -36,8 +38,7 @@ M.new_file_tpl = function()
     vim.fn.append(0, "package " .. package_name)
     vim.fn.append(1, "")
     vim.api.nvim_win_set_cursor(0, { 3, 1 })
-    local ls = require("luasnip")
-    local snippets = require("x.luasnip").get_snippet_map("go")
+    local snippets = xls.get_snippet_map("go")
     if is_main then
         ls.snip_expand(snippets["main"])
     elseif fname == "setup_test.go" then

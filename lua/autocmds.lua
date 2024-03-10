@@ -1,5 +1,3 @@
-local cb = require("x.callbacks.autocmd")
-
 local group = vim.api.nvim_create_augroup("x_augroup_autocmds", { clear = true })
 local cac = function(event, opts)
     opts.group = group
@@ -10,69 +8,96 @@ end
 cac({ "BufNewFile", "BufRead" }, {
     pattern = { "*.gohtml" },
     desc = "set filetype to html",
-    callback = cb.set_filetype_func("html")
+    callback = function()
+        vim.bo.filetype = "html"
+    end
 })
 
 -- # indentations
 cac("FileType", {
     pattern = { "yaml", "proto", "c", "cpp" },
     desc = "set tab to 2 spaces",
-    callback = cb.set_tab_to_n_spaces_func(2)
+    callback = function()
+        vim.bo.tabstop = 2
+        vim.bo.softtabstop = 2
+        vim.bo.shiftwidth = 2
+        vim.bo.expandtab = true
+    end
 })
 cac("FileType", {
     pattern = { "snippets" },
     desc = "set tab length = 8 spaces",
-    callback = cb.set_tab_to_n_spaces_func(8, false)
+    callback = function()
+        vim.bo.tabstop = 8
+        vim.bo.softtabstop = 8
+        vim.bo.shiftwidth = 8
+        vim.bo.expandtab = false
+    end
 })
 
 -- # off syntax
 cac({ "BufNewFile", "BufWinEnter" }, {
     pattern = { "go.sum" },
     desc = "off syntax",
-    callback = cb.off_syntax
+    callback = function()
+        vim.cmd("ownsyntax off")
+    end
 })
 
 -- # restore cursor
 cac({ "BufReadPost" }, {
     desc = "restore cursor",
-    callback = cb.restore_cursor
+    callback = require("x.restore_cursor").restore_cursor
 })
 
 -- # statusline
 cac({ "BufWinEnter" }, {
     pattern = { "dap-scopes-*" },
     desc = "debug scopes",
-    callback = cb.set_statusline_func("Scopes")
+    callback = function()
+        vim.wo.statusline = "Scopes"
+    end
 })
 cac("FileType", {
     pattern = "dap-repl",
     desc = "debug repl",
-    callback = cb.set_statusline_func("REPL")
+    callback = function()
+        vim.wo.statusline = "REPL"
+    end
 })
 
 -- # commentary
 cac({ "BufNewFile", "BufRead" }, {
     pattern = { "*.mod", "*.work" },
     desc = "set comment string",
-    callback = cb.set_commentstring_func("// %s")
+    callback = function()
+        vim.bo.commentstring = "// %s"
+    end
 })
 
 -- # auto format
 cac("BufWritePre", {
     pattern = "*.go",
     desc = "auto format go",
-    callback = cb.format_go
+    callback = function()
+        require("x.go").goimports(1000)
+    end
 })
 
 -- # go
 cac("BufNewFile", {
     pattern = "*.go",
     desc = "new go template",
-    callback = cb.new_go_file_tpl
+    callback = require("x.go").new_file_tpl
 })
 
 -- # session
 cac("VimLeave", {
     desc = "auto save session",
-    callback = cb.auto_save_session,
+    callback = function()
+        if vim.fn.expand("%") == ".git/COMMIT_EDITMSG" then
+            return
+        end
+        require("x.session").save_session()
+    end,
 })
