@@ -8,19 +8,8 @@ local f = ls.function_node
 local sn = ls.snippet_node
 local fmt = require("luasnip.extras.fmt").fmta
 local rep = require("luasnip.extras").rep
-local xutils = require("x.utils")
+local xgo = require("x.go")
 local xts = require("x.treesitter")
-
-local go_zero_values = {
-    int = "0",
-    bool = "false",
-    string = [[""]],
-}
-
-xutils.set_same_value_entries(go_zero_values, "int",
-    "int8", "int16", "int32", "int64",
-    "uint", "uint8", "uint16", "uint32", "uint64",
-    "float32", "float64")
 
 return {
     s("pkd", t('import _ "github.com/lib/pq"')),
@@ -114,7 +103,7 @@ return {
         err = i(1, "err"),
         returns = d(2, function(args)
             local result = {}
-            local rets = xts.go_return_types()
+            local rets = xts.func_return_types()
             local err_name = args[1][1]
             local nIdx = 0
             for idx, ret in ipairs(rets) do
@@ -130,8 +119,8 @@ return {
                             err = t(err_name),
                         }))
                     })
-                elseif go_zero_values[ret] ~= nil then
-                    val = t(go_zero_values[ret])
+                elseif xgo.zero_values[ret] ~= nil then
+                    val = t(xgo.zero_values[ret])
                 end
                 table.insert(result, val)
                 if idx ~= #rets then

@@ -51,7 +51,7 @@ local function_node_types = {
     func_literal = true,
 }
 
-M.go_return_types = function()
+M.func_return_types = function()
     local fnode = vim.treesitter.get_node()
     while fnode ~= nil do
         if function_node_types[fnode:type()] then
