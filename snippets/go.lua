@@ -103,7 +103,7 @@ return {
         err = i(1, "err"),
         returns = d(2, function(args)
             local result = {}
-            local rets = xts.func_return_types()
+            local rets = xts.get_func_return_types()
             local err_name = args[1][1]
             local nIdx = 0
             for idx, ret in ipairs(rets) do

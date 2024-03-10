@@ -45,20 +45,26 @@ M.setup = function()
     }
 end
 
-local function_node_types = {
-    function_declaration = true,
-    method_declaration = true,
-    func_literal = true,
-}
+local default_func_node_types = {
+        function_declaration = true,
+        method_declaration = true,
+        func_literal = true,
+    }
 
-M.func_return_types = function()
+local get_func_node = function(fnode_types)
+    fnode_types = fnode_types or default_func_node_types
     local fnode = vim.treesitter.get_node()
     while fnode ~= nil do
-        if function_node_types[fnode:type()] then
-            break
+        if fnode_types[fnode:type()] then
+            return fnode
         end
         fnode = fnode:parent()
     end
+    return nil
+end
+
+M.get_func_return_types = function(fnode_types)
+    local fnode = get_func_node(fnode_types)
     if not fnode then
         print("not inside of a function")
         return {}
@@ -92,6 +98,15 @@ M.func_return_types = function()
 
     print("cannot recognize return types")
     return {}
+end
+
+M.get_func_name = function(fnode_types)
+    local fnode = get_func_node(fnode_types)
+    if not fnode then
+        print("not inside of a function")
+        return {}
+    end
+    return vim.treesitter.get_node_text(fnode:field("name")[1], 0)
 end
 
 return M
