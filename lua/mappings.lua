@@ -28,7 +28,7 @@ sm("n", "<leader>gb", function() require("gitsigns").blame_line({ full = true })
 sm("n", "<leader>hp", require("gitsigns").preview_hunk, { desc = "preview changed hunk" })
 sm("n", "<leader>hr", require("gitsigns").reset_hunk, { desc = "reset changed hunk" })
 -- # jump
-sm({ "n", "v" }, "<leader>j", require("hop").hint_char1, { desc = "jump to char" })
+sm({ "n", "v" }, "<leader>j", function() require("hop").hint_char1() end, { desc = "jump to char" })
 -- # lsp
 sm("n", "gd", vim.lsp.buf.definition, { desc = "code definition" })
 sm("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "code action" })

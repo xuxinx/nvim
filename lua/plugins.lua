@@ -14,6 +14,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     {
         "tpope/vim-vinegar",
+        keys = "-",
     },
     {
         "neovim/nvim-lspconfig",
@@ -45,7 +46,9 @@ require("lazy").setup({
         "L3MON4D3/LuaSnip",
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
+            "honza/vim-snippets",
         },
+        build = "make install_jsregexp",
         config = function()
             require("x.luasnip").setup()
         end,
@@ -58,12 +61,12 @@ require("lazy").setup({
             "hrsh7th/cmp-path",
             "L3MON4D3/LuaSnip",
             "saadparwaiz1/cmp_luasnip",
-            "honza/vim-snippets",
             "nvim-treesitter/nvim-treesitter",
         },
         config = function()
             require("x.cmp").setup()
         end,
+        event = "InsertEnter",
     },
     {
         "nvim-telescope/telescope.nvim",
@@ -84,18 +87,21 @@ require("lazy").setup({
         config = function()
             require("hop").setup()
         end,
+        lazy = true,
     },
     {
         "numToStr/Comment.nvim",
         config = function()
             require("Comment").setup()
         end,
+        event = "VeryLazy",
     },
     {
         "windwp/nvim-autopairs",
         config = function()
             require("nvim-autopairs").setup()
         end,
+        event = "InsertEnter",
     },
     {
         "lewis6991/gitsigns.nvim",
@@ -108,6 +114,7 @@ require("lazy").setup({
     },
     {
         "majutsushi/tagbar",
+        cmd = "TagbarToggle",
     },
     {
         "NvChad/nvim-colorizer.lua",
@@ -126,6 +133,7 @@ require("lazy").setup({
         config = function()
             require("x.copilot").setup()
         end,
+        cmd = "Copilot",
     },
     {
         "dinhhuy258/vim-local-history",
@@ -139,9 +147,11 @@ require("lazy").setup({
         build = function()
             vim.fn["mkdp#util#install"]()
         end,
+        ft = "markdown",
     },
     {
         "prettier/vim-prettier",
+        cmd = "Prettier",
     },
     {
         "lukas-reineke/indent-blankline.nvim",
