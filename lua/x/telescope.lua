@@ -1,4 +1,4 @@
-local utils = require("x.utils")
+local xutils = require("x.utils")
 local telescope = require("telescope")
 local previewers = require("telescope.previewers")
 local telescopebi = require("telescope.builtin")
@@ -8,13 +8,13 @@ local M = {}
 local get_file_ignore_patterns = function()
     local patterns = {}
 
-    local ignore_dirs = utils.merge_arrays({
+    local ignore_dirs = xutils.merge_arrays({
     }, PCFG.telescope.ignore_dirs)
-    local ignore_file_extensions = utils.merge_arrays({
+    local ignore_file_extensions = xutils.merge_arrays({
     }, PCFG.telescope.ignore_file_extensions)
-    local ignore_files = utils.merge_arrays({
+    local ignore_files = xutils.merge_arrays({
     }, PCFG.telescope.ignore_files)
-    local ignore_free_patterns = utils.merge_arrays({
+    local ignore_free_patterns = xutils.merge_arrays({
     }, PCFG.telescope.ignore_free_patterns)
 
     for _, v in pairs(ignore_dirs) do

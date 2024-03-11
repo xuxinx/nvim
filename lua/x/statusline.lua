@@ -1,10 +1,10 @@
-local utils = require("x.utils")
+local xutils = require("x.utils")
 
 local M = {}
 M.helpers = {}
 
 M.helpers.curr_file_path = function()
-    local path = utils.get_curr_file_relative_path()
+    local path = xutils.get_curr_file_relative_path()
     if (path == "") then
         return "[No Name]"
     end
@@ -68,7 +68,7 @@ M.statusline = function()
     local s = ""
 
     -- base cwd
-    s = s .. utils.get_base_cwd_name() .. ":"
+    s = s .. xutils.get_base_cwd_name() .. ":"
 
     -- filepath
     s = s .. [[ %{v:lua.require("x.statusline").helpers.curr_file_path()}]]
