@@ -29,7 +29,7 @@ local function update_lsp_diagnostic_info()
         elseif v.severity == vim.diagnostic.severity.HINT then
             hint_count = hint_count + 1
         else
-            print("unknown diagnostic severity: " .. v.severity)
+            vim.notify("unknown diagnostic severity: " .. v.severity, vim.log.levels.WARN)
         end
     end
 

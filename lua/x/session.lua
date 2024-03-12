@@ -87,7 +87,7 @@ end
 
 M.load_session = function(sname)
     if vim.fn.filereadable(store_dir .. fname(sname)) ~= 1 then
-        print("session not found")
+        vim.notify("session not found", vim.log.levels.ERROR)
         return
     end
     vim.cmd("source " .. vim.fn.fnameescape(store_dir .. fname(sname)))
@@ -96,7 +96,7 @@ end
 
 M.delete_session = function(sname)
     if vim.fn.filereadable(store_dir .. fname(sname)) ~= 1 then
-        print("session not found")
+        vim.notify("session not found", vim.log.levels.ERROR)
         return
     end
     os.remove(store_dir .. fname(sname))
@@ -106,7 +106,7 @@ end
 M.select_session_to_load = function()
     local sessions = cwd_sessions()
     if next(sessions) == nil then
-        print("no sessions")
+        vim.notify("no sessions")
         return
     end
     vim.ui.select(sessions, {
@@ -122,7 +122,7 @@ end
 M.select_session_to_delete = function()
     local sessions = cwd_sessions()
     if next(sessions) == nil then
-        print("no sessions")
+        vim.notify("no sessions")
         return
     end
     vim.ui.select(sessions, {

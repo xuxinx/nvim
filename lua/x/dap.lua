@@ -29,7 +29,7 @@ local setup_go = function()
             stderr:close()
             handle:close()
             if code ~= 0 then
-                print("dlv exited with code", code)
+                vim.notify("dlv exited with code " .. code, vim.log.levels.WARN)
             end
         end)
         assert(handle, "Error running dlv: " .. tostring(pid_or_err))
