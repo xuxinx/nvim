@@ -103,6 +103,12 @@ end
 M.debug_test = function()
     local ft = vim.bo.filetype
     if ft == "go" then
+        local fname = xts.get_func_name({
+            function_declaration = true,
+        })
+        if fname == nil then
+            return
+        end
         dap.run({
             type = "go",
             name = "Debug test",
@@ -110,9 +116,6 @@ M.debug_test = function()
             mode = "test",
             program = "${fileDirname}",
             args = function()
-                local fname = xts.get_func_name({
-                    function_declaration = true,
-                })
                 return { "-test.run", fname }
             end,
         })

@@ -46,10 +46,10 @@ M.setup = function()
 end
 
 local default_func_node_types = {
-        function_declaration = true,
-        method_declaration = true,
-        func_literal = true,
-    }
+    function_declaration = true,
+    method_declaration = true,
+    func_literal = true,
+}
 
 local get_func_node = function(fnode_types)
     fnode_types = fnode_types or default_func_node_types
@@ -70,29 +70,20 @@ M.get_func_return_types = function(fnode_types)
         return {}
     end
 
-    local query = vim.treesitter.query.parse(
-        "go",
-        [[
-      [
-        (method_declaration result: (_) @type)
-        (function_declaration result: (_) @type)
-        (func_literal result: (_) @type)
-      ]
-    ]]
-    )
-
-    for _, cnode in query:iter_captures(fnode, 0) do
-        if cnode:type() == "parameter_list" then
+    local res_nodes = fnode:field("result")
+    if #res_nodes == 1 then
+        local res_node = res_nodes[1]
+        if res_node:type() == "parameter_list" then
             local result = {}
-            local count = cnode:named_child_count()
+            local count = res_node:named_child_count()
             for idx = 0, count - 1 do
-                local matching_node = cnode:named_child(idx)
+                local matching_node = res_node:named_child(idx)
                 local type_node = matching_node:field("type")[1]
                 table.insert(result, vim.treesitter.get_node_text(type_node, 0))
             end
             return result
-        elseif cnode:type() == "type_identifier" then
-            return { vim.treesitter.get_node_text(cnode, 0) }
+        elseif res_node:type() == "type_identifier" then
+            return { vim.treesitter.get_node_text(res_node, 0) }
         end
     end
 
@@ -104,7 +95,7 @@ M.get_func_name = function(fnode_types)
     local fnode = get_func_node(fnode_types)
     if not fnode then
         vim.notify("not inside of a function", vim.log.levels.WARN)
-        return {}
+        return nil
     end
     return vim.treesitter.get_node_text(fnode:field("name")[1], 0)
 end
