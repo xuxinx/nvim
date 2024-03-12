@@ -13,8 +13,10 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     {
-        "tpope/vim-vinegar",
-        keys = "-",
+        "stevearc/oil.nvim",
+        config = function()
+            require("x.oil").setup()
+        end
     },
     {
         "neovim/nvim-lspconfig",

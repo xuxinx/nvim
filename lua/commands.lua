@@ -1,3 +1,6 @@
+local oil = require("oil")
+local oil_actions = require("oil.actions")
+
 local cc = vim.api.nvim_create_user_command
 local bcc = function(name, command, opts)
     vim.api.nvim_buf_create_user_command(0, name, command, opts)
@@ -26,5 +29,16 @@ cac("FileType", {
     pattern = "go",
     callback = function()
         bcc("GoGenerate", require("x.go").execute_go_generate, { desc = "execute go:generate" })
+    end
+})
+cac("FileType", {
+    pattern = "oil",
+    callback = function()
+        bcc("OilRefresh", oil_actions.refresh.callback, { desc = "refresh list" })
+        bcc("OilTrash", oil_actions.toggle_trash.callback, { desc = "toggle trash" })
+        bcc("OilHidden", oil_actions.toggle_hidden.callback, { desc = "toggle hidden" })
+        bcc("OilCmd", oil_actions.open_cmdline.callback, { desc = "open cmdline" })
+        bcc("OilCmdDir", oil_actions.open_cmdline_dir.callback, { desc = "open cmdline" })
+        bcc("OilDiscardChanges", oil.discard_all_changes, { desc = "discard all changes" })
     end
 })

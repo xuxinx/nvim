@@ -1,4 +1,5 @@
 local xls = require("x.luasnip")
+local oil_actions = require("oil.actions")
 
 local sm = vim.keymap.set
 local group = vim.api.nvim_create_augroup("x_augroup_mappings", { clear = true })
@@ -8,6 +9,18 @@ local cac = function(event, opts)
 end
 
 
+-- # file explorer
+sm("n", "-", "<cmd>Oil<cr>", { desc = "open parent directory" })
+cac("FileType", {
+    pattern = "oil",
+    callback = function()
+        sm("n", "-", oil_actions.parent.callback, { buffer = true, desc = "up to parent dir" })
+        sm("n", "<cr>", oil_actions.select.callback, { buffer = true, desc = "select the entry" })
+        sm("n", "<leader>p", oil_actions.preview.callback, { buffer = true, desc = "toggle preview" })
+        sm("n", "<C-6>", oil_actions.close.callback, { buffer = true, desc = "close oil" })
+        sm("n", "gx", oil_actions.open_external.callback, { buffer = true, desc = "open the entry in an external program" })
+    end
+})
 -- # quickfix list
 sm("n", "<leader>co", "<cmd>copen<cr>", { desc = "open quickfix list" })
 sm("n", "<leader>cc", "<cmd>cclose<cr>", { desc = "close quickfix list" })
