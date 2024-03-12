@@ -18,7 +18,7 @@ cac("FileType", {
         sm("n", "<cr>", oil_actions.select.callback, { buffer = true, desc = "select the entry" })
         sm("n", "<leader>p", oil_actions.preview.callback, { buffer = true, desc = "toggle preview" })
         sm("n", "<C-6>", oil_actions.close.callback, { buffer = true, desc = "close oil" })
-        sm("n", "gx", oil_actions.open_external.callback, { buffer = true, desc = "open the entry in an external program" })
+        sm("n", "gx", oil_actions.open_external.callback, { buffer = true, desc = "open the entry in external program" })
     end
 })
 -- # quickfix list

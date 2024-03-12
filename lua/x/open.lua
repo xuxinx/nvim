@@ -1,3 +1,5 @@
+local xutil = require("x.utils")
+
 local M = {}
 
 M.open_git = function()
@@ -21,6 +23,18 @@ M.open_git = function()
     local url = repo_url .. "/blob/" .. branch .. "/" .. path .. vim.fn.expand("%:p:~:.") .. "#L" .. vim.fn.line(".")
 
     os.execute("open -a 'Google Chrome' " .. url)
+end
+
+M.open_finder = function()
+    local path
+    local buf_name = vim.api.nvim_buf_get_name(0)
+    if buf_name:find("oil://", 1, true) then
+        path = xutil.trim_prefix(buf_name, "oil://")
+    else
+        path = vim.fs.dirname(buf_name)
+    end
+
+    os.execute("open " .. path)
 end
 
 return M
