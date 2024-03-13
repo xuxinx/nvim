@@ -109,6 +109,10 @@ M.select_session_to_load = function()
         vim.notify("no sessions")
         return
     end
+    if #sessions == 1 then
+        M.load_session(sessions[1])
+        return
+    end
     vim.ui.select(sessions, {
         prompt = "select a session",
     }, function(selected, _)
