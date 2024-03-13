@@ -6,7 +6,19 @@ local xts = require("x.treesitter")
 
 local M = {}
 
-local scopes = widgets.sidebar(widgets.scopes, { width = 50 })
+local repl_win_opts = {
+    height = 15,
+}
+
+local sidebar_win_opts = {
+    width = 50,
+}
+
+local scopes = widgets.sidebar(widgets.scopes, sidebar_win_opts)
+
+M.toggle_repl = function ()
+    repl.toggle(repl_win_opts)
+end
 
 M.toggle_scopes = function()
     scopes.toggle()
@@ -83,7 +95,7 @@ end
 
 M.setup = function()
     dap.listeners.after.event_initialized["ui_config"] = function()
-        dap.repl.open({ height = 20 })
+        dap.repl.open(repl_win_opts)
         scopes.open()
     end
 

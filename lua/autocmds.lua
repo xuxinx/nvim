@@ -56,6 +56,7 @@ cac({ "BufWinEnter" }, {
     desc = "debug scopes",
     callback = function()
         vim.wo.statusline = "Scopes"
+        vim.wo.wrap = false
     end
 })
 cac("FileType", {
