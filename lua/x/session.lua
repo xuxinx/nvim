@@ -39,6 +39,7 @@ local function save_breakpoints(sname)
     local bps = {}
     local breakpoints_by_buf = breakpoints.get()
     if next(breakpoints_by_buf) == nil then
+        os.remove(breakpoints_dir .. fname(sname))
         return
     end
     for buf, buf_bps in pairs(breakpoints_by_buf) do
