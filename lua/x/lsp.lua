@@ -30,9 +30,14 @@ local server_options = {
     clangd = function(opts)
         opts.filetypes = { "c", "cpp", "objc", "objcpp", "cuda" }
     end,
-    tsserver = function(opts)
-    end,
-    vuels = function(opts)
+    tsserver = function() end,
+    vuels = function() end,
+    bashls = function(opts)
+        opts.settings = {
+            bashIde = {
+                shellcheckArguments = "-e SC2086",
+            }
+        }
     end,
 }
 
