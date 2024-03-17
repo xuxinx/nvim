@@ -1,4 +1,4 @@
-local xutil = require("x.utils")
+local util = require("x.utils")
 
 local M = {}
 
@@ -29,7 +29,7 @@ M.open_finder = function()
     local path
     local buf_name = vim.api.nvim_buf_get_name(0)
     if buf_name:find("oil://", 1, true) then
-        path = xutil.trim_prefix(buf_name, "oil://")
+        path = util.trim_prefix(buf_name, "oil://")
     else
         path = vim.fs.dirname(buf_name)
     end

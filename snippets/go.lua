@@ -8,7 +8,7 @@ local f = ls.function_node
 local sn = ls.snippet_node
 local fmt = require("luasnip.extras.fmt").fmta
 local rep = require("luasnip.extras").rep
-local xgo = require("x.go")
+local go = require("x.go")
 local xts = require("x.treesitter")
 
 return {
@@ -119,8 +119,8 @@ return {
                             err = t(err_name),
                         }))
                     })
-                elseif xgo.zero_values[ret] ~= nil then
-                    val = t(xgo.zero_values[ret])
+                elseif go.zero_values[ret] ~= nil then
+                    val = t(go.zero_values[ret])
                 end
                 table.insert(result, val)
                 if idx ~= #rets then

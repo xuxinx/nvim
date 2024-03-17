@@ -1,9 +1,7 @@
-local g = require("gitsigns")
-
 local M = {}
 
 M.setup = function()
-    g.setup({
+    require("gitsigns").setup({
         signs = {
             add          = { text = '+' },
             change       = { text = '│' },

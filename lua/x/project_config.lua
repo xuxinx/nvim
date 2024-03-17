@@ -1,4 +1,4 @@
-local xutils = require("x.utils")
+local utils = require("x.utils")
 
 local M = {}
 
@@ -14,7 +14,7 @@ local PCFG_default_str = [[
 ]]
 local PCFG_default = load("return " .. PCFG_default_str)()
 
-local store_dir = xutils.join_path(vim.fn.stdpath("data"), "project_configs") .. "/"
+local store_dir = utils.join_path(vim.fn.stdpath("data"), "project_configs") .. "/"
 vim.fn.mkdir(store_dir, "p")
 
 local function fname()

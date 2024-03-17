@@ -1,10 +1,10 @@
-local xutils = require("x.utils")
+local utils = require("x.utils")
 local breakpoints = require("dap.breakpoints")
 
 local M = {}
 
-local store_dir = xutils.join_path(vim.fn.stdpath("data"), "sessions") .. "/"
-local breakpoints_dir = xutils.join_path(store_dir, "breakpoints") .. "/"
+local store_dir = utils.join_path(vim.fn.stdpath("data"), "sessions") .. "/"
+local breakpoints_dir = utils.join_path(store_dir, "breakpoints") .. "/"
 local auto_session_name = "auto_session"
 
 vim.fn.mkdir(store_dir, "p")
@@ -22,7 +22,7 @@ local function cwd_sessions()
     local all_sessions = vim.split(vim.fn.glob(store_dir .. "*"), "\n")
     local prefix = store_dir .. string.gsub(vim.fn.getcwd() .. "/", "/", "%%")
     for _, s in ipairs(all_sessions) do
-        local name = xutils.trim_prefix(s, prefix)
+        local name = utils.trim_prefix(s, prefix)
         if (not string.find(name, "%%")) and (not string.find(name, "/")) then
             if (name == auto_session_name) then
                 table.insert(sessions, 1, name)

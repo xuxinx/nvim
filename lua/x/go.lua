@@ -1,4 +1,4 @@
-local xutils = require("x.utils")
+local utils = require("x.utils")
 local ls = require("luasnip")
 local xls = require("x.luasnip")
 
@@ -10,7 +10,7 @@ local zero_values = {
     string = [[""]],
 }
 
-xutils.set_same_value_entries(zero_values, "int",
+utils.set_same_value_entries(zero_values, "int",
     "int8", "int16", "int32", "int64",
     "uint", "uint8", "uint16", "uint32", "uint64",
     "float32", "float64")
@@ -46,7 +46,7 @@ M.new_file_tpl = function()
     if is_main or vim.fn.filereadable(vim.fs.dirname(buf_name) .. "/main.go") == 1 then
         package_name = "main"
     else
-        package_name = xutils.get_curr_dir_name()
+        package_name = utils.get_curr_dir_name()
     end
     vim.fn.append(0, "package " .. package_name)
     vim.fn.append(1, "")
