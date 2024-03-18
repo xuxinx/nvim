@@ -67,6 +67,8 @@ sm("n", "<F6>", require("dap").run_to_cursor, { desc = "debug run to cursor" })
 sm("n", "<F7>", require("dap").step_into, { desc = "debug step into" })
 sm("n", "<F8>", require("dap").step_over, { desc = "debug step over" })
 sm("n", "<leader><F8>", require("dap").step_out, { desc = "debug step out" })
+-- # table-mode
+sm("n", "<leader>tm", require("x.table_mode").toggle_table_mode, { desc = "toggle table mode" })
 -- # markdown
 cac("FileType", {
     pattern = "markdown",

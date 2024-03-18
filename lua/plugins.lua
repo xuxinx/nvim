@@ -161,4 +161,10 @@ require("lazy").setup({
             require("x.indent_guide").setup()
         end,
     },
+    {
+        "dhruvasagar/vim-table-mode",
+        init = function()
+            require("x.table_mode").init()
+        end,
+    }
 })
