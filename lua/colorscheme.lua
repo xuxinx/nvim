@@ -103,7 +103,7 @@ set_hls({
     CursorIM     = { link = "Cursor" },              -- Like Cursor, but used when in IME mode. CursorIM
     CursorColumn = { link = "CursorLine" },          -- Screen-column at the cursor, when 'cursorcolumn' is set.
     CursorLine   = { bg = ash_l1 },                  -- Screen-line at the cursor, when 'cursorline' is set. Low-priority if foreground (ctermfg OR guifg) is not set.
-    Directory    = { fg = blue, bold = true },       -- Directory names (and other special names in listings).
+    Directory    = { fg = blue_d1, bold = true },       -- Directory names (and other special names in listings).
     DiffAdd      = { fg = green, bg = grey_green },  -- Diff mode: Added line. diff.txt
     DiffChange   = { fg = blue_l1, bg = grey_blue }, -- Diff mode: Changed line. diff.txt
     DiffDelete   = { fg = red_d1, bg = grey_red },   -- Diff mode: Deleted line. diff.txt
