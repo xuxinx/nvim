@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function()
+M.init = function()
     vim.g.local_history_new_change_delay = 60
     vim.g.local_history_exclude = {
         "oil://**",

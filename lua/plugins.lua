@@ -132,16 +132,16 @@ require("lazy").setup({
     },
     {
         "github/copilot.vim",
-        config = function()
-            require("x.copilot").setup()
+        init = function()
+            require("x.copilot").init()
         end,
         cmd = "Copilot",
     },
     {
         "dinhhuy258/vim-local-history",
         build = ":UpdateRemotePlugins",
-        config = function()
-            require("x.local_history").setup()
+        init = function()
+            require("x.local_history").init()
         end,
     },
     {
