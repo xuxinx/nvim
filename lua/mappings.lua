@@ -69,6 +69,8 @@ sm("n", "<F8>", require("dap").step_over, { desc = "debug step over" })
 sm("n", "<leader><F8>", require("dap").step_out, { desc = "debug step out" })
 -- # table-mode
 sm("n", "<leader>tm", require("x.table_mode").toggle_table_mode, { desc = "toggle table mode" })
+-- # terminal
+sm("n", "<leader>lg", ":tabe<CR>:setlocal nonumber<CR>:setlocal norelativenumber<CR>:term lazygit<CR>i", { desc = "open lazygit" })
 -- # markdown
 cac("FileType", {
     pattern = "markdown",
