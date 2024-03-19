@@ -41,6 +41,7 @@ local brown_d1 = "#953800"
 local brown_d2 = "#633c01"
 
 local unknown = { bg = "#ef62eb", fg = green, bold = true, underline = true, italic = true }
+local comment = { fg = grey, italic = true }
 
 local function set_hls(groups)
     for n, v in pairs(groups) do
@@ -50,7 +51,7 @@ end
 
 -- https://neovim.io/doc/user/syntax.html#group-name
 set_hls({
-    Comment        = { fg = grey, italic = true }, -- any comment
+    Comment        = comment, -- any comment
     Constant       = { fg = blue_d1 },             -- any constant
     String         = { fg = blue_d5 },             -- a string constant: "this is a string"
     Character      = { link = "String" },          -- a character constant: 'c', '\n'
@@ -200,13 +201,14 @@ set_hls({
 
     -- Literals
     --
-    ["@string"]                         = { link = "String" }, -- string literals
+    ["@string"]                         = { link = "String" },     -- string literals
+    ["@string.special.url"]             = { link = "Underlined" }, -- URIs (e.g. hyperlinks)
+    ["@string.special.url.comment"]     = vim.tbl_deep_extend("force", comment, { underline = true }),
     -- ["@string.documentation"]           = unknown,                       -- string documenting code (e.g. Python docstrings)
     -- ["@string.regexp"]                  = { fg = blue_d5 },              -- regular expressions
     -- ["@string.escape"]                  = { fg = blue_d5, bold = true }, -- escape sequences
     -- ["@string.special"]                 = unknown,                                    -- other special strings (e.g. dates)
     -- ["@string.special.symbol"]          = unknown,                                    -- symbols or atoms
-    -- ["@string.special.url"]             = { link = "Underlined" },                    -- URIs (e.g. hyperlinks)
     -- ["@string.special.path"]            = unknown,                                    -- filenames
     ["@character"]                      = { link = "Character" }, -- character literals
     -- ["@character.special"]              = { link = "SpecialChar" },                   -- special characters (e.g. wildcards)
