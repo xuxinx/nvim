@@ -118,7 +118,7 @@ M.select_session_to_load = function()
         prompt = "select a session",
     }, function(selected, _)
         if not selected then
-            return
+            selected = sessions[1]
         end
         M.load_session(selected)
     end)
