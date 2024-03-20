@@ -1,3 +1,4 @@
+local xoil = require("x.oil")
 local oil = require("oil")
 local oil_actions = require("oil.actions")
 
@@ -35,7 +36,7 @@ cac("FileType", {
     pattern = "oil",
     callback = function()
         bcc("OilRefresh", oil_actions.refresh.callback, { desc = "refresh list" })
-        bcc("OilTrash", oil_actions.toggle_trash.callback, { desc = "toggle trash" })
+        bcc("OilTrash", xoil.open_trash, { desc = "open trash" })
         bcc("OilHidden", oil_actions.toggle_hidden.callback, { desc = "toggle hidden" })
         bcc("OilCmd", oil_actions.open_cmdline.callback, { desc = "open cmdline" })
         bcc("OilCmdDir", oil_actions.open_cmdline_dir.callback, { desc = "open cmdline" })
