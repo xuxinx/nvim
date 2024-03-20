@@ -39,8 +39,11 @@ M.goimports = function(wait_ms)
 end
 
 M.new_file_tpl = function()
-    local package_name
     local buf_name = vim.api.nvim_buf_get_name(0)
+    if vim.fn.getfsize(buf_name) > 0 then
+        return
+    end
+    local package_name
     local fname = vim.fs.basename(buf_name)
     local is_main = fname == "main.go"
     if is_main or vim.fn.filereadable(vim.fs.dirname(buf_name) .. "/main.go") == 1 then

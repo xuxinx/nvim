@@ -85,8 +85,8 @@ cac("BufWritePre", {
     end
 })
 
--- # go
-cac("BufNewFile", {
+-- # go file template
+cac({ "BufNewFile", "BufReadPre" }, {
     pattern = "*.go",
     desc = "new go template",
     callback = require("x.go").new_file_tpl
