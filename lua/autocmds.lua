@@ -102,3 +102,12 @@ cac("VimLeave", {
         require("x.session").save_session()
     end,
 })
+
+-- # terminal
+cac("TermOpen", {
+    pattern = "*",
+    callback = function()
+        vim.opt_local.number = false
+        vim.opt_local.relativenumber = false
+    end
+})
