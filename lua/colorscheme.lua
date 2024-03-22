@@ -308,8 +308,11 @@ set_hls({
 -- gitsigns
 set_hls({
     GitSignsAdd = { fg = green_l1 },
+    GitSignsAddInline = { fg = green_l1 },
     GitSignsChange = { fg = brown },
+    GitSignsChangeInline = { fg = brown },
     GitSignsDelete = { fg = red_d1 },
+    GitSignsDeleteInline = { fg = red_d1 },
 })
 
 -- indent-blankline
