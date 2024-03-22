@@ -75,4 +75,13 @@ M.trim_prefix = function(str, prefix)
     return (str:sub(0, #prefix) == prefix) and str:sub(#prefix + 1) or str
 end
 
+M.string_to_line_array = function(str)
+    local a = {}
+    local lines = string.gmatch(str, "[^\r\n]+")
+    for line in lines do
+        table.insert(a, line)
+    end
+    return a
+end
+
 return M

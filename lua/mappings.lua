@@ -1,5 +1,6 @@
 local xls = require("x.luasnip")
 local oil_actions = require("oil.actions")
+local swap = require("x.swap")
 
 local maps = {
     -- # file explorer
@@ -69,7 +70,17 @@ local maps = {
         pattern = "markdown",
         { "n", "<leader>tdd", "mk$?- [<cr>2f<Space>rx`k:noh<cr>", { buffer = true, desc = "markdown done todo" } },
         { "n", "<leader>tdu", "mk$?- [<cr>fxr<Space>`k:noh<cr>", { buffer = true, desc = "markdown undone todo" } },
-    }
+    },
+    -- # text operations
+    { "n", "<leader>s1", function() swap.swap_list_items(1) end, { desc = "swap list item 1" } },
+    { "n", "<leader>s2", function() swap.swap_list_items(2) end, { desc = "swap list item 2" } },
+    { "n", "<leader>s3", function() swap.swap_list_items(3) end, { desc = "swap list item 3" } },
+    { "n", "<leader>s4", function() swap.swap_list_items(4) end, { desc = "swap list item 4" } },
+    { "n", "<leader>s5", function() swap.swap_list_items(5) end, { desc = "swap list item 5" } },
+    { "n", "<leader>s6", function() swap.swap_list_items(6) end, { desc = "swap list item 6" } },
+    { "n", "<leader>s7", function() swap.swap_list_items(7) end, { desc = "swap list item 7" } },
+    { "n", "<leader>s8", function() swap.swap_list_items(8) end, { desc = "swap list item 8" } },
+    { "n", "<leader>s9", function() swap.swap_list_items(9) end, { desc = "swap list item 9" } },
 }
 
 local group = vim.api.nvim_create_augroup("x_augroup_mappings", { clear = true })
