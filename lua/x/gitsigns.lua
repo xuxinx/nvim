@@ -14,4 +14,15 @@ M.setup = function()
     })
 end
 
+M.statusline_branch_name = function(max_length, prefix)
+    local v = vim.b.gitsigns_head
+    if v == nil then
+        return ""
+    end
+    if max_length ~= nil and #v > max_length then
+        v = v:sub(1, max_length - 3) .. "..."
+    end
+    return prefix .. v
+end
+
 return M
