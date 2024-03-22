@@ -131,6 +131,16 @@ return {
         end, { 1 }),
     })),
 
+    -- error panic
+    s("ep", fmt([[
+    if <err> != nil {
+        panic(<panic>)
+    }
+    ]], {
+        err = i(1, "err"),
+        panic = rep(1),
+    })),
+
     -- gracefully shutdown services
     s("gss", fmt([[
     ch := make(chan os.Signal, 1)
