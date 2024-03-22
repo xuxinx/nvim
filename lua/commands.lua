@@ -2,44 +2,51 @@ local xoil = require("x.oil")
 local oil = require("oil")
 local oil_actions = require("oil.actions")
 
-local cc = vim.api.nvim_create_user_command
-local bcc = function(name, command, opts)
-    vim.api.nvim_buf_create_user_command(0, name, command, opts)
-end
-local group = vim.api.nvim_create_augroup("x_augroup_usercommands", { clear = true })
-local cac = function(event, opts)
-    opts.group = group
-    vim.api.nvim_create_autocmd(event, opts)
-end
+local cs = {
+    { "Note", require("x.note").find_note, { desc = "find note" } },
+    { "NoteG", require("x.note").grep_note, { desc = "grep note" } },
+    { "Z", function(o) require("x.z").z_navi("lcd", o.args) end, { nargs = 1, desc = "z local jump" } },
+    { "Zg", function(o) require("x.z").z_navi("cd", o.args) end, { nargs = 1, desc = "z global jump" } },
+    { "OpenGit", require("x.open").open_git, { desc = "open git" } },
+    { "OpenFinder", require("x.open").open_finder, { desc = "open finder" } },
+    { "ClearBreakpoints", require("dap").clear_breakpoints, { desc = "clear breakpoints" } },
+    { "DebugScopes", require("x.dap").toggle_scopes, { desc = "toggle debug scopes" } },
+    { "DebugRepl", require("x.dap").toggle_repl, { desc = "toggle debug repl" } },
+    { "SaveSession", function(o) require("x.session").save_session(o.args) end, { nargs = "?", desc = "save session" } },
+    { "LoadSession", require("x.session").select_session_to_load, { desc = "select a session to load" } },
+    { "DelSession", require("x.session").select_session_to_delete, { desc = "select a session to delete" } },
+    { "ProjectConfig", require("x.project_config").edit, { desc = "edit project config" } },
+    { "Term", require("x.terminal").open_terminal_for_current_dir, { desc = "open terminal for current dir" } },
+    {
+        event = "FileType",
+        pattern = "go",
+        { "GoGenerate", require("x.go").execute_go_generate, { desc = "execute go:generate" } },
+    },
+    {
+        event = "FileType",
+        pattern = "oil",
+        { "OilRefresh", oil_actions.refresh.callback, { desc = "refresh list" } },
+        { "OilTrash", xoil.open_trash, { desc = "open trash" } },
+        { "OilHidden", oil_actions.toggle_hidden.callback, { desc = "toggle hidden" } },
+        { "OilCmd", oil_actions.open_cmdline.callback, { desc = "open cmdline" } },
+        { "OilCmdDir", oil_actions.open_cmdline_dir.callback, { desc = "open cmdline" } },
+        { "OilDiscardChanges", oil.discard_all_changes, { desc = "discard all changes" } },
+    }
+}
 
-cc("Note", require("x.note").find_note, { desc = "find note" })
-cc("NoteG", require("x.note").grep_note, { desc = "grep note" })
-cc("Z", function(o) require("x.z").z_navi("lcd", o.args) end, { nargs = 1, desc = "z local jump" })
-cc("Zg", function(o) require("x.z").z_navi("cd", o.args) end, { nargs = 1, desc = "z global jump" })
-cc("OpenGit", require("x.open").open_git, { desc = "open git" })
-cc("OpenFinder", require("x.open").open_finder, { desc = "open finder" })
-cc("ClearBreakpoints", require("dap").clear_breakpoints, { desc = "clear breakpoints" })
-cc("DebugScopes", require("x.dap").toggle_scopes, { desc = "toggle debug scopes" })
-cc("DebugRepl", require("x.dap").toggle_repl, { desc = "toggle debug repl" })
-cc("SaveSession", function(o) require("x.session").save_session(o.args) end, { nargs = "?", desc = "save session" })
-cc("LoadSession", require("x.session").select_session_to_load, { desc = "select a session to load" })
-cc("DelSession", require("x.session").select_session_to_delete, { desc = "select a session to delete" })
-cc("ProjectConfig", require("x.project_config").edit, { desc = "edit project config" })
-cc("Term", require("x.terminal").open_terminal_for_current_dir, { desc = "open terminal for current dir" })
-cac("FileType", {
-    pattern = "go",
-    callback = function()
-        bcc("GoGenerate", require("x.go").execute_go_generate, { desc = "execute go:generate" })
+local group = vim.api.nvim_create_augroup("x_augroup_usercommands", { clear = true })
+for _, c in ipairs(cs) do
+    if c.event ~= nil then
+        vim.api.nvim_create_autocmd(c.event, {
+            group = group,
+            pattern = c.pattern,
+            callback = function()
+                for _, ec in ipairs(c) do
+                    vim.api.nvim_buf_create_user_command(0, ec[1], ec[2], ec[3])
+                end
+            end
+        })
+    else
+        vim.api.nvim_create_user_command(c[1], c[2], c[3])
     end
-})
-cac("FileType", {
-    pattern = "oil",
-    callback = function()
-        bcc("OilRefresh", oil_actions.refresh.callback, { desc = "refresh list" })
-        bcc("OilTrash", xoil.open_trash, { desc = "open trash" })
-        bcc("OilHidden", oil_actions.toggle_hidden.callback, { desc = "toggle hidden" })
-        bcc("OilCmd", oil_actions.open_cmdline.callback, { desc = "open cmdline" })
-        bcc("OilCmdDir", oil_actions.open_cmdline_dir.callback, { desc = "open cmdline" })
-        bcc("OilDiscardChanges", oil.discard_all_changes, { desc = "discard all changes" })
-    end
-})
+end

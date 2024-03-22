@@ -12,6 +12,13 @@ local server_options = {
             Lua = {
                 completion = {
                     callSnippet = "Replace"
+                },
+                format = {
+                    defaultConfig = {
+                        align_continuous_assign_statement = "false",
+                        align_continuous_rect_table_field = "false",
+                        align_array_table = "false",
+                    },
                 }
             },
         }

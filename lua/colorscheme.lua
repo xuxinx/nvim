@@ -51,105 +51,105 @@ end
 
 -- https://neovim.io/doc/user/syntax.html#group-name
 set_hls({
-    Comment        = comment, -- any comment
-    Constant       = { fg = blue_d1 },             -- any constant
-    String         = { fg = blue_d5 },             -- a string constant: "this is a string"
-    Character      = { link = "String" },          -- a character constant: 'c', '\n'
-    Number         = { fg = blue_d1 },             -- a number constant: 234, 0xff
-    Boolean        = { link = "Number" },          -- a boolean constant: TRUE, false
-    Float          = { link = "Number" },          -- a floating point constant: 2.3e10
-    Identifier     = { fg = black },               -- any variable name
-    Function       = { fg = purple },              -- function name (also: methods for classes)
-    Statement      = { fg = red_d2 },              -- any statement
-    Conditional    = { fg = red_d2 },              -- if, then, else, endif, switch, etc.
-    Repeat         = { link = "Conditional" },     -- for, do, while, etc.
-    Label          = { link = "Conditional" },     -- case, default, etc.
-    Operator       = { fg = blue_d1 },             -- "sizeof", "+", "*", etc.
-    Keyword        = { fg = red_d2 },              -- any other keyword
-    Exception      = { link = "keyword" },         -- try, catch, throw
-    PreProc        = { fg = red_d2 },              -- generic Preprocessor
-    Include        = { link = "PreProc" },         -- preprocessor #include
-    Define         = { link = "PreProc" },         -- preprocessor #define
-    Macro          = { link = "PreProc" },         -- same as Define
-    PreCondit      = { link = "PreProc" },         -- preprocessor #if, #else, #endif, etc.
-    Type           = { fg = black },               -- int, long, char, etc.
-    StorageClass   = { link = "Type" },            -- static, register, volatile, etc.
-    Structure      = { link = "Type" },            -- struct, union, enum, etc.
-    Typedef        = { fg = black },               -- a typedef
-    Special        = { fg = blue_d1 },             -- any special symbol
-    SpecialChar    = { link = "Special" },         -- special character in a constant
-    Tag            = { link = "Special" },         -- you can use CTRL-] on this
-    Delimiter      = { link = "Special" },         -- character that needs attention
-    SpecialComment = { link = "Special" },         -- special things inside a comment
-    Debug          = { link = "Special" },         -- debugging statements
-    Underlined     = { underline = true },         -- text that stands out, HTML links
+    Comment = comment,                     -- any comment
+    Constant = { fg = blue_d1 },           -- any constant
+    String = { fg = blue_d5 },             -- a string constant: "this is a string"
+    Character = { link = "String" },       -- a character constant: 'c', '\n'
+    Number = { fg = blue_d1 },             -- a number constant: 234, 0xff
+    Boolean = { link = "Number" },         -- a boolean constant: TRUE, false
+    Float = { link = "Number" },           -- a floating point constant: 2.3e10
+    Identifier = { fg = black },           -- any variable name
+    Function = { fg = purple },            -- function name (also: methods for classes)
+    Statement = { fg = red_d2 },           -- any statement
+    Conditional = { fg = red_d2 },         -- if, then, else, endif, switch, etc.
+    Repeat = { link = "Conditional" },     -- for, do, while, etc.
+    Label = { link = "Conditional" },      -- case, default, etc.
+    Operator = { fg = blue_d1 },           -- "sizeof", "+", "*", etc.
+    Keyword = { fg = red_d2 },             -- any other keyword
+    Exception = { link = "keyword" },      -- try, catch, throw
+    PreProc = { fg = red_d2 },             -- generic Preprocessor
+    Include = { link = "PreProc" },        -- preprocessor #include
+    Define = { link = "PreProc" },         -- preprocessor #define
+    Macro = { link = "PreProc" },          -- same as Define
+    PreCondit = { link = "PreProc" },      -- preprocessor #if, #else, #endif, etc.
+    Type = { fg = black },                 -- int, long, char, etc.
+    StorageClass = { link = "Type" },      -- static, register, volatile, etc.
+    Structure = { link = "Type" },         -- struct, union, enum, etc.
+    Typedef = { fg = black },              -- a typedef
+    Special = { fg = blue_d1 },            -- any special symbol
+    SpecialChar = { link = "Special" },    -- special character in a constant
+    Tag = { link = "Special" },            -- you can use CTRL-] on this
+    Delimiter = { link = "Special" },      -- character that needs attention
+    SpecialComment = { link = "Special" }, -- special things inside a comment
+    Debug = { link = "Special" },          -- debugging statements
+    Underlined = { underline = true },     -- text that stands out, HTML links
     -- Ignore         = unknown,                      -- left blank, hidden  hl-Ignore
-    Error          = { fg = red_d1 },              -- any erroneous construct
-    Todo           = { fg = white, bg = blue },    -- anything that needs extra attention; mostly the keywords TODO FIXME and XXX
-    Added          = { link = "DiffAdd" },         -- added line in a diff
-    Changed        = { link = "DiffChange" },      -- changed line in a diff
-    Removed        = { link = "DiffDelete" },      -- removed line in a diff
+    Error = { fg = red_d1 },               -- any erroneous construct
+    Todo = { fg = white, bg = blue },      -- anything that needs extra attention; mostly the keywords TODO FIXME and XXX
+    Added = { link = "DiffAdd" },          -- added line in a diff
+    Changed = { link = "DiffChange" },     -- changed line in a diff
+    Removed = { link = "DiffDelete" },     -- removed line in a diff
 
     -- custom
-    Field          = { fg = blue_d1 }
+    Field = { fg = blue_d1 }
 })
 
 -- https://neovim.io/doc/user/syntax.html#highlight-groups
 set_hls({
     -- ColorColumn    = { bg = grey_l4 },                 -- Used for the columns set with 'colorcolumn'.
-    Conceal      = { fg = grey },                    -- Placeholder characters substituted for concealed text (see 'conceallevel').
-    CurSearch    = { link = "IncSearch" },           -- Used for highlighting a search pattern under the cursor (see 'hlsearch').
-    Cursor       = { fg = white, bg = black },       -- Character under the cursor.
-    lCursor      = { link = "Cursor" },              -- Character under the cursor when language-mapping is used (see 'guicursor').
-    CursorIM     = { link = "Cursor" },              -- Like Cursor, but used when in IME mode. CursorIM
-    CursorColumn = { link = "CursorLine" },          -- Screen-column at the cursor, when 'cursorcolumn' is set.
-    CursorLine   = { bg = ash_l1 },                  -- Screen-line at the cursor, when 'cursorline' is set. Low-priority if foreground (ctermfg OR guifg) is not set.
-    Directory    = { fg = blue_d1, bold = true },       -- Directory names (and other special names in listings).
-    DiffAdd      = { fg = green, bg = grey_green },  -- Diff mode: Added line. diff.txt
-    DiffChange   = { fg = blue_l1, bg = grey_blue }, -- Diff mode: Changed line. diff.txt
-    DiffDelete   = { fg = red_d1, bg = grey_red },   -- Diff mode: Deleted line. diff.txt
-    DiffText     = { fg = black, bg = grey_l4 },     -- Diff mode: Changed text within a changed line. diff.txt
+    Conceal = { fg = grey },                       -- Placeholder characters substituted for concealed text (see 'conceallevel').
+    CurSearch = { link = "IncSearch" },            -- Used for highlighting a search pattern under the cursor (see 'hlsearch').
+    Cursor = { fg = white, bg = black },           -- Character under the cursor.
+    lCursor = { link = "Cursor" },                 -- Character under the cursor when language-mapping is used (see 'guicursor').
+    CursorIM = { link = "Cursor" },                -- Like Cursor, but used when in IME mode. CursorIM
+    CursorColumn = { link = "CursorLine" },        -- Screen-column at the cursor, when 'cursorcolumn' is set.
+    CursorLine = { bg = ash_l1 },                  -- Screen-line at the cursor, when 'cursorline' is set. Low-priority if foreground (ctermfg OR guifg) is not set.
+    Directory = { fg = blue_d1, bold = true },     -- Directory names (and other special names in listings).
+    DiffAdd = { fg = green, bg = grey_green },     -- Diff mode: Added line. diff.txt
+    DiffChange = { fg = blue_l1, bg = grey_blue }, -- Diff mode: Changed line. diff.txt
+    DiffDelete = { fg = red_d1, bg = grey_red },   -- Diff mode: Deleted line. diff.txt
+    DiffText = { fg = black, bg = grey_l4 },       -- Diff mode: Changed text within a changed line. diff.txt
     -- EndOfBuffer   = { fg = white },                   -- Filler lines (~) after the end of the buffer. By default, this is highlighted like hl-NonText.
-    TermCursor   = { link = "Cursor" },              -- Cursor in a focused terminal.
-    TermCursorNC = { link = "Cursor" },              -- Cursor in an unfocused terminal.
-    ErrorMsg     = { fg = red_d1 },                  -- Error messages on the command line.
-    WinSeparator = { fg = grey_l2 },                 -- Separators between window splits.
-    Folded       = { fg = grey_d1, bg = grey_l4 },   -- Line used for closed folds.
-    FoldColumn   = { fg = grey_d1 },                 -- 'foldcolumn'
-    SignColumn   = { fg = grey_d1 },                 -- Column where signs are displayed.
-    IncSearch    = { fg = grey_d1, bg = orange },    -- 'incsearch' highlighting; also used for the text replaced with ":s///c".
-    Substitute   = { link = "Search" },              -- :substitute replacement text highlighting.
-    LineNr       = { fg = grey },                    -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
+    TermCursor = { link = "Cursor" },              -- Cursor in a focused terminal.
+    TermCursorNC = { link = "Cursor" },            -- Cursor in an unfocused terminal.
+    ErrorMsg = { fg = red_d1 },                    -- Error messages on the command line.
+    WinSeparator = { fg = grey_l2 },               -- Separators between window splits.
+    Folded = { fg = grey_d1, bg = grey_l4 },       -- Line used for closed folds.
+    FoldColumn = { fg = grey_d1 },                 -- 'foldcolumn'
+    SignColumn = { fg = grey_d1 },                 -- Column where signs are displayed.
+    IncSearch = { fg = grey_d1, bg = orange },     -- 'incsearch' highlighting; also used for the text replaced with ":s///c".
+    Substitute = { link = "Search" },              -- :substitute replacement text highlighting.
+    LineNr = { fg = grey },                        -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
     -- LineNrAbove    = unknown,                                   -- Line number for when the 'relativenumber' option is set, above the cursor line.
     -- LineNrBelow    = unknown,                                   -- Line number for when the 'relativenumber' option is set, below the cursor line.
     CursorLineNr = { fg = black }, -- Like LineNr when 'cursorline' is set and 'cursorlineopt' contains "number" or is "both", for the cursor line.
     -- CursorLineFold = unknown,                                   -- Like FoldColumn when 'cursorline' is set for the cursor line.
     -- CursorLineSign = unknown,                                   -- Like SignColumn when 'cursorline' is set for the cursor line.
-    MatchParen   = { fg = black, bg = blue_l3, bold = true }, -- Character under the cursor or just before it, if it is a paired bracket, and its match. pi_paren.txt
+    MatchParen = { fg = black, bg = blue_l3, bold = true }, -- Character under the cursor or just before it, if it is a paired bracket, and its match. pi_paren.txt
     -- ModeMsg       = { fg = brown, bold = true },               -- 'showmode' message (e.g., "-- INSERT -- ").
     -- MsgArea       = { fg = brown },                            -- Area for messages and cmdline.
     -- MsgSeparator   = unknown,                                   -- Separator for scrolled messages msgsep.
     -- MoreMsg       = { fg = blue, bold = true },                -- more-prompt
-    NonText      = { fg = grey }, --[[  '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text
+    NonText = { fg = grey }, --[[  '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text
                                           (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also hl-EndOfBuffer.]]
-    Normal       = { bg = white, fg = black }, -- Normal text.
+    Normal = { bg = white, fg = black }, -- Normal text.
     -- NormalFloat   = { bg = grey_l5 },           -- Normal text in floating windows.
-    FloatBorder  = { fg = grey_l2 },           -- Border of floating windows.
-    FloatTitle   = { link = "Title" },         -- Title of floating windows.
+    FloatBorder = { fg = grey_l2 },      -- Border of floating windows.
+    FloatTitle = { link = "Title" },     -- Title of floating windows.
     -- FloatFooter   = unknown,                    -- Footer of floating windows.
     -- NormalNC      = { link = "Normal" },        -- Normal text in non-current windows.
-    Pmenu        = { bg = grey_l4 }, -- Popup menu: Normal item.
-    PmenuSel     = { bg = blue_l4 }, -- Popup menu: Selected item.
+    Pmenu = { bg = grey_l4 },    -- Popup menu: Normal item.
+    PmenuSel = { bg = blue_l4 }, -- Popup menu: Selected item.
     -- PmenuKind     = unknown,              -- Popup menu: Normal item "kind".
     -- PmenuKindSel  = unknown,              -- Popup menu: Selected item "kind".
     -- PmenuExtra    = unknown,              -- Popup menu: Normal item "extra text".
     -- PmenuExtraSel = unknown,              -- Popup menu: Selected item "extra text".
-    PmenuSbar    = { link = "Pmenu" }, -- Popup menu: Scrollbar.
-    PmenuThumb   = { bg = grey_blue }, -- Popup menu: Thumb of the scrollbar.
+    PmenuSbar = { link = "Pmenu" },  -- Popup menu: Scrollbar.
+    PmenuThumb = { bg = grey_blue }, -- Popup menu: Thumb of the scrollbar.
     -- Question      = { link = "MoreMsg" }, -- hit-enter prompt and yes/no questions.
     QuickFixLine = { link = "Visual" }, --[[ Current quickfix item in the quickfix window. Combined with
                                                    hl-CursorLine when the cursor is there.]]
-    Search       = { bg = yellow, fg = black }, --[[ Last search pattern highlighting (see 'hlsearch').
+    Search = { bg = yellow, fg = black }, --[[ Last search pattern highlighting (see 'hlsearch').
 		                                               Also used for similar items that need to stand out.]]
     -- SpecialKey    = { fg = blue_d5 }, --[[	Unprintable characters: Text displayed differently from what
     --                                   it really is. But not 'listchars' whitespace. hl-Whitespace]]
@@ -161,80 +161,80 @@ set_hls({
     --                                                  used in another region. spell Combined with the highlighting used otherwise.]]
     -- SpellRare     = { sp = blue, undercurl = true }, --[[ Word that is recognized by the spellchecker as one that is
     --                                                  hardly ever used. spell Combined with the highlighting used otherwise.]]
-    StatusLine   = { bg = ash, fg = grey },       -- Status line of current window.
-    StatusLineNC = { bg = ash, fg = grey_l2 },    -- Status lines of not-current windows.
-    TabLine      = { link = "StatusLine" },       -- Tab pages line, not active tab page label.
-    TabLineFill  = { bg = white },                -- Tab pages line, where there are no labels.
-    TabLineSel   = { bg = grey, fg = grey_l4 },   -- Tab pages line, active tab page label.
-    Title        = { fg = blue_d1, bold = true }, -- Titles for output from ":set all", ":autocmd" etc.
-    Visual       = { bg = grey_blue },            -- Visual mode selection.
+    StatusLine = { bg = ash, fg = grey },      -- Status line of current window.
+    StatusLineNC = { bg = ash, fg = grey_l2 }, -- Status lines of not-current windows.
+    TabLine = { link = "StatusLine" },         -- Tab pages line, not active tab page label.
+    TabLineFill = { bg = white },              -- Tab pages line, where there are no labels.
+    TabLineSel = { bg = grey, fg = grey_l4 },  -- Tab pages line, active tab page label.
+    Title = { fg = blue_d1, bold = true },     -- Titles for output from ":set all", ":autocmd" etc.
+    Visual = { bg = grey_blue },               -- Visual mode selection.
     -- VisualNOS    = { link = "Visual" },            -- Visual mode selection when vim is "Not Owning the Selection".
-    WarningMsg   = { fg = red_d2 },               -- Warning messages.
+    WarningMsg = { fg = red_d2 },              -- Warning messages.
     -- Whitespace   = { fg = grey_l3 },               -- "nbsp", "space", "tab", "multispace", "lead" and "trail" in 'listchars'.
-    WildMenu     = { link = "Pmenu" },            -- Current match in 'wildmenu' completion.
-    WinBar       = { link = "StatusLine" },       -- Window bar of current window.
-    WinBarNC     = { link = "StatusLineNC" },     -- Window bar of not-current windows.
+    WildMenu = { link = "Pmenu" },             -- Current match in 'wildmenu' completion.
+    WinBar = { link = "StatusLine" },          -- Window bar of current window.
+    WinBarNC = { link = "StatusLineNC" },      -- Window bar of not-current windows.
 })
 
 -- https://github.com/nvim-treesitter/nvim-treesitter/blob/master/CONTRIBUTING.md#highlights
 set_hls({
     -- Non-highlighting captures
     --
-    ["@none"]                           = {},                   -- completely disable the highlight
-    ["@conceal"]                        = { link = "Conceal" }, -- captures that are only meant to be concealed
+    ["@none"] = {},                      -- completely disable the highlight
+    ["@conceal"] = { link = "Conceal" }, -- captures that are only meant to be concealed
     -- ["@spell"]                          = unknown,                       -- for defining regions to be spellchecked
     -- ["@nospell"]                        = unknown,                       -- for defining regions that should NOT be spellchecked
 
     -- Identifiers
     --
-    ["@variable"]                       = { link = "Identifier" }, -- various variable names
+    ["@variable"] = { link = "Identifier" }, -- various variable names
     -- ["@variable.builtin"]               = { fg = blue_d1 },              -- built-in variable names (e.g. `this`)
     -- ["@variable.parameter"]             = { link = "Identifier" },       -- parameters of a function
     -- ["@variable.parameter.builtin"]     = { link = "Identifier" },       -- special parameters (e.g. `_`, `it`)
-    ["@variable.member"]                = { link = "Field" },    -- object and struct fields
-    ["@constant"]                       = { link = "Constant" }, -- constant identifiers
-    ["@constant.builtin"]               = { link = "Special" },  -- built-in constant values
-    ["@constant.macro"]                 = { link = "Define" },   -- constants defined by the preprocessor
-    ["@module"]                         = { fg = black },        -- modules or namespaces
+    ["@variable.member"] = { link = "Field" },    -- object and struct fields
+    ["@constant"] = { link = "Constant" },        -- constant identifiers
+    ["@constant.builtin"] = { link = "Special" }, -- built-in constant values
+    ["@constant.macro"] = { link = "Define" },    -- constants defined by the preprocessor
+    ["@module"] = { fg = black },                 -- modules or namespaces
     -- ["@module.builtin"]                 = unknown,                       -- built-in modules or namespaces
-    ["@label"]                          = { link = "@tag" },     -- GOTO and other labels (e.g. `label:` in C), including heredoc labels
+    ["@label"] = { link = "@tag" },               -- GOTO and other labels (e.g. `label:` in C), including heredoc labels
 
     -- Literals
     --
-    ["@string"]                         = { link = "String" },     -- string literals
-    ["@string.special.url"]             = { link = "Underlined" }, -- URIs (e.g. hyperlinks)
-    ["@string.special.url.comment"]     = vim.tbl_deep_extend("force", comment, { underline = true }),
+    ["@string"] = { link = "String" },                 -- string literals
+    ["@string.special.url"] = { link = "Underlined" }, -- URIs (e.g. hyperlinks)
+    ["@string.special.url.comment"] = vim.tbl_deep_extend("force", comment, { underline = true }),
     -- ["@string.documentation"]           = unknown,                       -- string documenting code (e.g. Python docstrings)
     -- ["@string.regexp"]                  = { fg = blue_d5 },              -- regular expressions
     -- ["@string.escape"]                  = { fg = blue_d5, bold = true }, -- escape sequences
     -- ["@string.special"]                 = unknown,                                    -- other special strings (e.g. dates)
     -- ["@string.special.symbol"]          = unknown,                                    -- symbols or atoms
     -- ["@string.special.path"]            = unknown,                                    -- filenames
-    ["@character"]                      = { link = "Character" }, -- character literals
+    ["@character"] = { link = "Character" }, -- character literals
     -- ["@character.special"]              = { link = "SpecialChar" },                   -- special characters (e.g. wildcards)
-    ["@boolean"]                        = { link = "Boolean" },   -- boolean literals
-    ["@number"]                         = { link = "Number" },    -- numeric literals
-    ["@number.float"]                   = { link = "Float" },     -- floating-point number literals
+    ["@boolean"] = { link = "Boolean" },     -- boolean literals
+    ["@number"] = { link = "Number" },       -- numeric literals
+    ["@number.float"] = { link = "Float" },  -- floating-point number literals
 
     -- Types
     --
-    ["@type"]                           = { link = "Type" },     -- type or class definitions and annotations
+    ["@type"] = { link = "Type" },               -- type or class definitions and annotations
     -- ["@type.builtin"]                   = { fg = red_d2 },                            -- built-in types
-    ["@type.definition"]                = { link = "Typedef" },  -- identifiers in type definitions (e.g. `typedef <type> <identifier>` in C)
-    ["@attribute"]                      = { link = "PreProc" },  -- attribute annotations (e.g. Python decorators, Rust lifetimes)
+    ["@type.definition"] = { link = "Typedef" }, -- identifiers in type definitions (e.g. `typedef <type> <identifier>` in C)
+    ["@attribute"] = { link = "PreProc" },       -- attribute annotations (e.g. Python decorators, Rust lifetimes)
     -- ["@attribute.builtin"]              = unknown,                                    -- builtin annotations (e.g. `@property` in Python)
-    ["@property"]                       = { link = "Field" },    -- the key in key/value pairs
+    ["@property"] = { link = "Field" },          -- the key in key/value pairs
     -- Functions
-    ["@function"]                       = { link = "Function" }, -- function definitions
+    ["@function"] = { link = "Function" },       -- function definitions
     -- ["@function.builtin"]               = { link = "Special" },                       -- built-in functions
     -- ["@function.call"]                  = { link = "@function" },                     -- function calls
     -- ["@function.macro"]                 = { link = "Macro" },                         -- preprocessor macros
     -- ["@function.method"]                = { link = "Function" },                      -- method definitions
     -- ["@function.method.call"]           = { link = "@function.method" },              -- method calls
     -- ["@constructor"]                    = { fg = brown_d1 },                          -- constructor calls and definitions
-    ["@operator"]                       = { link = "Operator" }, -- symbolic operators (e.g. `+` / `*`)
+    ["@operator"] = { link = "Operator" }, -- symbolic operators (e.g. `+` / `*`)
     -- Keywords
-    ["@keyword"]                        = { link = "Keyword" },  -- keywords not fitting into specific categories
+    ["@keyword"] = { link = "Keyword" },   -- keywords not fitting into specific categories
     -- ["@keyword.coroutine"]              = { link = "@keyword" },                      -- keywords related to coroutines (e.g. `go` in Go, `async/await` in Python)
     -- ["@keyword.function"]               = { fg = red_d2 },                            -- keywords that define a function (e.g. `func` in Go, `def` in Python)
     -- ["@keyword.operator"]               = { link = "@operator" },                     -- operators that are English words (e.g. `and` / `or`)
@@ -252,24 +252,24 @@ set_hls({
 
     -- Punctuation
     --
-    ["@punctuation.delimiter"]          = { fg = black }, -- delimiters (e.g. `;` / `.` / `,`)
-    ["@punctuation.bracket"]            = { fg = black }, -- brackets (e.g. `()` / `{}` / `[]`)
-    ["@punctuation.special"]            = { fg = black }, -- special symbols (e.g. `{}` in string interpolation)
+    ["@punctuation.delimiter"] = { fg = black }, -- delimiters (e.g. `;` / `.` / `,`)
+    ["@punctuation.bracket"] = { fg = black },   -- brackets (e.g. `()` / `{}` / `[]`)
+    ["@punctuation.special"] = { fg = black },   -- special symbols (e.g. `{}` in string interpolation)
 
     -- Comments
     --
-    ["@comment"]                        = { link = "Comment" },                       -- line and block comments
+    ["@comment"] = { link = "Comment" },                             -- line and block comments
     -- ["@comment.documentation"]          = { link = "Comment" },                       -- comments documenting code
-    ["@comment.error"]                  = { fg = white, bg = red_l1, bold = true },   -- error-type comments (e.g. `ERROR`, `FIXME`, `DEPRECATED`)
-    ["@comment.warning"]                = { fg = white, bg = orange, bold = true },   -- warning-type comments (e.g. `WARNING`, `FIX`, `HACK`)
-    ["@comment.todo"]                   = { link = "Todo" },                          -- todo-type comments (e.g. `TODO`, `WIP`)
-    ["@comment.note"]                   = { fg = white, bg = green_l2, bold = true }, -- note-type comments (e.g. `NOTE`, `INFO`, `XXX`)
+    ["@comment.error"] = { fg = white, bg = red_l1, bold = true },   -- error-type comments (e.g. `ERROR`, `FIXME`, `DEPRECATED`)
+    ["@comment.warning"] = { fg = white, bg = orange, bold = true }, -- warning-type comments (e.g. `WARNING`, `FIX`, `HACK`)
+    ["@comment.todo"] = { link = "Todo" },                           -- todo-type comments (e.g. `TODO`, `WIP`)
+    ["@comment.note"] = { fg = white, bg = green_l2, bold = true },  -- note-type comments (e.g. `NOTE`, `INFO`, `XXX`)
     -- Markup
-    ["@markup.strong"]                  = { bold = true },                            -- bold text
-    ["@markup.italic"]                  = { italic = true },                          -- italic text
-    ["@markup.strikethrough"]           = { strikethrough = true },                   -- struck-through text
-    ["@markup.underline"]               = { underline = true },                       -- underlined text (only for literal underline markup!)
-    ["@markup.heading"]                 = { link = "Title" },                         -- headings, titles (including markers)
+    ["@markup.strong"] = { bold = true },                            -- bold text
+    ["@markup.italic"] = { italic = true },                          -- italic text
+    ["@markup.strikethrough"] = { strikethrough = true },            -- struck-through text
+    ["@markup.underline"] = { underline = true },                    -- underlined text (only for literal underline markup!)
+    ["@markup.heading"] = { link = "Title" },                        -- headings, titles (including markers)
     -- ["@markup.heading.1"]               = unknown,                                    -- top-level heading
     -- ["@markup.heading.2"]               = unknown,                                    -- section heading
     -- ["@markup.heading.3"]               = unknown,                                    -- subsection heading
@@ -280,17 +280,17 @@ set_hls({
     -- ["@markup.math"]                    = { link = "Special" },     -- math environments (e.g. `$ ... $` in LaTeX)
     -- ["@markup.link"]                    = { link = "Constant" },    -- text references, footnotes, citations, etc.
     -- ["@markup.link.label"]              = { link = "SpecialChar" }, -- link, reference descriptions
-    ["@markup.link.url"]                = { link = "Underlined" }, -- URL-style links
+    ["@markup.link.url"] = { link = "Underlined" }, -- URL-style links
     -- ["@markup.raw"]                     = { link = "String" },      -- literal or verbatim text (e.g. inline code)
     -- ["@markup.raw.block"]               = unknown,                  -- literal or verbatim text as a stand-alone block
     -- ["@markup.list"]                    = unknown,                  -- list markers
     -- ["@markup.list.checked"]            = unknown,                  -- checked todo-style list markers
     -- ["@markup.list.unchecked"]          = unknown,                  -- unchecked todo-style list markers
     ["@markup.list.unchecked.markdown"] = { bg = blue_l3 },
-    ["@diff.plus"]                      = { link = "DiffAdd" },    -- added text (for diff files)
-    ["@diff.minus"]                     = { link = "DiffDelete" }, -- deleted text (for diff files)
-    ["@diff.delta"]                     = { link = "DiffChange" }, -- changed text (for diff files)
-    ["@tag"]                            = { link = "Label" },      -- XML-style tag names (and similar)
+    ["@diff.plus"] = { link = "DiffAdd" },     -- added text (for diff files)
+    ["@diff.minus"] = { link = "DiffDelete" }, -- deleted text (for diff files)
+    ["@diff.delta"] = { link = "DiffChange" }, -- changed text (for diff files)
+    ["@tag"] = { link = "Label" },             -- XML-style tag names (and similar)
     -- ["@tag.builtin"]                    = unknown,                 -- builtin tag names (e.g. HTML5 tags)
     -- ["@tag.attribute"]                  = { link = "@property" },  -- XML-style tag attributes
     -- ["@tag.delimiter"]                  = { link = "Delimiter" },  -- XML-style tag delimiters
@@ -298,16 +298,16 @@ set_hls({
 
 -- hop
 set_hls({
-    HopNextKey   = { link = "Search" },
-    HopNextKey1  = { link = "Search" },
-    HopNextKey2  = { link = "Search" },
+    HopNextKey = { link = "Search" },
+    HopNextKey1 = { link = "Search" },
+    HopNextKey2 = { link = "Search" },
     HopUnmatched = { fg = grey },
     -- HopCursor { },
 })
 
 -- gitsigns
 set_hls({
-    GitSignsAdd    = { fg = green_l1 },
+    GitSignsAdd = { fg = green_l1 },
     GitSignsChange = { fg = brown },
     GitSignsDelete = { fg = red_d1 },
 })

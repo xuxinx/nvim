@@ -1,6 +1,6 @@
 local M = {}
 
-M.init = function ()
+M.init = function()
     vim.g.copilot_enabled = false
 end
 

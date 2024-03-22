@@ -21,13 +21,13 @@ M.setup = function()
     require("luasnip.loaders.from_lua").load({ paths = utils.join_path(vim.fn.stdpath("config"), "snippets") })
 end
 
-M.get_snippet_map = function (ft)
+M.get_snippet_map = function(ft)
     local result = {}
     local snippets = ls.get_snippets(ft)
-	for _, snip in pairs(snippets) do
-		result[snip.trigger] = snip
-	end
-	return result
+    for _, snip in pairs(snippets) do
+        result[snip.trigger] = snip
+    end
+    return result
 end
 
 M.snip_expand = function()

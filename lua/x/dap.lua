@@ -16,7 +16,7 @@ local sidebar_win_opts = {
 
 local scopes = widgets.sidebar(widgets.scopes, sidebar_win_opts)
 
-M.toggle_repl = function ()
+M.toggle_repl = function()
     repl.toggle(repl_win_opts)
 end
 

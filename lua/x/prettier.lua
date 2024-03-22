@@ -5,7 +5,7 @@ local M = {}
 local prettier_files = utils.list_to_set({ "javascript", "javascriptreact", "typescript", "typescriptreact",
     "vue", "css", "less", "scss", "html", "json", "graphql", "markdown", "yaml" })
 
-M.format = function ()
+M.format = function()
     if prettier_files[vim.bo.filetype] then
         vim.cmd("Prettier")
     else
