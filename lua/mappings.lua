@@ -35,6 +35,7 @@ local maps = {
     { "n", "<leader>hr", require("gitsigns").reset_hunk, { desc = "reset changed hunk" } },
     -- # jump
     { { "n", "v" }, "<leader>j", "<cmd>HopPattern<cr>", { desc = "search pattern and jump" } },
+    { "n", "<leader>/", "<cmd>noh<cr>", { desc = "stop search highlight" } },
     -- # lsp
     { "n", "gd", vim.lsp.buf.definition, { desc = "code definition" } },
     { "n", "<leader>ca", vim.lsp.buf.code_action, { desc = "code action" } },
