@@ -89,7 +89,7 @@ require("lazy").setup({
         config = function()
             require("hop").setup()
         end,
-        lazy = true,
+        cmd = "HopPattern",
     },
     {
         "numToStr/Comment.nvim",
