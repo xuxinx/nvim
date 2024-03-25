@@ -1,6 +1,7 @@
 local xls = require("x.luasnip")
 local oil_actions = require("oil.actions")
 local swap = require("x.swap")
+local session = require("x.session")
 
 local maps = {
     -- # file explorer
@@ -82,6 +83,8 @@ local maps = {
     { "n", "<leader>s7", function() swap.swap_list_items(7) end, { desc = "swap list item 7" } },
     { "n", "<leader>s8", function() swap.swap_list_items(8) end, { desc = "swap list item 8" } },
     { "n", "<leader>s9", function() swap.swap_list_items(9) end, { desc = "swap list item 9" } },
+    -- # session
+    { "n", "<leader>ds", function() session.load_session(session.auto_session_name) end, { desc = "load default session" } },
 }
 
 local group = vim.api.nvim_create_augroup("x_augroup_mappings", { clear = true })
