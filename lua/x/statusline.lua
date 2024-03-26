@@ -100,7 +100,7 @@ M.statusline = function()
     end
 
     -- git branch
-    s = s .. [[ %{v:lua.require("x.gitsigns").statusline_branch_name(30, "| ")}]]
+    s = s .. [[ %{v:lua.require("x.gitsigns").statusline_branch_name(45, "| ")}]]
 
     return s
 end
