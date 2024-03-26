@@ -26,10 +26,6 @@ local server_options = {
     gopls = function(opts)
         opts.settings = {
             gopls = {
-                analyses = {
-                    unusedparams = false,
-                },
-                -- staticcheck = true,
                 usePlaceholders = true,
             },
         }
