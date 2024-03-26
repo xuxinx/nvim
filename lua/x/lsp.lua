@@ -42,6 +42,7 @@ local server_options = {
             }
         }
     end,
+    rust_analyzer = function() end,
 }
 
 M.setup = function()
