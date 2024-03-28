@@ -16,12 +16,6 @@ local cs = {
     { "LoadSession", require("x.session").select_session_to_load, { desc = "select a session to load" } },
     { "DelSession", require("x.session").select_session_to_delete, { desc = "select a session to delete" } },
     { "ProjectConfig", require("x.project_config").edit, { desc = "edit project config" } },
-    { "Term", require("x.terminal").open_terminal_for_current_dir, { desc = "open terminal for current dir" } },
-    {
-        event = "FileType",
-        pattern = "go",
-        { "GoGenerate", require("x.go").execute_go_generate, { desc = "execute go:generate" } },
-    },
     {
         event = "FileType",
         pattern = "oil",

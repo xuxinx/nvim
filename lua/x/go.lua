@@ -62,28 +62,4 @@ M.new_file_tpl = function()
     end
 end
 
-M.execute_go_generate = function()
-    vim.fn.jobstart(
-        "go generate && echo 'go generate done'",
-        {
-            cwd = vim.fs.dirname(vim.api.nvim_buf_get_name(0)),
-            on_exit = function(job_id, exit_code, event) end,
-            on_stdout = function(job_id, data, event)
-                for _, msg in ipairs(data) do
-                    if msg ~= "" then
-                        vim.notify(msg, vim.log.levels.INFO)
-                    end
-                end
-            end,
-            on_stderr = function(job_id, data, event)
-                for _, msg in ipairs(data) do
-                    if msg ~= "" then
-                        vim.notify(msg, vim.log.levels.ERROR)
-                    end
-                end
-            end
-        }
-    )
-end
-
 return M

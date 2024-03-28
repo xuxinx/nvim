@@ -9,6 +9,13 @@ M.open_terminal_for_current_dir = function()
         path = util.trim_prefix(buf_name, "oil://")
     end
     vim.cmd("belowright split term://" .. path .. "/zsh")
+    vim.api.nvim_input("a")
+end
+
+M.open_terminal_for_root_dir = function()
+    local path = vim.fn.getcwd() .. "/"
+    vim.cmd("belowright split term://" .. path .. "/zsh")
+    vim.api.nvim_input("a")
 end
 
 return M

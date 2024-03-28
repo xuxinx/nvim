@@ -66,6 +66,8 @@ local maps = {
     { "n", "<leader>tm", require("x.table_mode").toggle_table_mode, { desc = "toggle table mode" } },
     -- # terminal
     { "n", "<leader>lg", ":-tabe<CR>:term lazygit<CR>i", { desc = "open lazygit" } },
+    { "n", "<leader>tc", require("x.terminal").open_terminal_for_current_dir, { desc = "open terminal for current dir" } },
+    { "n", "<leader>tr", require("x.terminal").open_terminal_for_root_dir, { desc = "open terminal for root dir" } },
     -- # markdown
     {
         event = "FileType",
