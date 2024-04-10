@@ -43,7 +43,7 @@ local maps = {
     { "n", "<leader>D", vim.lsp.buf.hover, { desc = "hover code doc" } },
     { "n", "<leader>fr", require("telescope.builtin").lsp_references, { desc = "code references" } },
     { "n", "<leader>fi", require("telescope.builtin").lsp_implementations, { desc = "interface implementations" } },
-    { "n", "<leader>F", require("x.prettier").format, { desc = "format buffer" } },
+    { "n", "<leader>F", require("x.format").format, { desc = "format buffer" } },
     { "n", "<leader>R", vim.lsp.buf.rename, { desc = "rename var" } },
     -- # diagnostic
     { "n", "]e", vim.diagnostic.goto_next, { desc = "next diagnostic" } },

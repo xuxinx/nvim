@@ -43,6 +43,7 @@ local server_options = {
         }
     end,
     rust_analyzer = function() end,
+    pyright = function() end,
 }
 
 M.setup = function()
