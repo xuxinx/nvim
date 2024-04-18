@@ -37,6 +37,8 @@ local maps = {
     -- # jump
     { { "n", "v" }, "<leader>j", "<cmd>HopPattern<cr>", { desc = "search pattern and jump" } },
     { "n", "<leader>/", "<cmd>noh<cr>", { desc = "stop search highlight" } },
+    { "n", "<C-e>", "3<C-e>", { desc = "quicker C-e" } },
+    { "n", "<C-y>", "3<C-y>", { desc = "quicker C-y" } },
     -- # lsp
     { "n", "gd", vim.lsp.buf.definition, { desc = "code definition" } },
     { "n", "<leader>ca", vim.lsp.buf.code_action, { desc = "code action" } },
