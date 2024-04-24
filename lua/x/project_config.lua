@@ -10,6 +10,10 @@ local PCFG_default_str = [[
         ignore_files = {},
         ignore_free_patterns = {},
     },
+    init = function()
+    end,
+    after = function()
+    end,
 }
 ]]
 local PCFG_default = load("return " .. PCFG_default_str)()
@@ -31,12 +35,32 @@ M.edit = function()
     vim.cmd("e " .. vim.fn.fnameescape(f))
 end
 
-M.load = function()
+local init = function()
     local f = store_dir .. fname()
     if vim.fn.filereadable(f) == 1 then
         vim.cmd("luafile " .. vim.fn.fnameescape(f))
     end
     PCFG = vim.tbl_deep_extend("force", PCFG_default, PCFG or {})
+    if PCFG.init ~= nil then
+        PCFG.init()
+    end
 end
+
+local after = function ()
+    if PCFG.after ~= nil then
+        PCFG.after()
+    end
+end
+
+init()
+
+vim.api.nvim_create_autocmd("VimEnter", {
+    group = vim.api.nvim_create_augroup("x_augroup_project_config", {clear = true}),
+    pattern = "*",
+    desc = "execute project_config.after",
+    callback = function()
+        after()
+    end,
+})
 
 return M
