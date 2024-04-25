@@ -84,4 +84,28 @@ M.string_to_line_array = function(str)
     return a
 end
 
+-- anyKindOfString
+M.lower_camel_string = function(str)
+    str = str:lower()
+    return str:gsub("_(.)", string.upper)
+end
+
+-- AnyKindOfString
+M.camel_string = function(str)
+    str = M.lower_camel_string(str)
+    return str:gsub("^%w", string.upper)
+end
+
+-- any_kind_of_string
+M.snake_string = function(str)
+    return str:gsub("([A-Z0-9]+)([A-Z])", "%1_%2"):gsub("([a-z][0-9]*)([A-Z]+)", "%1_%2"):lower()
+end
+
+-- # lua api
+
+M.feedkeys = function(key, mode)
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, false, true), mode or "m", false)
+end
+
+
 return M
