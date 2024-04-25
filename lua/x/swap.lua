@@ -16,6 +16,9 @@ local list_node_types = {
 local get_item_node_and_its_list_node = function(node)
     local child = node
     local parent = child:parent()
+    if parent == nil then
+        return nil, nil
+    end
     while list_node_types[parent:type()] ~= true do
         child = parent
         parent = child:parent()

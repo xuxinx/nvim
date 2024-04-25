@@ -87,6 +87,7 @@ local maps = {
     { "n", "<leader>s7", function() swap.swap_list_items(7) end, { desc = "swap list item 7" } },
     { "n", "<leader>s8", function() swap.swap_list_items(8) end, { desc = "swap list item 8" } },
     { "n", "<leader>s9", function() swap.swap_list_items(9) end, { desc = "swap list item 9" } },
+    { "n", "<leader>lf", require("x.list_format").toggle_list_format, { desc = "toggle list format" } },
     -- # session
     { "n", "<leader>ds", function() session.load_session(session.auto_session_name) end, { desc = "load default session" } },
 }

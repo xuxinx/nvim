@@ -23,6 +23,14 @@ local acs = {
     },
     {
         "FileType",
+        pattern = { "go" },
+        desc = "set expandtab false",
+        callback = function()
+            vim.bo.expandtab = false
+        end,
+    },
+    {
+        "FileType",
         pattern = { "snippets" },
         desc = "set tab length = 8 spaces",
         callback = function()
