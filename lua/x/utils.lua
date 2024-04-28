@@ -107,5 +107,27 @@ M.feedkeys = function(key, mode)
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, false, true), mode or "m", false)
 end
 
+-- 0 based
+M.get_cursor_word_position = function()
+    vim.cmd.normal("viw")
+    local pos1 = vim.api.nvim_win_get_cursor(0)
+    vim.cmd.normal("o")
+    local pos2 = vim.api.nvim_win_get_cursor(0)
+    vim.cmd.normal("v")
+    local srow, scol, erow, ecol
+    if pos1[2] < pos2[2] then
+        srow = pos1[1]
+        scol = pos1[2]
+        erow = pos2[1]
+        ecol = pos2[2]
+    else
+        srow = pos2[1]
+        scol = pos2[2]
+        erow = pos1[1]
+        ecol = pos1[2]
+    end
+    return srow - 1, scol, erow - 1, ecol
+end
+
 
 return M

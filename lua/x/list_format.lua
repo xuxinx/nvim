@@ -75,7 +75,7 @@ M.toggle_list_format = function()
     if erow ~= srow then
         js = (erow - srow) .. "j"
     end
-    vim.cmd("execute 'normal V" .. js .. "=='")
+    vim.cmd.normal("V" .. js .. "==")
 
     -- restore cusror position
     -- TODO: original node position

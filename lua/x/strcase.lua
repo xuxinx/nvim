@@ -3,8 +3,8 @@ local utils = require("x.utils")
 local M = {}
 
 local replace_word = function(new)
-    vim.cmd("execute 'normal diw'")
-    vim.api.nvim_put({ new }, "c", false, false)
+    local srow, scol, erow, ecol = utils.get_cursor_word_position()
+    vim.api.nvim_buf_set_text(0, srow, scol, erow, ecol + 1, { new })
 end
 
 M.to_lower_camel = function()
