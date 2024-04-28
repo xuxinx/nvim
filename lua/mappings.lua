@@ -2,6 +2,7 @@ local xls = require("x.luasnip")
 local oil_actions = require("oil.actions")
 local swap = require("x.swap")
 local session = require("x.session")
+local strcase = require("x.strcase")
 
 local maps = {
     -- # file explorer
@@ -88,6 +89,8 @@ local maps = {
     { "n", "<leader>s8", function() swap.swap_list_items(8) end, { desc = "swap list item 8" } },
     { "n", "<leader>s9", function() swap.swap_list_items(9) end, { desc = "swap list item 9" } },
     { "n", "<leader>lf", require("x.list_format").toggle_list_format, { desc = "toggle list format" } },
+    { "n", "<leader>wf1", function() return strcase.to_lower_camel() or strcase.to_snake() end, { desc = "toggle snake and lower camel" } },
+    { "n", "<leader>wf2", function() return strcase.to_camel() or strcase.to_snake() end, { desc = "toggle snake and camel" } },
     -- # session
     { "n", "<leader>ds", function() session.load_session(session.auto_session_name) end, { desc = "load default session" } },
 }

@@ -10,28 +10,31 @@ end
 M.to_lower_camel = function()
     local old = vim.fn.expand("<cword>")
     if not string.find(old, "_") then
-        return
+        return false
     end
     local new = utils.lower_camel_string(old)
     replace_word(new)
+    return true
 end
 
 M.to_camel = function()
     local old = vim.fn.expand("<cword>")
     if not string.find(old, "_") then
-        return
+        return false
     end
     local new = utils.camel_string(old)
     replace_word(new)
+    return true
 end
 
 M.to_snake = function()
     local old = vim.fn.expand("<cword>")
     if string.find(old, "_") then
-        return
+        return false
     end
     local new = utils.snake_string(old)
     replace_word(new)
+    return true
 end
 
 return M

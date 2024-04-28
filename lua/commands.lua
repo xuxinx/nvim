@@ -16,9 +16,6 @@ local cs = {
     { "LoadSession", require("x.session").select_session_to_load, { desc = "select a session to load" } },
     { "DelSession", require("x.session").select_session_to_delete, { desc = "select a session to delete" } },
     { "ProjectConfig", require("x.project_config").edit, { desc = "edit project config" } },
-    { "ToLowerCamel", require("x.strcase").to_lower_camel, { desc = "convert string to lower camel case" } },
-    { "ToCamel", require("x.strcase").to_camel, { desc = "convert string to camel case" } },
-    { "ToSnake", require("x.strcase").to_snake, { desc = "convert string to snake case" } },
     {
         event = "FileType",
         pattern = "oil",
