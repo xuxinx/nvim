@@ -16,7 +16,7 @@ local is_enabled = function()
     return false
 end
 
-M.toggle_table_mode = function()
+M.toggle = function()
     if is_enabled() == true then
         vim.cmd("TableModeDisable")
         vim.keymap.del("i", "|", { buffer = true })

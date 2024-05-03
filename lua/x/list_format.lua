@@ -21,7 +21,7 @@ local get_list_node = function(node)
     return node
 end
 
-M.toggle_list_format = function()
+M.toggle = function()
     local cursor_node = vim.treesitter.get_node()
     local list_node = get_list_node(cursor_node)
     if list_node == nil then
