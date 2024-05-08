@@ -129,6 +129,14 @@ local acs = {
             vim.opt_local.relativenumber = false
         end,
     },
+
+    -- # oil
+    {
+        "User",
+        pattern = "OilActionsPost",
+        desc = "oil OilActionsPost",
+        callback = require("x.oil").actions_post_callback,
+    },
 }
 
 local group = vim.api.nvim_create_augroup("x_augroup_autocmds", { clear = true })

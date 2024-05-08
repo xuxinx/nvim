@@ -38,4 +38,27 @@ M.open_trash = function()
     oil_actions.toggle_trash.callback()
 end
 
+local parse_url = function(url)
+    return url:match("^.*://(.*)$")
+end
+
+M.actions_post_callback = function(args)
+    if args.data.err then
+        return
+    end
+
+    for _, action in ipairs(args.data.actions) do
+        if action.type == "delete" and action.entry_type == "file" then
+            local path = parse_url(action.url)
+            local bufnr = vim.fn.bufnr(path)
+            if bufnr == -1 then
+                return
+            end
+
+            vim.notify("buf " .. bufnr .. " for file ".. path .. " was deleted")
+            vim.cmd("bd! " .. bufnr)
+        end
+    end
+end
+
 return M
