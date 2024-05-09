@@ -47,17 +47,38 @@ M.actions_post_callback = function(args)
         return
     end
 
+    local dels = {}
     for _, action in ipairs(args.data.actions) do
-        if action.type == "delete" and action.entry_type == "file" then
+        if action.type == "delete" then
             local path = parse_url(action.url)
-            local bufnr = vim.fn.bufnr(path)
-            if bufnr == -1 then
-                return
+            if action.entry_type == "file" then
+                local bufnr = vim.fn.bufnr(path)
+                if vim.api.nvim_buf_is_loaded(bufnr) then
+                    table.insert(dels, {
+                        bufnr = bufnr,
+                        name = path,
+                    })
+                end
+            elseif action.entry_type == "directory" then
+                local all_bufs = vim.api.nvim_list_bufs()
+                for _, bufnr in ipairs(all_bufs) do
+                    if vim.api.nvim_buf_is_loaded(bufnr) then
+                        local bufname = vim.fn.bufname(bufnr)
+                        if bufname:find(path, 1, true) == 1 then
+                            table.insert(dels, {
+                                bufnr = bufnr,
+                                name = bufname,
+                            })
+                        end
+                    end
+                end
             end
-
-            vim.notify("buf " .. bufnr .. " for file ".. path .. " was deleted")
-            vim.cmd("bd! " .. bufnr)
         end
+    end
+
+    for _, b in ipairs(dels) do
+        vim.notify("buf " .. b.bufnr .. " for file " .. b.name .. " was deleted")
+        vim.cmd("bd! " .. b.bufnr)
     end
 end
 
