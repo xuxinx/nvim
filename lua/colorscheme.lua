@@ -176,6 +176,15 @@ set_hls({
     WinBarNC = { link = "StatusLineNC" },      -- Window bar of not-current windows.
 })
 
+-- https://neovim.io/doc/user/diagnostic.html#diagnostic-highlights
+set_hls({
+    DiagnosticError = { fg = red },
+    DiagnosticWarn = { fg = orange },
+    DiagnosticInfo = { fg = cyan },
+    DiagnosticHint = { fg = blue_l3 },
+    DiagnosticOk = { fg = green_l1 },
+})
+
 -- https://github.com/nvim-treesitter/nvim-treesitter/blob/master/CONTRIBUTING.md#highlights
 set_hls({
     -- Non-highlighting captures
