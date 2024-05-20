@@ -42,14 +42,10 @@ local maps = {
     -- # lsp
     { "n", "gd", vim.lsp.buf.definition, { desc = "code definition" } },
     { "n", "<leader>a", vim.lsp.buf.code_action, { desc = "code action" } },
-    { "n", "<leader>D", vim.lsp.buf.hover, { desc = "hover code doc" } },
     { "n", "<leader>r", require("telescope.builtin").lsp_references, { desc = "code references" } },
     { "n", "<leader>i", require("telescope.builtin").lsp_implementations, { desc = "interface implementations" } },
     { "n", "<leader>F", require("x.format").format, { desc = "format buffer" } },
     { "n", "<leader>R", vim.lsp.buf.rename, { desc = "rename var" } },
-    -- # diagnostic
-    { "n", "]e", vim.diagnostic.goto_next, { desc = "next diagnostic" } },
-    { "n", "[e", vim.diagnostic.goto_prev, { desc = "prev diagnostic" } },
     -- snip
     { { "i", "s" }, "<C-h>", xls.snip_expand, { desc = "snippet expand" } },
     { { "i", "s" }, "<C-j>", xls.snip_jump_forward, { desc = "snippet jump forward" } },
