@@ -92,13 +92,6 @@ require("lazy").setup({
         cmd = "HopPattern",
     },
     {
-        "numToStr/Comment.nvim",
-        config = function()
-            require("Comment").setup()
-        end,
-        event = "VeryLazy",
-    },
-    {
         "windwp/nvim-autopairs",
         config = function()
             require("nvim-autopairs").setup()
