@@ -23,12 +23,12 @@ return {
 	func Test<func>(t *testing.T) {
 		for _, c := range []struct {
 			name string
-			<expect> <expect_type>
+			<expected> <expected_type>
 		}{
 			{},
 		}{
 			t.Run(c.name, func(t *testing.T) {
-				if diff := cmp.Diff(c.<expect_rep>, <func_rep>()); diff != "" {
+				if diff := cmp.Diff(c.<expected_rep>, <func_rep>()); diff != "" {
 					t.Fatalf("got diff %s\n", diff)
 				}
 			})
@@ -36,9 +36,9 @@ return {
 	}
     ]], {
         func = i(1, "func"),
-        expect = i(2, "expect"),
-        expect_type = i(3, "type"),
-        expect_rep = rep(2),
+        expected = i(2, "expected"),
+        expected_type = i(3, "type"),
+        expected_rep = rep(2),
         func_rep = rep(1),
     })),
 
@@ -134,11 +134,15 @@ return {
     -- error panic
     s("ep", fmt([[
     if <err> != nil {
-        panic(<panic>)
+        <panic>(<err_rep>)
     }
     ]], {
         err = i(1, "err"),
-        panic = rep(1),
+        panic = c(2, {
+            t("panic"),
+            t("t.Fatal"),
+        }),
+        err_rep = rep(1),
     })),
 
     -- gracefully shutdown services
