@@ -42,7 +42,7 @@ local maps = {
     -- # lsp
     { "n", "gd", vim.lsp.buf.definition, { desc = "code definition" } },
     { "n", "<leader>a", vim.lsp.buf.code_action, { desc = "code action" } },
-    { "n", "<leader>r", require("telescope.builtin").lsp_references, { desc = "code references" } },
+    { "n", "<leader>r", function() require("telescope.builtin").lsp_references({ include_current_line = true }) end, { desc = "code references" } },
     { "n", "<leader>i", require("telescope.builtin").lsp_implementations, { desc = "interface implementations" } },
     { "n", "<leader>F", require("x.format").format, { desc = "format buffer" } },
     { "n", "<leader>R", vim.lsp.buf.rename, { desc = "rename var" } },
