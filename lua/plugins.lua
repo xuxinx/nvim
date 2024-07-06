@@ -109,6 +109,9 @@ require("lazy").setup({
     },
     {
         "majutsushi/tagbar",
+        init = function()
+            require("x.tagbar").init()
+        end,
         cmd = "TagbarToggle",
     },
     {

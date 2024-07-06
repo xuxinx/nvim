@@ -89,6 +89,8 @@ local maps = {
     { "n", "<leader>W", function() return strcase.to_camel() or strcase.to_snake() end, { desc = "toggle snake and camel" } },
     -- # session
     { "n", "<bslash>s", function() session.load_session(session.auto_session_name) end, { desc = "load default session" } },
+    -- # tags
+    { "n", "<leader>;", "<cmd>TagbarToggle f<cr>", { desc = "toggle tagbar" } },
 }
 
 local group = vim.api.nvim_create_augroup("x_augroup_mappings", { clear = true })
