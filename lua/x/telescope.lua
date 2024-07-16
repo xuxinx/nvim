@@ -41,7 +41,7 @@ end
 local new_maker = function(filepath, bufnr, opts)
     opts = opts or {}
     filepath = vim.fn.expand(filepath)
-    local stats = vim.loop.fs_stat(filepath)
+    local stats = vim.uv.fs_stat(filepath)
     -- FIXME: vim.api.nvim_buf_line_count(bufnr) always 1 here
     if stats and stats.size > 100 * 1024 then
         opts.use_ft_detect = false

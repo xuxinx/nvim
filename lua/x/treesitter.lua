@@ -8,7 +8,7 @@ M.setup = function()
             enable = true,
             disable = function(lang, bufnr)
                 local filepath = vim.api.nvim_buf_get_name(bufnr)
-                local stats = vim.loop.fs_stat(filepath)
+                local stats = vim.uv.fs_stat(filepath)
                 if stats and stats.size / vim.api.nvim_buf_line_count(bufnr) > 1024 then
                     return true
                 end

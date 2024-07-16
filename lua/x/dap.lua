@@ -26,8 +26,8 @@ end
 
 local setup_go = function()
     dap.adapters.go = function(callback, config)
-        local stdout = vim.loop.new_pipe(false)
-        local stderr = vim.loop.new_pipe(false)
+        local stdout = vim.uv.new_pipe(false)
+        local stderr = vim.uv.new_pipe(false)
         local handle
         local pid_or_err
         local port = 38697
@@ -36,7 +36,7 @@ local setup_go = function()
             args = { "dap", "-l", "127.0.0.1:" .. port },
             detached = true
         }
-        handle, pid_or_err = vim.loop.spawn("dlv", opts, function(code)
+        handle, pid_or_err = vim.uv.spawn("dlv", opts, function(code)
             stdout:close()
             stderr:close()
             handle:close()
