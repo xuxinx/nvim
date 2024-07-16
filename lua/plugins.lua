@@ -22,10 +22,19 @@ require("lazy").setup({
         "neovim/nvim-lspconfig",
         dependencies = {
             "williamboman/mason.nvim",
-            "folke/neodev.nvim",
         },
         config = function()
             require("x.lsp").setup()
+        end,
+    },
+    {
+        "folke/lazydev.nvim",
+        ft = "lua",
+        dependencies = {
+            "Bilal2453/luvit-meta",
+        },
+        config = function()
+            require("x.lazydev").setup()
         end,
     },
     {
@@ -162,5 +171,5 @@ require("lazy").setup({
         init = function()
             require("x.table_mode").init()
         end,
-    }
+    },
 })
