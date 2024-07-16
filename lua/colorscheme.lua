@@ -321,10 +321,10 @@ set_hls({
 
 -- gitsigns
 set_hls({
-    GitSignsAdd = { fg = green_l1 },
-    GitSignsAddInline = { fg = green_l1 },
-    GitSignsChange = { fg = brown },
-    GitSignsChangeInline = { fg = brown },
+    GitSignsAdd = { fg = green },
+    GitSignsAddInline = { fg = green },
+    GitSignsChange = { fg = blue_l1 },
+    GitSignsChangeInline = { fg = blue_l1 },
     GitSignsDelete = { fg = red_d1 },
     GitSignsDeleteInline = { fg = red_d1 },
 })
