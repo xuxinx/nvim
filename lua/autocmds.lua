@@ -81,7 +81,7 @@ local acs = {
     -- # commentary
     {
         { "BufNewFile", "BufRead" },
-        pattern = { "*.mod", "*.work" },
+        pattern = { "*.mod", "*.work", "*.proto" },
         desc = "set comment string",
         callback = function()
             vim.bo.commentstring = "// %s"
