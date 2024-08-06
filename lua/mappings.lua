@@ -18,8 +18,8 @@ local maps = {
     },
     -- # quickfix list
     { "n", "<leader>q", require("x.qflist").toggle, { desc = "toggle quickfix list" } },
-    { "n", "]q", "<cmd>cnext<cr>", { desc = "next quickfix list item" } },
-    { "n", "[q", "<cmd>cprev<cr>", { desc = "prev quickfix list item" } },
+    { "n", "]q", require("x.qflist").next, { desc = "next quickfix list item" } },
+    { "n", "[q", require("x.qflist").prev, { desc = "prev quickfix list item" } },
     -- # search file/string
     { "n", "<leader>f", require("x.telescope").find_files, { desc = "find files" } },
     { "n", "<leader>b", require("telescope.builtin").buffers, { desc = "find buffers" } },
