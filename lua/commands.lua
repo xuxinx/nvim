@@ -25,7 +25,8 @@ local cs = {
         { "OilCmd", oil_actions.open_cmdline.callback, { desc = "open cmdline" } },
         { "OilCmdDir", oil_actions.open_cmdline_dir.callback, { desc = "open cmdline" } },
         { "OilDiscardChanges", oil.discard_all_changes, { desc = "discard all changes" } },
-    }
+    },
+    { "CopyPath", function() vim.fn.setreg("+", vim.fn.expand("%:p")) end, { desc = "copy full path of current buffer to clipboard" } },
 }
 
 local group = vim.api.nvim_create_augroup("x_augroup_usercommands", { clear = true })
