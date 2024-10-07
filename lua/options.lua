@@ -32,7 +32,7 @@ vim.o.tabline = "%!v:lua.require'x.tabline'.tabline()"
 vim.o.completeopt = "menu,menuone,noselect"
 vim.o.signcolumn = "yes:2"
 vim.o.wildignore = vim.o.wildignore .. ".git,.DS_Store,.vscode,.idea,.local-history"
-vim.o.jumpoptions = vim.o.jumpoptions .. "stack,view"
+vim.o.jumpoptions = "stack,view,clean"
 vim.o.laststatus = 3
 -- vim.o.cmdheight = 0 -- too many bugs
 
