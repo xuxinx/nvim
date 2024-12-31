@@ -169,4 +169,15 @@ func TestMain(m *testing.M) {
     ]], {
         sth = i(1),
     })),
+
+    s("tp", fmt([[
+    lo.ToPtr(<val>)
+    ]], {
+        val = i(1),
+    })),
+    s("fp", fmt([[
+    lo.FromPtr(<val>)
+    ]], {
+        val = i(1),
+    })),
 }
