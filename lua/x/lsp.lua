@@ -31,7 +31,7 @@ local server_options = {
     clangd = function(opts)
         opts.filetypes = { "c", "cpp", "objc", "objcpp", "cuda" }
     end,
-    tsserver = function() end,
+    ts_ls = function() end,
     vuels = function() end,
     bashls = function(opts)
         opts.settings = {
