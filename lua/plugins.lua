@@ -146,6 +146,17 @@ require("lazy").setup({
         cmd = "Copilot",
     },
     {
+        "CopilotC-Nvim/CopilotChat.nvim",
+        dependencies = {
+            "github/copilot.vim",
+            "nvim-lua/plenary.nvim",
+        },
+        build = "make tiktoken",
+        config = function()
+            require("x.copilot_chat").setup()
+        end
+    },
+    {
         "dinhhuy258/vim-local-history",
         build = ":UpdateRemotePlugins",
         init = function()

@@ -82,7 +82,22 @@ local function load_breakpoints(sname)
     end
 end
 
+local function clean_buffers()
+    local clean_fts = {
+        "copilot-chat",
+    }
+    for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+        local ft = vim.api.nvim_get_option_value("filetype", {
+            buf = bufnr,
+        })
+        if vim.tbl_contains(clean_fts, ft) then
+            vim.api.nvim_buf_delete(bufnr, { force = true })
+        end
+    end
+end
+
 M.save_session = function(sname)
+    clean_buffers()
     vim.cmd("mksession! " .. vim.fn.fnameescape(store_dir .. fname(sname)))
     save_breakpoints(sname)
 end

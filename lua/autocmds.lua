@@ -137,6 +137,16 @@ local acs = {
         desc = "oil OilActionsPost",
         callback = require("x.oil").actions_post_callback,
     },
+
+    -- # hide signcolumn
+    {
+        "BufWinEnter",
+        pattern = "copilot-*",
+        desc = "copilot chat",
+        callback = function ()
+            vim.o.signcolumn = "no"
+        end,
+    },
 }
 
 local group = vim.api.nvim_create_augroup("x_augroup_autocmds", { clear = true })

@@ -1,8 +1,10 @@
 local xls = require("x.luasnip")
 local oil_actions = require("oil.actions")
+local xoil = require("x.oil")
 local swap = require("x.swap")
 local session = require("x.session")
 local strcase = require("x.strcase")
+local chat = require("CopilotChat")
 
 local maps = {
     -- # file explorer
@@ -12,9 +14,12 @@ local maps = {
         pattern = "oil",
         { "n", "-", oil_actions.parent.callback, { buffer = true, desc = "up to parent dir" } },
         { "n", "<cr>", oil_actions.select.callback, { buffer = true, desc = "select the entry" } },
-        { "n", "<leader>p", oil_actions.preview.callback, { buffer = true, desc = "toggle preview" } },
         { "n", "<C-6>", oil_actions.close.callback, { buffer = true, desc = "close oil" } },
         { "n", "gx", oil_actions.open_external.callback, { buffer = true, desc = "open the entry in external program" } },
+        { "n", ",p", oil_actions.preview.callback, { buffer = true, desc = "toggle preview" } },
+        { "n", ",y", function() oil_actions.yank_entry.callback({ modify = ":." }) end, { buffer = true, desc = "copy entry relative path" } },
+        { "n", ",Y", oil_actions.yank_entry.callback, { buffer = true, desc = "copy entry full path" } },
+        { "n", ",c", xoil.put_entry_to_ai_chat_context, { buffer = true, desc = "put entry to ai chat context" } },
     },
     -- # quickfix list
     { "n", "<leader>q", require("x.qflist").toggle, { desc = "toggle quickfix list" } },
@@ -26,13 +31,13 @@ local maps = {
     { "n", "<leader>g", require("telescope.builtin").live_grep, { desc = "find by grep" } },
     { "n", "<leader>G", require("x.search_copied").search_copied, { expr = true, desc = "find copied string" } },
     { "n", "<F1>", require("telescope.builtin").help_tags, { desc = "find help doc" } },
-    { "n", "<leader>c", require("telescope.builtin").commands, { desc = "find commands" } },
+    { { "n", "v" }, "<leader>c", require("telescope.builtin").commands, { desc = "find commands" } },
     -- # tab
     { "n", "<leader>t", "<cmd>$tabe<cr>", { desc = "new tab" } },
     { "n", "<leader>T", "<cmd>$tab split<cr>", { desc = "new tab with current buffer" } },
     -- # git
-    { "n", "]c", require("gitsigns").next_hunk, { desc = "next git changed hunk" } },
-    { "n", "[c", require("gitsigns").prev_hunk, { desc = "prev git changed hunk" } },
+    { "n", "]c", function() require("gitsigns").nav_hunk("next") end, { desc = "next git changed hunk" } },
+    { "n", "[c", function() require("gitsigns").nav_hunk("prev") end, { desc = "prev git changed hunk" } },
     { "n", "<leader>B", function() require("gitsigns").blame_line({ full = true }) end, { desc = "blame line" } },
     { "n", "<leader>d", require("gitsigns").preview_hunk, { desc = "diff changed hunk" } },
     { "n", "<leader>u", require("gitsigns").reset_hunk, { desc = "reset changed hunk" } },
@@ -72,7 +77,7 @@ local maps = {
     {
         event = "FileType",
         pattern = "markdown",
-        { "n", "<leader>x", require("x.markdown").toggle_todo, { buffer = true, desc = "toggle markdown todo" } },
+        { "n", ",x", require("x.markdown").toggle_todo, { buffer = true, desc = "toggle markdown todo" } },
     },
     -- # text operations
     { "n", "<leader>s1", function() swap.swap_list_items(1) end, { desc = "swap list item 1" } },
@@ -91,6 +96,20 @@ local maps = {
     { "n", "<bslash>s", function() session.load_session(session.auto_session_name) end, { desc = "load default session" } },
     -- # tags
     { "n", "<leader>;", "<cmd>TagbarToggle f<cr>", { desc = "toggle tagbar" } },
+    -- # ai
+    { { "n", "v" }, "<bslash>c", "<cmd>CopilotChatToggle<cr>", { desc = "toggle AI chat" } },
+    {
+        event = "FileType",
+        pattern = "copilot-chat",
+        -- ,a: accept diff
+        { "n", ",e", function() chat.ask("/Explain") end, { buffer = true, desc = "explain the selected code" } },
+        { "n", ",r", function() chat.ask("/Review") end, { buffer = true, desc = "review the selected code" } },
+        { "n", ",f", function() chat.ask("/Fix") end, { buffer = true, desc = "fix the selected code" } },
+        { "n", ",o", function() chat.ask("/Optimize") end, { buffer = true, desc = "optimize the selected code" } },
+        { "n", ",d", function() chat.ask("/Docs") end, { buffer = true, desc = "add doc comment to the selected code" } },
+        { "n", ",t", function() chat.ask("/Tests") end, { buffer = true, desc = "generate tests" } },
+        { "n", ",c", function() chat.ask("/Commit") end, { buffer = true, desc = "generate git commit message" } },
+    },
 }
 
 local group = vim.api.nvim_create_augroup("x_augroup_mappings", { clear = true })
