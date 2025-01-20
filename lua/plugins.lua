@@ -14,12 +14,15 @@ if not vim.uv.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+local lazyFile = { "BufReadPost", "BufWritePost", "BufNewFile" }
+
 require("lazy").setup({
     {
         "stevearc/oil.nvim",
         config = function()
             require("x.oil").setup()
-        end
+        end,
+        cmd = "Oil",
     },
     {
         "neovim/nvim-lspconfig",
@@ -29,16 +32,15 @@ require("lazy").setup({
         config = function()
             require("x.lsp").setup()
         end,
+        event = lazyFile,
     },
     {
         "folke/lazydev.nvim",
-        ft = "lua",
-        dependencies = {
-            "Bilal2453/luvit-meta",
-        },
         config = function()
             require("x.lazydev").setup()
         end,
+        ft = "lua",
+        cmd = "LazyDev",
     },
     {
         "williamboman/mason.nvim",
@@ -55,6 +57,7 @@ require("lazy").setup({
         config = function()
             require("x.treesitter").setup()
         end,
+        event = lazyFile,
     },
     {
         "L3MON4D3/LuaSnip",
@@ -66,6 +69,7 @@ require("lazy").setup({
         config = function()
             require("x.luasnip").setup()
         end,
+        lazy = true,
     },
     {
         "hrsh7th/nvim-cmp",
@@ -95,6 +99,7 @@ require("lazy").setup({
         config = function()
             require("x.telescope").setup()
         end,
+        cmd = "Telescope",
     },
     {
         "smoka7/hop.nvim",
@@ -118,6 +123,7 @@ require("lazy").setup({
         config = function()
             require("x.gitsigns").setup()
         end,
+        event = lazyFile,
     },
     {
         "majutsushi/tagbar",
@@ -131,12 +137,14 @@ require("lazy").setup({
         config = function()
             require("colorizer").setup({})
         end,
+        event = lazyFile,
     },
     {
         "mfussenegger/nvim-dap",
         config = function()
             require("x.dap").setup()
         end,
+        lazy = true,
     },
     {
         "github/copilot.vim",
@@ -154,7 +162,8 @@ require("lazy").setup({
         build = "make tiktoken",
         config = function()
             require("x.copilot_chat").setup()
-        end
+        end,
+        cmd = "CopilotChatToggle",
     },
     {
         "dinhhuy258/vim-local-history",
@@ -179,17 +188,20 @@ require("lazy").setup({
         config = function()
             require("x.indent_guide").setup()
         end,
+        event = lazyFile,
     },
     {
         "dhruvasagar/vim-table-mode",
         init = function()
             require("x.table_mode").init()
         end,
+        cmd = "TableModeEnable",
     },
     {
         "mistweaverco/kulala.nvim",
         config = function()
             require("x.kulala").setup()
         end,
+        ft = "http",
     },
 })
