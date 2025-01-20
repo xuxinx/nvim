@@ -1,6 +1,3 @@
-local telescopebi = require("telescope.builtin")
-local xtelescope = require("x.telescope")
-
 local M = {}
 
 local rest_src = "$HOME/xhome/rest"
@@ -12,13 +9,13 @@ M.setup = function()
 end
 
 M.find_rest = function()
-    xtelescope.find_files({
+    require("x.telescope").find_files({
         cwd = rest_src,
     })
 end
 
 M.grep_rest = function()
-    telescopebi.live_grep({
+    require("telescope.builtin").live_grep({
         cwd = rest_src,
     })
 end

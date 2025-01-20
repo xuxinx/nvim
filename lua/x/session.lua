@@ -1,5 +1,4 @@
 local utils = require("x.utils")
-local breakpoints = require("dap.breakpoints")
 
 local M = {}
 
@@ -37,6 +36,8 @@ end
 
 -- https://github.com/mfussenegger/nvim-dap/issues/198
 local function save_breakpoints(sname)
+    local breakpoints = require("dap.breakpoints")
+
     local bps = {}
     local breakpoints_by_buf = breakpoints.get()
     if next(breakpoints_by_buf) == nil then
@@ -53,6 +54,8 @@ local function save_breakpoints(sname)
 end
 
 local function load_breakpoints(sname)
+    local breakpoints = require("dap.breakpoints")
+
     breakpoints.clear()
     local fpath = breakpoints_dir .. fname(sname)
     if vim.fn.filereadable(fpath) ~= 1 then

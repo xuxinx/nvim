@@ -1,9 +1,7 @@
-local ld = require("lazydev")
-
 local M = {}
 
 M.setup = function()
-    ld.setup({
+    require("lazydev").setup({
         library = {
             "luvit-meta/library",
         },

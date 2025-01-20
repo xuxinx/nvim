@@ -1,6 +1,4 @@
 local utils = require("x.utils")
-local ls = require("luasnip")
-local xls = require("x.luasnip")
 
 local M = {}
 
@@ -43,6 +41,10 @@ M.new_file_tpl = function()
     if vim.fn.getfsize(buf_name) > 0 then
         return
     end
+
+    local ls = require("luasnip")
+    local xls = require("x.luasnip")
+
     local package_name
     local fname = vim.fs.basename(buf_name)
     local is_main = fname == "main.go"

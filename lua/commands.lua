@@ -1,34 +1,30 @@
-local xoil = require("x.oil")
-local oil = require("oil")
-local oil_actions = require("oil.actions")
-
 local cs = {
-    { "Note", require("x.note").find_note, { desc = "find note" } },
-    { "NoteG", require("x.note").grep_note, { desc = "grep note" } },
+    { "Note", function() require("x.note").find_note() end, { desc = "find note" } },
+    { "NoteG", function() require("x.note").grep_note() end, { desc = "grep note" } },
     { "Z", function(o) require("x.z").z_navi("lcd", o.args) end, { nargs = 1, desc = "z local jump" } },
     { "Zg", function(o) require("x.z").z_navi("cd", o.args) end, { nargs = 1, desc = "z global jump" } },
-    { "OpenGit", require("x.open").open_git, { desc = "open git" } },
-    { "OpenFinder", require("x.open").open_finder, { desc = "open finder" } },
-    { "ClearBreakpoints", require("dap").clear_breakpoints, { desc = "clear breakpoints" } },
-    { "DebugScopes", require("x.dap").toggle_scopes, { desc = "toggle debug scopes" } },
-    { "DebugRepl", require("x.dap").toggle_repl, { desc = "toggle debug repl" } },
+    { "OpenGit", function() require("x.open").open_git() end, { desc = "open git" } },
+    { "OpenFinder", function() require("x.open").open_finder() end, { desc = "open finder" } },
+    { "ClearBreakpoints", function() require("dap").clear_breakpoints() end, { desc = "clear breakpoints" } },
+    { "DebugScopes", function() require("x.dap").toggle_scopes() end, { desc = "toggle debug scopes" } },
+    { "DebugRepl", function() require("x.dap").toggle_repl() end, { desc = "toggle debug repl" } },
     { "SaveSession", function(o) require("x.session").save_session(o.args) end, { nargs = "?", desc = "save session" } },
-    { "LoadSession", require("x.session").select_session_to_load, { desc = "select a session to load" } },
-    { "DelSession", require("x.session").select_session_to_delete, { desc = "select a session to delete" } },
-    { "ProjectConfig", require("x.project_config").edit, { desc = "edit project config" } },
+    { "LoadSession", function() require("x.session").select_session_to_load() end, { desc = "select a session to load" } },
+    { "DelSession", function() require("x.session").select_session_to_delete() end, { desc = "select a session to delete" } },
+    { "ProjectConfig", function() require("x.project_config").edit() end, { desc = "edit project config" } },
     {
         event = "FileType",
         pattern = "oil",
-        { "OilRefresh", oil_actions.refresh.callback, { desc = "refresh list" } },
-        { "OilTrash", xoil.open_trash, { desc = "open trash" } },
-        { "OilHidden", oil_actions.toggle_hidden.callback, { desc = "toggle hidden" } },
-        { "OilCmd", oil_actions.open_cmdline.callback, { desc = "open cmdline" } },
-        { "OilCmdDir", oil_actions.open_cmdline_dir.callback, { desc = "open cmdline" } },
-        { "OilDiscardChanges", oil.discard_all_changes, { desc = "discard all changes" } },
+        { "OilRefresh", function() require("oil.actions").refresh.callback() end, { desc = "refresh list" } },
+        { "OilTrash", function() require("x.oil").open_trash() end, { desc = "open trash" } },
+        { "OilHidden", function() require("oil.actions").toggle_hidden.callback() end, { desc = "toggle hidden" } },
+        { "OilCmd", function() require("oil.actions").open_cmdline.callback() end, { desc = "open cmdline" } },
+        { "OilCmdDir", function() require("oil.actions").open_cmdline_dir.callback() end, { desc = "open cmdline" } },
+        { "OilDiscardChanges", function() require("oil").discard_all_changes() end, { desc = "discard all changes" } },
     },
     { "CopyPath", function() vim.fn.setreg("+", vim.fn.expand("%:p")) end, { desc = "copy full path of current buffer to clipboard" } },
-    { "Rest", require("x.kulala").find_rest, { desc = "find rest" } },
-    { "RestG", require("x.kulala").grep_rest, { desc = "grep rest" } },
+    { "Rest", function() require("x.kulala").find_rest() end, { desc = "find rest" } },
+    { "RestG", function() require("x.kulala").grep_rest() end, { desc = "grep rest" } },
 }
 
 local group = vim.api.nvim_create_augroup("x_augroup_usercommands", { clear = true })

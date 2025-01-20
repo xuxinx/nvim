@@ -1,18 +1,15 @@
-local telescopebi = require("telescope.builtin")
-local xtelescope = require("x.telescope")
-
 local M = {}
 
 local dir = "$HOME/xhome/notes"
 
 M.find_note = function()
-    xtelescope.find_files({
+    require("x.telescope").find_files({
         cwd = dir,
     })
 end
 
 M.grep_note = function()
-    telescopebi.live_grep({
+    require("telescope.builtin").live_grep({
         cwd = dir,
     })
 end

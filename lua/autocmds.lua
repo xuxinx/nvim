@@ -56,7 +56,9 @@ local acs = {
         { "BufReadPost" },
         pattern = "*",
         desc = "restore cursor",
-        callback = require("x.restore_cursor").restore_cursor,
+        callback = function()
+            require("x.restore_cursor").restore_cursor()
+        end,
     },
 
     -- # statusline
@@ -103,7 +105,9 @@ local acs = {
         { "BufNewFile", "BufReadPre" },
         pattern = "*.go",
         desc = "new go template",
-        callback = require("x.go").new_file_tpl,
+        callback = function()
+            require("x.go").new_file_tpl()
+        end,
     },
 
     -- # session
@@ -135,7 +139,9 @@ local acs = {
         "User",
         pattern = "OilActionsPost",
         desc = "oil OilActionsPost",
-        callback = require("x.oil").actions_post_callback,
+        callback = function(args)
+            require("x.oil").actions_post_callback(args)
+        end,
     },
 
     -- # hide signcolumn
@@ -143,7 +149,7 @@ local acs = {
         "BufWinEnter",
         pattern = "copilot-*",
         desc = "copilot chat",
-        callback = function ()
+        callback = function()
             vim.o.signcolumn = "no"
         end,
     },

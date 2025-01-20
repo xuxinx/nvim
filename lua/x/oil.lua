@@ -1,6 +1,3 @@
-local oil = require("oil")
-local oil_actions = require("oil.actions")
-
 local M = {}
 
 M.setup = function()
@@ -36,7 +33,7 @@ M.open_trash = function()
         end
     end
     vim.cmd(":vs")
-    oil_actions.toggle_trash.callback()
+    require("oil.actions").toggle_trash.callback()
 end
 
 local parse_url = function(url)
@@ -84,6 +81,8 @@ M.actions_post_callback = function(args)
 end
 
 M.put_entry_to_ai_chat_context = function()
+    local oil = require("oil")
+
     local entry = oil.get_cursor_entry()
     local dir = oil.get_current_dir()
     if not entry or not dir then

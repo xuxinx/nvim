@@ -1,8 +1,8 @@
-local ibl = require("ibl")
-
 local M = {}
 
 M.setup = function()
+    local ibl = require("ibl")
+
     ibl.setup {
         indent = {
             char = "|",

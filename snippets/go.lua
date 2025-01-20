@@ -8,8 +8,6 @@ local f = ls.function_node
 local sn = ls.snippet_node
 local fmt = require("luasnip.extras.fmt").fmta
 local rep = require("luasnip.extras").rep
-local go = require("x.go")
-local xts = require("x.treesitter")
 
 return {
     s("pkd", t('import _ "github.com/lib/pq"')),
@@ -102,6 +100,9 @@ return {
     ]], {
         err = i(1, "err"),
         returns = d(2, function(args)
+            local go = require("x.go")
+            local xts = require("x.treesitter")
+
             local result = {}
             local rets = xts.get_func_return_types()
             local err_name = args[1][1]
@@ -154,6 +155,14 @@ return {
     <todo>
     ]], {
         todo = i(1),
+    })),
+
+    s("main", fmt([[
+func main() {
+    <sth>
+}
+    ]], {
+        sth = i(1),
     })),
 
     s("testmain", fmt([[

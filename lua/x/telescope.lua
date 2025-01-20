@@ -1,7 +1,4 @@
 local utils = require("x.utils")
-local telescope = require("telescope")
-local previewers = require("telescope.previewers")
-local telescopebi = require("telescope.builtin")
 
 local M = {}
 
@@ -46,10 +43,12 @@ local new_maker = function(filepath, bufnr, opts)
     if stats and stats.size > 100 * 1024 then
         opts.use_ft_detect = false
     end
-    previewers.buffer_previewer_maker(filepath, bufnr, opts)
+    require("telescope.previewers").buffer_previewer_maker(filepath, bufnr, opts)
 end
 
 M.setup = function()
+    local telescope = require("telescope")
+
     telescope.setup {
         defaults = {
             vimgrep_arguments = {
@@ -78,7 +77,7 @@ M.setup = function()
 end
 
 M.find_files = function(opts)
-    telescopebi.find_files(vim.tbl_deep_extend("force", {
+    require("telescope.builtin").find_files(vim.tbl_deep_extend("force", {
         find_command = {
             "rg",
             "--files",

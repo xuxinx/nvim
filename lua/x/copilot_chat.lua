@@ -1,6 +1,3 @@
-local chat = require("CopilotChat")
-local context = require('CopilotChat.context')
-
 local M = {}
 
 local go_test_instructions = [[
@@ -36,6 +33,8 @@ func Test<func>(t *testing.T) {
 ]]
 
 M.setup = function()
+    local chat = require("CopilotChat")
+
     chat.setup({
         show_help = false,
         show_folds = false,
@@ -65,6 +64,7 @@ Please generate tests for my code.
                 description =
                 'Includes all non-hidden files in the current workspace in chat context. Supports input (default list).',
                 resolve = function(input, source)
+                    local context = require('CopilotChat.context')
                     if vim.fn.isdirectory(input) == 1 then
                         local temp_buf = vim.api.nvim_create_buf(false, true)
                         local temp_win = vim.api.nvim_open_win(temp_buf, false, {

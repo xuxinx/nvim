@@ -1,9 +1,3 @@
-local dap = require("dap")
-local widgets = require("dap.ui.widgets")
-local repl = require("dap.repl")
-local utils = require("dap.utils")
-local xts = require("x.treesitter")
-
 local M = {}
 
 local repl_win_opts = {
@@ -14,10 +8,15 @@ local sidebar_win_opts = {
     width = 50,
 }
 
-local scopes = widgets.sidebar(widgets.scopes, sidebar_win_opts)
+local scopes
+local init_scopes = function()
+    local widgets = require("dap.ui.widgets")
+
+    scopes = widgets.sidebar(widgets.scopes, sidebar_win_opts)
+end
 
 M.toggle_repl = function()
-    repl.toggle(repl_win_opts)
+    require("dap.repl").toggle(repl_win_opts)
 end
 
 M.toggle_scopes = function()
@@ -25,7 +24,11 @@ M.toggle_scopes = function()
 end
 
 local setup_go = function()
-    dap.adapters.go = function(callback, config)
+    local dap = require("dap")
+    local repl = require("dap.repl")
+    local utils = require("dap.utils")
+
+    dap.adapters.go = function(callback, _)
         local stdout = vim.uv.new_pipe(false)
         local stderr = vim.uv.new_pipe(false)
         local handle
@@ -94,6 +97,10 @@ local setup_go = function()
 end
 
 M.setup = function()
+    local dap = require("dap")
+
+    init_scopes()
+
     dap.listeners.after.event_initialized["ui_config"] = function()
         dap.repl.open(repl_win_opts)
         scopes.open()
@@ -113,9 +120,11 @@ M.setup = function()
 end
 
 M.debug_test = function()
+    local dap = require("dap")
+
     local ft = vim.bo.filetype
     if ft == "go" then
-        local fname = xts.get_func_name({
+        local fname = require("x.treesitter").get_func_name({
             function_declaration = true,
         })
         if fname == nil then
