@@ -22,6 +22,8 @@ M.setup = function()
             end,
         },
     })
+    -- https://github.com/stevearc/oil.nvim/issues/99#issuecomment-2245686282
+    package.loaded["oil.adapters.trash"] = require("oil.adapters.trash.freedesktop")
 end
 
 M.open_trash = function()

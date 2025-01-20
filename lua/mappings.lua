@@ -11,6 +11,12 @@ local maps = {
         { "n", ",p", function() require("oil.actions").preview.callback() end, { buffer = true, desc = "toggle preview" } },
         { "n", ",y", function() require("oil.actions").yank_entry.callback({ modify = ":." }) end, { buffer = true, desc = "copy entry relative path" } },
         { "n", ",Y", function() require("oil.actions").yank_entry.callback() end, { buffer = true, desc = "copy entry full path" } },
+        { "n", ",r", function() require("oil.actions").refresh.callback() end, { buffer = true, desc = "refresh list" } },
+        { "n", ",h", function() require("oil.actions").toggle_hidden.callback() end, { buffer = true, desc = "toggle hidden" } },
+        { "n", ",s", function() require("oil.actions").open_cmdline.callback() end, { buffer = true, desc = "open cmdline for file" } },
+        { "n", ",S", function() require("oil.actions").open_cmdline_dir.callback() end, { buffer = true, desc = "open cmdline for dir" } },
+        { "n", ",d", function() require("oil").discard_all_changes() end, { buffer = true, desc = "discard all changes" } },
+        { "n", ",t", function() require("x.oil").open_trash() end, { buffer = true, desc = "open trash" } },
         { "n", ",c", function() require("x.oil").put_entry_to_ai_chat_context() end, { buffer = true, desc = "put entry to ai chat context" } },
     },
     -- # quickfix list
