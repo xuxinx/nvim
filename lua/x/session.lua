@@ -86,11 +86,16 @@ local function clean_buffers()
     local clean_fts = {
         "copilot-chat",
     }
+    local clean_names = {
+        "kulala://ui",
+    }
     for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
         local ft = vim.api.nvim_get_option_value("filetype", {
             buf = bufnr,
         })
-        if vim.tbl_contains(clean_fts, ft) then
+        local name = vim.api.nvim_buf_get_name(bufnr)
+        if vim.tbl_contains(clean_fts, ft) or
+            vim.tbl_contains(clean_names, name) then
             vim.api.nvim_buf_delete(bufnr, { force = true })
         end
     end

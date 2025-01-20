@@ -27,6 +27,8 @@ local cs = {
         { "OilDiscardChanges", oil.discard_all_changes, { desc = "discard all changes" } },
     },
     { "CopyPath", function() vim.fn.setreg("+", vim.fn.expand("%:p")) end, { desc = "copy full path of current buffer to clipboard" } },
+    { "Rest", require("x.kulala").find_rest, { desc = "find rest" } },
+    { "RestG", require("x.kulala").grep_rest, { desc = "grep rest" } },
 }
 
 local group = vim.api.nvim_create_augroup("x_augroup_usercommands", { clear = true })

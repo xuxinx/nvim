@@ -186,4 +186,10 @@ require("lazy").setup({
             require("x.table_mode").init()
         end,
     },
+    {
+        "mistweaverco/kulala.nvim",
+        config = function()
+            require("x.kulala").setup()
+        end,
+    },
 })

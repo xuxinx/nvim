@@ -110,6 +110,18 @@ local maps = {
         { "n", ",t", function() chat.ask("/Tests") end, { buffer = true, desc = "generate tests" } },
         { "n", ",c", function() chat.ask("/Commit") end, { buffer = true, desc = "generate git commit message" } },
     },
+    -- # rest client
+    {
+        event = "FileType",
+        pattern = "http",
+        { "n", ",r", function() require('kulala').run() end, { buffer = true, desc = "run request" } },
+        { "n", ",R", function() require('kulala').run_all() end, { buffer = true, desc = "run all requests" } },
+        { "n", ",f", function() require("x.kulala").find_rest() end, { buffer = true, desc = "find rest" } },
+        { "n", ",F", function() require("x.kulala").grep_rest() end, { buffer = true, desc = "grep rest" } },
+        { "n", ",e", function() require('kulala').copy() end, { buffer = true, desc = "export request to cURL" } },
+        { "n", ",i", function() require('kulala').from_curl() end, { buffer = true, desc = "import request from cURL" } },
+        { "n", ",d", function() require('kulala').inspect() end, { buffer = true, desc = "show parsed request" } },
+    },
 }
 
 local group = vim.api.nvim_create_augroup("x_augroup_mappings", { clear = true })
