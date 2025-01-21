@@ -151,7 +151,7 @@ require("lazy").setup({
         init = function()
             require("x.copilot").init()
         end,
-        cmd = "Copilot",
+        event = "InsertEnter",
     },
     {
         "CopilotC-Nvim/CopilotChat.nvim",
