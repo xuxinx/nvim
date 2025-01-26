@@ -6,11 +6,16 @@ M.setup = function()
         ignore_install = { "sql" },
         highlight = {
             enable = true,
-            disable = function(lang, bufnr)
+            disable = function(_, bufnr)
                 local filepath = vim.api.nvim_buf_get_name(bufnr)
                 local stats = vim.uv.fs_stat(filepath)
-                if stats and stats.size / vim.api.nvim_buf_line_count(bufnr) > 1024 then
-                    return true
+                if stats then
+                    if stats.size > 500 * 1024 then
+                        return true
+                    end
+                    if stats.size / vim.api.nvim_buf_line_count(bufnr) > 1024 then
+                        return true
+                    end
                 end
                 return false
             end,
