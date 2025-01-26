@@ -51,6 +51,10 @@ M.setup = function()
 
     telescope.setup {
         defaults = {
+            layout_strategy = "vertical",
+            layout_config = {
+                width = 0.75,
+            },
             vimgrep_arguments = {
                 "rg",
                 "--color=never",
