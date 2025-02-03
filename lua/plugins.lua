@@ -180,8 +180,12 @@ require("lazy").setup({
         ft = "markdown",
     },
     {
-        "prettier/vim-prettier",
-        cmd = "Prettier",
+        "stevearc/conform.nvim",
+        config = function()
+            require("x.conform").setup()
+        end,
+        event = "BufWritePre",
+        cmd = "ConformInfo",
     },
     {
         "lukas-reineke/indent-blankline.nvim",

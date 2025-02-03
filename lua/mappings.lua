@@ -49,7 +49,6 @@ local maps = {
     { "n", "<leader>a", vim.lsp.buf.code_action, { desc = "code action" } },
     { "n", "<leader>r", function() require("telescope.builtin").lsp_references({ include_current_line = true }) end, { desc = "code references" } },
     { "n", "<leader>i", function() require("telescope.builtin").lsp_implementations() end, { desc = "interface implementations" } },
-    { "n", "<leader>F", function() require("x.format").format() end, { desc = "format buffer" } },
     { "n", "<leader>R", vim.lsp.buf.rename, { desc = "rename var" } },
     -- snip
     { { "i", "s" }, "<C-h>", function() require("x.luasnip").snip_expand() end, { desc = "snippet expand" } },

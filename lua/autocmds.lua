@@ -90,13 +90,15 @@ local acs = {
         end,
     },
 
-    -- # auto format
     {
         "BufWritePre",
-        pattern = "*.go",
-        desc = "auto format go",
-        callback = function()
-            require("x.go").goimports(1000)
+        pattern = "*",
+        desc = "auto format",
+        callback = function(args)
+            require("conform").format({
+                bufnr = args.buf,
+                timeout_ms = 1000,
+            })
         end,
     },
 
