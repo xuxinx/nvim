@@ -8,6 +8,14 @@ local acs = {
             vim.bo.filetype = "html"
         end,
     },
+    {
+        { "BufNewFile", "BufRead" },
+        pattern = { "*.http" },
+        desc = "set filetype to http",
+        callback = function()
+            vim.bo.filetype = "http"
+        end,
+    },
 
     -- # indentations
     {
