@@ -36,7 +36,7 @@ M.setup = function()
     local chat = require("CopilotChat")
 
     chat.setup({
-        model = "claude-3.5-sonnet",
+        model = "claude-3.7-sonnet",
         show_help = false,
         show_folds = false,
         question_header = ' User ',
