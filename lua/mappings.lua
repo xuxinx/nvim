@@ -27,7 +27,7 @@ local maps = {
     { "n", "<leader>f", function() require("x.telescope").find_files() end, { desc = "find files" } },
     { "n", "<leader>b", function() require("telescope.builtin").buffers() end, { desc = "find buffers" } },
     { "n", "<leader>g", function() require("telescope.builtin").live_grep() end, { desc = "find by grep" } },
-    { "n", "<leader>G", function() require("x.search_copied").search_copied() end, { expr = true, desc = "find copied string" } },
+    { { "n", "v" }, "<leader>G", function() require("telescope.builtin").grep_string() end, { desc = "find string" } },
     { "n", "<F1>", function() require("telescope.builtin").help_tags() end, { desc = "find help doc" } },
     { { "n", "v" }, "<leader>c", function() require("telescope.builtin").commands() end, { desc = "find commands" } },
     -- # tab
