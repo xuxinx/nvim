@@ -106,7 +106,7 @@ require("lazy").setup({
         config = function()
             require("hop").setup()
         end,
-        cmd = "HopPattern",
+        cmd = "HopChar1MW",
     },
     {
         "windwp/nvim-autopairs",

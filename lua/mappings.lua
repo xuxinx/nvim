@@ -40,7 +40,7 @@ local maps = {
     { "n", "<leader>d", function() require("gitsigns").preview_hunk() end, { desc = "diff changed hunk" } },
     { "n", "<leader>u", function() require("gitsigns").reset_hunk() end, { desc = "reset changed hunk" } },
     -- # jump
-    { { "n", "v" }, "<leader>j", "<cmd>HopPattern<cr>", { desc = "search pattern and jump" } },
+    { { "n", "v" }, "<leader>j", "<cmd>HopChar1MW<cr>", { desc = "search char and jump" } },
     { "n", "<leader>/", "<cmd>noh<cr>", { desc = "stop search highlight" } },
     { "n", "<C-e>", "3<C-e>", { desc = "quicker C-e" } },
     { "n", "<C-y>", "3<C-y>", { desc = "quicker C-y" } },
