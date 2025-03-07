@@ -20,7 +20,7 @@ local acs = {
     -- # indentations
     {
         "FileType",
-        pattern = { "yaml", "proto", "c", "cpp" },
+        pattern = { "yaml", "proto", "c", "cpp", "markdown" },
         desc = "set tab to 2 spaces",
         callback = function()
             vim.bo.tabstop = 2
