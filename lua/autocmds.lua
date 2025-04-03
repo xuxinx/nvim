@@ -1,22 +1,4 @@
 local acs = {
-    -- # filetype
-    {
-        { "BufNewFile", "BufRead" },
-        pattern = { "*.gohtml" },
-        desc = "set filetype to html",
-        callback = function()
-            vim.bo.filetype = "html"
-        end,
-    },
-    {
-        { "BufNewFile", "BufRead" },
-        pattern = { "*.http" },
-        desc = "set filetype to http",
-        callback = function()
-            vim.bo.filetype = "http"
-        end,
-    },
-
     -- # indentations
     {
         "FileType",
@@ -95,6 +77,14 @@ local acs = {
         desc = "set comment string",
         callback = function()
             vim.bo.commentstring = "// %s"
+        end,
+    },
+    {
+        "FileType",
+        pattern = { "http" },
+        desc = "set comment string",
+        callback = function()
+            vim.bo.commentstring = "# %s"
         end,
     },
 
