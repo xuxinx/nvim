@@ -93,15 +93,7 @@ local acs = {
         pattern = "*",
         desc = "auto format",
         callback = function(args)
-            if vim.bo[args.buf].filetype == "go" then
-                require("x.go").goimports(1000)
-                return
-            end
-            -- FIXME: Formatter 'goimports' timeout
-            require("conform").format({
-                bufnr = args.buf,
-                timeout_ms = 1000,
-            })
+            require("x.format").format(args.buf)
         end,
     },
 

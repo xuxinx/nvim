@@ -15,6 +15,9 @@ local cs = {
     { "CopyPath", function() vim.fn.setreg("+", vim.fn.expand("%:p")) end, { desc = "copy full path of current buffer to clipboard" } },
     { "Rest", function() require("x.kulala").find_rest() end, { desc = "find rest" } },
     { "RestG", function() require("x.kulala").grep_rest() end, { desc = "grep rest" } },
+    { "BufferDisableFormat", function() require("x.format").disable_buffer() end, { desc = "disable format for buffer" } },
+    { "GlobalDisableFormat", function() require("x.format").disable_global() end, { desc = "disable format for global" } },
+    { "EnableFormat", function() require("x.format").enable() end, { desc = "enable format" } },
 }
 
 local group = vim.api.nvim_create_augroup("x_augroup_usercommands", { clear = true })
