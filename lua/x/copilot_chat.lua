@@ -60,41 +60,6 @@ Please generate tests for my code.
                 ]] .. go_test_instructions,
             }
         },
-        contexts = {
-            files = {
-                description =
-                'Includes all non-hidden files in the current workspace in chat context. Supports input (default list).',
-                resolve = function(input, source)
-                    local context = require('CopilotChat.context')
-                    if vim.fn.isdirectory(input) == 1 then
-                        local temp_buf = vim.api.nvim_create_buf(false, true)
-                        local temp_win = vim.api.nvim_open_win(temp_buf, false, {
-                            relative = 'editor',
-                            width = 1,
-                            height = 1,
-                            row = 0,
-                            col = 0,
-                            style = 'minimal',
-                            focusable = false,
-                            noautocmd = true,
-                        })
-                        vim.api.nvim_win_set_buf(temp_win, temp_buf)
-                        vim.bo[temp_buf].buftype = 'nofile'
-                        vim.bo[temp_buf].bufhidden = 'wipe'
-                        vim.bo[temp_buf].swapfile = false
-
-                        vim.fn.win_execute(temp_win, 'lcd ' .. input)
-                        local result = context.files(temp_win, true)
-                        vim.defer_fn(function()
-                            vim.api.nvim_win_close(temp_win, true)
-                        end, 0)
-                        return result
-                    else
-                        return context.files(source.winnr, input == 'full')
-                    end
-                end,
-            },
-        },
     })
 end
 

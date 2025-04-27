@@ -101,11 +101,12 @@ M.put_entry_to_ai_chat_context = function()
             buf = bufnr,
         })
         if ft == "copilot-chat" then
-            local prefix = "#file:"
+            local ctx = "> #file:" .. path
             if entry.type == "directory" then
-                prefix = "#files:"
+                ctx = "> #files:" .. path .. "**"
+                print("haha", ctx)
             end
-            vim.api.nvim_buf_set_lines(bufnr, -2, -2, false, { "> " .. prefix .. path })
+            vim.api.nvim_buf_set_lines(bufnr, -2, -2, false, { ctx })
             return
         end
     end
