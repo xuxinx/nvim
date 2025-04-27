@@ -111,6 +111,7 @@ local maps = {
     {
         event = "FileType",
         pattern = "http",
+        { "n", ",,", function() require('kulala').open() end, { buffer = true, desc = "open dashboard" } },
         { "n", ",r", function() require('kulala').run() end, { buffer = true, desc = "run request" } },
         { "n", ",R", function() require('kulala').run_all() end, { buffer = true, desc = "run all requests" } },
         { "n", ",f", function() require("x.kulala").find_rest() end, { buffer = true, desc = "find rest" } },
