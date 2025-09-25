@@ -41,7 +41,6 @@ local server_options = {
 }
 
 M.setup = function()
-    local lspconfig = require("lspconfig")
     local cmplsp = require("cmp_nvim_lsp")
     local capabilities = cmplsp.default_capabilities()
 
@@ -52,7 +51,8 @@ M.setup = function()
 
         optf(opts)
 
-        lspconfig[server].setup(opts)
+        vim.lsp.config(server, opts)
+        vim.lsp.enable(server)
     end
 end
 
