@@ -32,7 +32,6 @@ require("lazy").setup({
         config = function()
             require("x.lsp").setup()
         end,
-        event = lazyFile,
     },
     {
         "folke/lazydev.nvim",
