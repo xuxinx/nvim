@@ -98,14 +98,14 @@ local acs = {
     },
 
     -- # go file template
-    {
-        { "BufNewFile", "BufReadPre" },
-        pattern = "*.go",
-        desc = "new go template",
-        callback = function()
-            require("x.go").new_file_tpl()
-        end,
-    },
+    -- {
+    --     { "BufNewFile", "BufReadPre" },
+    --     pattern = "*.go",
+    --     desc = "new go template",
+    --     callback = function()
+    --         require("x.go").new_file_tpl()
+    --     end,
+    -- },
 
     -- # session
     {
