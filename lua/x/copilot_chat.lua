@@ -1,35 +1,35 @@
 local M = {}
 
 local go_test_instructions = [[
-Additional instructions for Golang tests:
-1. Follow the pattern:
-func Test<func>(t *testing.T) {
-    for _, c := range []struct {
-        name string
-        <arg>
-        <arg2>
-        ...
-        <expectedXXX1>
-        <expectedXXX2>
-        ...
-    }{
-        {},
-    }{
-        t.Run(c.name, func(t *testing.T) {
-            <call func>
-            if diff := cmp.Diff(c.<expectedXXX1>, res1); diff != "" {
-                t.Fatalf("got diff %s\n", diff)
+1. Additional instructions for Golang tests:
+    a. Follow the pattern:
+        func Test<func>(t *testing.T) {
+            for _, c := range []struct {
+                name string
+                <arg>
+                <arg2>
+                ...
+                <expectedXXX1>
+                <expectedXXX2>
+                ...
+            }{
+                {},
+            }{
+                t.Run(c.name, func(t *testing.T) {
+                    <call func>
+                    if diff := cmp.Diff(c.<expectedXXX1>, res1); diff != "" {
+                        t.Fatalf("got diff %s\n", diff)
+                    }
+                    if diff := cmp.Diff(c.<expectedXXX2>, res2); diff != "" {
+                        t.Fatalf("got diff %s\n", diff)
+                    }
+                    ...
+                })
             }
-            if diff := cmp.Diff(c.<expectedXXX2>, res2); diff != "" {
-                t.Fatalf("got diff %s\n", diff)
-            }
-            ...
-        })
-    }
-}
-2. Replace <func> with the name of the function you are testing.
-3. Replace <arg>, <expectedXXX>, <call func> with actual values.
-4. New line for each field of a case.
+        }
+    b. Replace <func> with the name of the function you are testing.
+    c. Replace <arg>, <expectedXXX>, <call func> with actual values.
+    d. New line for each field of a case.
 ]]
 
 M.setup = function()
