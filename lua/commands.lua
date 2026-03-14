@@ -12,7 +12,6 @@ local cs = {
     { "LoadSession", function() require("x.session").select_session_to_load() end, { desc = "select a session to load" } },
     { "DelSession", function() require("x.session").select_session_to_delete() end, { desc = "select a session to delete" } },
     { "ProjectConfig", function() require("x.project_config").edit() end, { desc = "edit project config" } },
-    { "CopyPath", function() vim.fn.setreg("+", vim.fn.expand("%:p")) end, { desc = "copy full path of current buffer to clipboard" } },
     { "Rest", function() require("x.kulala").find_rest() end, { desc = "find rest" } },
     { "RestG", function() require("x.kulala").grep_rest() end, { desc = "grep rest" } },
     { "BufferDisableFormat", function() require("x.format").disable_buffer() end, { desc = "disable format for buffer" } },

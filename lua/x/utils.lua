@@ -11,7 +11,7 @@ M.get_base_cwd_name = function()
 end
 
 M.get_curr_file_absolute_path = function()
-    return vim.fs.dirname(vim.api.nvim_buf_get_name(0))
+    return vim.fn.expand("%:p")
 end
 
 M.get_curr_file_relative_path = function()

@@ -88,6 +88,9 @@ local maps = {
     { "n", "<leader>l", function() require("x.list_format").toggle() end, { desc = "toggle list format" } },
     { "n", "<leader>w", function() return require("x.strcase").to_lower_camel() or require("x.strcase").to_snake() end, { desc = "toggle snake and lower camel" } },
     { "n", "<leader>W", function() return require("x.strcase").to_camel() or require("x.strcase").to_snake() end, { desc = "toggle snake and camel" } },
+    -- # copy file path
+    { "n", "<bslash>f", function() require("x.copyfilepath").copy_file_pos() end, { desc = "copy file:line:col to clipboard" } },
+    { "n", "<bslash>F", function() require("x.copyfilepath").copy_file_abs_pos() end, { desc = "copy absolute file:line:col to clipboard" } },
     -- # session
     { "n", "<bslash>s", function() require("x.session").load_session(require("x.session").auto_session_name) end, { desc = "load default session" } },
     -- # tags
