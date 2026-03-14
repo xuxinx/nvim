@@ -17,7 +17,6 @@ local maps = {
         { "n", ",S", function() require("oil.actions").open_cmdline_dir.callback() end, { buffer = true, desc = "open cmdline for dir" } },
         { "n", ",d", function() require("oil").discard_all_changes() end, { buffer = true, desc = "discard all changes" } },
         { "n", ",t", function() require("x.oil").open_trash() end, { buffer = true, desc = "open trash" } },
-        { "n", ",c", function() require("x.oil").put_entry_to_ai_chat_context() end, { buffer = true, desc = "put entry to ai chat context" } },
     },
     -- # quickfix list
     { "n", "<leader>q", function() require("x.qflist").toggle() end, { desc = "toggle quickfix list" } },
@@ -93,20 +92,6 @@ local maps = {
     { "n", "<bslash>s", function() require("x.session").load_session(require("x.session").auto_session_name) end, { desc = "load default session" } },
     -- # tags
     { "n", "<leader>;", "<cmd>TagbarToggle f<cr>", { desc = "toggle tagbar" } },
-    -- # ai
-    { { "n", "v" }, "<bslash>c", "<cmd>CopilotChatToggle<cr>", { desc = "toggle AI chat" } },
-    {
-        event = "FileType",
-        pattern = "copilot-chat",
-        -- ,a: accept diff
-        { "n", ",e", function() require("CopilotChat").ask("/Explain") end, { buffer = true, desc = "explain the selected code" } },
-        { "n", ",r", function() require("CopilotChat").ask("/Review") end, { buffer = true, desc = "review the selected code" } },
-        { "n", ",f", function() require("CopilotChat").ask("/Fix") end, { buffer = true, desc = "fix the selected code" } },
-        { "n", ",o", function() require("CopilotChat").ask("/Optimize") end, { buffer = true, desc = "optimize the selected code" } },
-        { "n", ",d", function() require("CopilotChat").ask("/Docs") end, { buffer = true, desc = "add doc comment to the selected code" } },
-        { "n", ",t", function() require("CopilotChat").ask("/Tests") end, { buffer = true, desc = "generate tests" } },
-        { "n", ",c", function() require("CopilotChat").ask("/Commit") end, { buffer = true, desc = "generate git commit message" } },
-    },
     -- # rest client
     {
         event = "FileType",
