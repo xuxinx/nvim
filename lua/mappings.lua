@@ -33,6 +33,7 @@ local maps = {
     { "n", "<leader>t", "<cmd>$tabe<cr>", { desc = "new tab" } },
     { "n", "<leader>T", "<cmd>$tab split<cr>", { desc = "new tab with current buffer" } },
     -- # git
+    { "n", "<bslash>g", "<cmd>LazyGit<cr>", { desc = "open lazygit" } },
     { "n", "]c", function() require("gitsigns").nav_hunk("next") end, { desc = "next git changed hunk" } },
     { "n", "[c", function() require("gitsigns").nav_hunk("prev") end, { desc = "prev git changed hunk" } },
     { "n", "<leader>B", function() require("gitsigns").blame_line({ full = true }) end, { desc = "blame line" } },
