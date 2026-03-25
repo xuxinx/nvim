@@ -182,13 +182,6 @@ require("lazy").setup({
         cmd = "TableModeEnable",
     },
     {
-        "kdheepak/lazygit.nvim",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-        },
-        cmd = "LazyGit",
-    },
-    {
         "mistweaverco/kulala.nvim",
         config = function()
             require("x.kulala").setup()
