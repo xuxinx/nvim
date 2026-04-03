@@ -92,6 +92,8 @@ local maps = {
     -- # copy file path
     { "n", "<bslash>f", function() require("x.copyfilepath").copy_file_pos() end, { desc = "copy file:line:col to clipboard" } },
     { "n", "<bslash>F", function() require("x.copyfilepath").copy_file_abs_pos() end, { desc = "copy absolute file:line:col to clipboard" } },
+    { "v", "<bslash>f", function() require("x.copyfilepath").copy_file_pos_visual() end, { desc = "copy file:range to clipboard" } },
+    { "v", "<bslash>F", function() require("x.copyfilepath").copy_file_abs_pos_visual() end, { desc = "copy absolute file:range to clipboard" } },
     -- # session
     { "n", "<bslash>s", function() require("x.session").load_session(require("x.session").auto_session_name) end, { desc = "load default session" } },
     -- # tags
