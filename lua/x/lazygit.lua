@@ -40,11 +40,16 @@ M.toggle = function()
 
     vim.fn.termopen("lazygit", {
         on_exit = function()
-            if state.buf and vim.api.nvim_buf_is_valid(state.buf) then
-                vim.api.nvim_buf_delete(state.buf, { force = true })
-            end
-            state.buf = nil
-            state.win = nil
+            vim.schedule(function()
+                if state.win and vim.api.nvim_win_is_valid(state.win) then
+                    vim.api.nvim_win_close(state.win, true)
+                end
+                if state.buf and vim.api.nvim_buf_is_valid(state.buf) then
+                    vim.api.nvim_buf_delete(state.buf, { force = true })
+                end
+                state.buf = nil
+                state.win = nil
+            end)
         end,
     })
 
